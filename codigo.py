@@ -66,6 +66,28 @@ class HomeScreen(QMainWindow):
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
 
+        self.animesButton.clicked.connect(self.showAnimesWindow)  # Este botón te lleva a la pestaña que muestra todos los animes
+        self.mangasButton.clicked.connect(self.showMangasWindows)   # Este botón te lleva a la pestaña que muestra todos los mangas
+        self.studiosButton.clicked.connect(self.showStudiosWindows)  # Este botón te lleva a la pestaña que muestra todos los estudios
+        self.mangakasButton.clicked.connect(self.showMangakasWindows)  # Este botón te lleva a la pestaña que muestra todos los mangakas
+        self.userInfoButton.clicked.connect(self.showUserInfoWindows)  # Este botón te lleva a la pestaña que muestra la información del usuario
+
+    def showAnimesWindow(self):
+        print("Mostrar animes")
+    
+    def showMangasWindows(self):
+        print("Mostrar mangas")
+
+    def showStudiosWindows(self):
+        print("Mostrar estudios")
+    
+    def showMangakasWindows(self):
+        print("Mostrar mangakas")
+
+    def showUserInfoWindows(self):
+        userWindow = Usuario(self)
+        userWindow.show()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
