@@ -28,3 +28,6 @@ class Estudio():
 
     def setPais(self, pais):
         self.pais = pais    
+
+    def __str__(self):
+        return f"{self.nombre} ({self.pais})"

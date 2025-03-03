@@ -157,12 +157,6 @@ for comentario in copmentarios:
     print(f"{comentario}\n")
 
 
-# Convierte los datos a JSON
-#a = json.dumps(mangas)
-#print(a)
-
-
-
 # Guardar cambios
 conn.commit()
 conn.close()

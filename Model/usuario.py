@@ -62,3 +62,7 @@ class Usuario():
         elif favorito is Anime:
             self.favoritos.append(favorito)
     
+
+    def __str__(self):
+        return f"Usuario: {self.nombre}, {self.email}"
+    

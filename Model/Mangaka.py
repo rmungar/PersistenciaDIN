@@ -41,3 +41,6 @@ class Mangaka():
 
     def setObras(self, obras):
         self.obras = obras
+
+    def __str__(self):
+        return f"{self.nombre} ({self.nacionalidad})"
