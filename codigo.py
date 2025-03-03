@@ -9,8 +9,8 @@ import os
 import pyrebase
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage
 from PyQt6 import uic
-
-from Model import Anime, Estudio, Manga, Mangaka, Usuario
+from Model import Anime, Estudio, Manga, Mangaka
+from Model.Usuario import Usuario
 
 basedir = os.path.dirname(__file__)
 
@@ -43,7 +43,7 @@ class Login(QMainWindow):
         password = self.passwordText.toPlainText()
 
         try:
-            user = auth.sign_in_with_email_and_password(email, password)
+            user = auth.sign_in_with_email_and_password(email, password)  
             print("Login exitoso:", user)
 
             # Cambia a la pantalla de inicio
@@ -69,31 +69,31 @@ class HomeScreen(QMainWindow):
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
 
-        self.animeButton.clicked.connect(self.showAnimesWindow)  # Este botón te lleva a la pestaña que muestra todos los animes
-        self.mangaButton.clicked.connect(self.showMangasWindows)   # Este botón te lleva a la pestaña que muestra todos los mangas
-        self.estudioButton.clicked.connect(self.showStudiosWindows)  # Este botón te lleva a la pestaña que muestra todos los estudios
-        self.mangakaButton.clicked.connect(self.showMangakasWindows)  # Este botón te lleva a la pestaña que muestra todos los mangakas
-        self.userButton.clicked.connect(self.showUserInfoWindows)  # Este botón te lleva a la pestaña que muestra la información del usuario
-
-    def showAnimesWindow(self):
-         animesWindow = Anime(self, userLogged)
-         animesWindow.show()
-     
-    def showMangasWindows(self):
-         mangasWindow = Manga(self)
-         mangasWindow.show()
-
-    def showStudiosWindows(self):
-         studiosWindow = Estudio(self)
-         studiosWindow.show()
-     
-    def showMangakasWindows(self):
-         mangakasWindow = Mangaka(self)
-         mangakasWindow.show()
-
-    def showUserInfoWindows(self):
-         userWindow = Usuario(self)
-         userWindow.show()
+    ##     self.animesButton.clicked.connect(self.showAnimesWindow)  # Este botón te lleva a la pestaña que muestra todos los animes
+    ##     self.mangasButton.clicked.connect(self.showMangasWindows)   # Este botón te lleva a la pestaña que muestra todos los mangas
+    ##     self.studiosButton.clicked.connect(self.showStudiosWindows)  # Este botón te lleva a la pestaña que muestra todos los estudios
+    ##     self.mangakasButton.clicked.connect(self.showMangakasWindows)  # Este botón te lleva a la pestaña que muestra todos los mangakas
+    ##     self.userInfoButton.clicked.connect(self.showUserInfoWindows)  # Este botón te lleva a la pestaña que muestra la información del usuario
+## 
+    ## def showAnimesWindow(self):
+    ##     animesWindow = Anime(self)
+    ##     animesWindow.show()
+    ## 
+    ## def showMangasWindows(self):
+    ##     mangasWindow = Manga(self)
+    ##     mangasWindow.show()
+## 
+    ## def showStudiosWindows(self):
+    ##     studiosWindow = Estudio(self)
+    ##     studiosWindow.show()
+    ## 
+    ## def showMangakasWindows(self):
+    ##     mangakasWindow = Mangaka(self)
+    ##     mangakasWindow.show()
+## 
+    ## def showUserInfoWindows(self):
+    ##     userWindow = Usuario(self)
+    ##     userWindow.show()
 
 
 if __name__ == '__main__':
