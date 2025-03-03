@@ -10,6 +10,9 @@ import pyrebase
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage
 from PyQt6 import uic
 
+from Model import Anime, Estudio, Manga, Mangaka
+from Model.usuario import Usuario
+
 basedir = os.path.dirname(__file__)
 
 config = {
@@ -73,16 +76,20 @@ class HomeScreen(QMainWindow):
         self.userInfoButton.clicked.connect(self.showUserInfoWindows)  # Este botón te lleva a la pestaña que muestra la información del usuario
 
     def showAnimesWindow(self):
-        print("Mostrar animes")
+        animesWindow = Anime(self)
+        animesWindow.show()
     
     def showMangasWindows(self):
-        print("Mostrar mangas")
+        mangasWindow = Manga(self)
+        mangasWindow.show()
 
     def showStudiosWindows(self):
-        print("Mostrar estudios")
+        studiosWindow = Estudio(self)
+        studiosWindow.show()
     
     def showMangakasWindows(self):
-        print("Mostrar mangakas")
+        mangakasWindow = Mangaka(self)
+        mangakasWindow.show()
 
     def showUserInfoWindows(self):
         userWindow = Usuario(self)

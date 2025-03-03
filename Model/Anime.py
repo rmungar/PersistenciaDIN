@@ -11,6 +11,9 @@
 ##     comentarios JSON)"""
 ## )
 
+from Model import Comentario
+
+
 class Anime():
     def __init__(self, _id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios):
         self._id = _id
