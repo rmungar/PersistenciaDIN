@@ -97,14 +97,14 @@
      </spacer>
     </item>
     <item row="6" column="1">
-     <widget class="QPushButton" name="mangaAPI">
+     <widget class="QPushButton" name="mangaButton">
       <property name="text">
        <string>Mangas</string>
       </property>
      </widget>
     </item>
     <item row="5" column="1">
-     <widget class="QPushButton" name="animeAPI">
+     <widget class="QPushButton" name="animeButton">
       <property name="text">
        <string>Animes</string>
       </property>
@@ -131,7 +131,7 @@
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>962</width>
+              <width>957</width>
               <height>2224</height>
              </rect>
             </property>
@@ -1115,14 +1115,14 @@
      </widget>
     </item>
     <item row="8" column="1">
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="mangakaButton">
       <property name="text">
        <string>Mangakas</string>
       </property>
      </widget>
     </item>
     <item row="7" column="1">
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="estudioButton">
       <property name="text">
        <string>Estudios</string>
       </property>

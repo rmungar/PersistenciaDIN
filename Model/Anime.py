@@ -15,7 +15,7 @@ from Model import Comentario
 
 
 class Anime():
-    def __init__(self, _id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios):
+    def __init__(self, _id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios, userLogged):
         self._id = _id
         self.nombre = nombre
         self.sinopsis = sinopsis
@@ -25,10 +25,17 @@ class Anime():
         self.temporadas = temporadas
         self.capitulos = capitulos
         self.comentarios = comentarios
+        self.userLogged = userLogged
 
-    def addComentario(self, comentario):
-        if comentario is Comentario:
-            self.comentarios.append(comentario)
+    def addComentario(self, userLogged):
+        userLogged = self.userLogged
+
+        nombreUser = userLogged.getNombre()
+
+        newComentario = Comentario(
+            _id = nombreUser + self.nombre,
+
+        )
 
     def getComentarios(self):
         return self.comentarios
@@ -56,6 +63,9 @@ class Anime():
 
     def get_id(self):
         return self._id
+    
+    def __str__(self):
+        return f"Anime: {self.nombre} - {self.sinopsis} - {self.genero} - {self.estudio} - {self.imagen} - {self.temporadas} - {self.capitulos} - {self.comentarios}"
 
-    def setEstudio(self, estudio):
-        self.estudio = estudio
+#    def setEstudio(self, estudio):
+#        self.estudio = estudio

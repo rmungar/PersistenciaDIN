@@ -49,7 +49,7 @@ CREATE TABLE ESTUDIO (
 );
 
 CREATE TABLE COMENTARIO (
-    _id VARCHAR(255) PRIMARY KEY, 
+    _id VARCHAR(255) PRIMARY KEY, -- Mezcla entre el nombre del usuario y anime
     usuario VARCHAR(255) NOT NULL, -- Referencia al id del usuario
     anime VARCHAR(255), -- Referencia al id del anime (si tiene)
     manga VARCHAR(255), -- Referencia al id del manga (si tiene)
