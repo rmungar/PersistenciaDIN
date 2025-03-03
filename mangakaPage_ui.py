@@ -116,7 +116,7 @@ class Ui_MainWindow(object):
         self.placeholderimage = QLabel(self.contentwidget)
         self.placeholderimage.setObjectName(u"placeholderimage")
         self.placeholderimage.setStyleSheet(u"background-color: #cccac6")
-        self.placeholderimage.setPixmap(QPixmap(u"C:/Users/kynrh/Downloads/FrierenImg.jpg"))
+        self.placeholderimage.setPixmap(QPixmap(u"C:/Users/kynrh/Downloads/frierenMangaka.png"))
         self.placeholderimage.setScaledContents(True)
 
         self.gridContenido.addWidget(self.placeholderimage, 1, 1, 1, 1)
