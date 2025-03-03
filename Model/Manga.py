@@ -11,6 +11,9 @@
 ##     comentarios TEXT)"""
 ## )
 
+from Model import Comentario
+
+
 class Manga():
     def __init__(self, _id, nombre, sinopsis, genero, autor, imagen, tomos, capitulos, comentarios):
         self._id = _id
