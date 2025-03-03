@@ -63,7 +63,10 @@ class Anime():
 
     def get_id(self):
         return self._id
-    
+
+    def setEstudio(self, estudio):
+        self.estudio = estudio
+
     def __str__(self):
         return f"Anime: {self.nombre} - {self.sinopsis} - {self.genero} - {self.estudio} - {self.imagen} - {self.temporadas} - {self.capitulos} - {self.comentarios}"
 
