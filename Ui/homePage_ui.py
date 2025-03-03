@@ -53,15 +53,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addItem(self.verticalSpacer, 3, 1, 1, 1)
 
-        self.mangaAPI = QPushButton(self.centralwidget)
-        self.mangaAPI.setObjectName(u"mangaAPI")
+        self.mangaButton = QPushButton(self.centralwidget)
+        self.mangaButton.setObjectName(u"mangaButton")
 
-        self.gridLayout.addWidget(self.mangaAPI, 6, 1, 1, 1)
+        self.gridLayout.addWidget(self.mangaButton, 6, 1, 1, 1)
 
-        self.animeAPI = QPushButton(self.centralwidget)
-        self.animeAPI.setObjectName(u"animeAPI")
+        self.animeButton = QPushButton(self.centralwidget)
+        self.animeButton.setObjectName(u"animeButton")
 
-        self.gridLayout.addWidget(self.animeAPI, 5, 1, 1, 1)
+        self.gridLayout.addWidget(self.animeButton, 5, 1, 1, 1)
 
         self.gridLayout_3 = QGridLayout()
         self.gridLayout_3.setObjectName(u"gridLayout_3")
@@ -76,7 +76,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 962, 2224))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 957, 2224))
         self.gridLayout_6 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_5 = QLabel(self.scrollAreaWidgetContents_2)
@@ -472,15 +472,15 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.userButton, 0, 4, 2, 1)
 
-        self.pushButton_3 = QPushButton(self.centralwidget)
-        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.mangakaButton = QPushButton(self.centralwidget)
+        self.mangakaButton.setObjectName(u"mangakaButton")
 
-        self.gridLayout.addWidget(self.pushButton_3, 8, 1, 1, 1)
+        self.gridLayout.addWidget(self.mangakaButton, 8, 1, 1, 1)
 
-        self.pushButton_4 = QPushButton(self.centralwidget)
-        self.pushButton_4.setObjectName(u"pushButton_4")
+        self.estudioButton = QPushButton(self.centralwidget)
+        self.estudioButton.setObjectName(u"estudioButton")
 
-        self.gridLayout.addWidget(self.pushButton_4, 7, 1, 1, 1)
+        self.gridLayout.addWidget(self.estudioButton, 7, 1, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -491,8 +491,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.mangaAPI.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
-        self.animeAPI.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
+        self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
+        self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt;\">Estudios</span></p></body></html>", None))
         self.mangaTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
@@ -511,7 +511,7 @@ class Ui_MainWindow(object):
         self.animeTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
         self.userButton.setText(QCoreApplication.translate("MainWindow", u"\ud83d\udc7e", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
+        self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
+        self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
     # retranslateUi
 
