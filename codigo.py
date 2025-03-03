@@ -3,7 +3,6 @@
 # prueba@gmail.com
 # passwordPrueba
 
-
 import sys
 import os
 import pyrebase
@@ -60,11 +59,18 @@ class Login(QMainWindow):
 
 
 class HomeScreen(QMainWindow):
+
     def __init__(self, stacked_widget):
         super(HomeScreen, self).__init__()
         uic.loadUi(os.path.join(basedir, 'homePage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
+
+        
+
+
+
+    
 
 
 if __name__ == '__main__':
