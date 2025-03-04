@@ -80,13 +80,69 @@ class MangaScreen(QMainWindow):
             self.title.setText(manga.nombre)
             self.synopsisvalue.setText(manga.sinopsis)
             self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, manga.imagen)))
-            self.placeholderimage.setScaledContents(True)
             self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
         else:
             self.title.setText("Sin información")
             self.synopsisvalue.setText("No se ha seleccionado un manga.")
             self.placeholderimage.clear()  # Limpia la imagen
             self.information.setText("Información no disponible.")
+
+
+class AnimeScreen(QMainWindow):
+    def __init__(self, stacked_widget, anime):
+        super(AnimeScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/animePage.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+        if anime is not None:
+            self.title.setText(anime.nombre)
+            self.synopsisvalue.setText(anime.sinopsis)
+            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, anime.imagen)))
+            self.information.setText(f"Generos: {anime.genero}\nTemporadas: {anime.temporadas}\nCapítulos: {anime.capitulos}\nEstudio: {anime.estudio}")
+        else:
+            self.title.setText("Sin información")
+            self.synopsisvalue.setText("No se ha seleccionado un manga.")
+            self.placeholderimage.clear()  # Limpia la imagen
+            self.information.setText("Información no disponible.")
+
+
+class MangakaScreen(QMainWindow):
+    def __init__(self, stacked_widget, mangaka):
+        super(MangakaScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/mangakaPage.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+        if mangaka is not None:
+            self.title.setText(mangaka.nombre)
+            self.biographyvalue.setText(f"Nacimiento: {mangaka.nacimiento}\nNacionalidad: {mangaka.nacionalidad}")
+            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, mangaka.imagen)))
+            self.mangas.setText(f"Obras: {mangaka.obras}")
+        else:
+            self.title.setText("Sin información")
+            self.biographyvalue.setText("No se ha seleccionado un mangaka.")
+            self.placeholderimage.clear()  # Limpia la imagen
+            self.mangas.setText("Información no disponible.")
+
+
+class EstudioScreen(QMainWindow):
+    def __init__(self, stacked_widget, estudio):
+        super(EstudioScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/estudioPage.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+        if estudio is not None:
+            self.title.setText(estudio.nombre)
+            self.detailsvalue.setText(f"País: {estudio.pais}")
+            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, estudio.imagen)))
+            self.animes.setText(f"Animes: {estudio.animes}")
+        else:
+            self.title.setText("Sin información")
+            self.detailsvalue.setText("No se ha seleccionado un estudio.")
+            self.placeholderimage.clear()  # Limpia la imagen
+            self.anime.setText("Información no disponible.")
 
 
 class HomeScreen(QMainWindow):
@@ -146,7 +202,7 @@ class HomeScreen(QMainWindow):
         self.configurarBoton(self.animeTop2, self.image_paths_anime[0])
         self.configurarBoton(self.animeTop3, self.image_paths_anime[2])
 
-        
+        self.animeTop1.clicked.connect(lambda: self.toAnimePage(self.animeList[0]))
         self.animeTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 2))
         self.animeTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 3))
 
@@ -166,6 +222,7 @@ class HomeScreen(QMainWindow):
         self.configurarBoton(self.mangakaTop2, self.image_paths_mangaka[1])
         self.configurarBoton(self.mangakaTop3, self.image_paths_mangaka[2])
 
+        self.mangakaTop1.clicked.connect(lambda: self.toMangakaPage(self.mangakaList[0]))
         self.mangakaTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_mangaka, self.mangakaTop1, self.mangakaTop2, self.mangakaTop3, 2))
         self.mangakaTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_mangaka, self.mangakaTop1, self.mangakaTop2, self.mangakaTop3, 3))
 
@@ -175,6 +232,7 @@ class HomeScreen(QMainWindow):
         self.configurarBoton(self.estudiosTop2, self.image_paths_estudio[1])
         self.configurarBoton(self.estudiosTop3, self.image_paths_estudio[2])
 
+        self.estudiosTop1.clicked.connect(lambda: self.toEstudioPage(self.estudioList[0]))
         self.estudiosTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_estudio, self.estudiosTop1, self.estudiosTop2, self.estudiosTop3, 2))
         self.estudiosTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_estudio, self.estudiosTop1, self.estudiosTop2, self.estudiosTop3, 3))
 
@@ -199,28 +257,50 @@ class HomeScreen(QMainWindow):
 
     def toMangaPage(self, manga: Manga.Manga):
         self.mangaScreen = MangaScreen(self.stacked_widget, manga)
-        self.stacked_widget.addWidget(self.mangaScreen)
         self.stacked_widget.setCurrentWidget(self.mangaScreen)
 
+    def toAnimePage(self, anime: Anime.Anime):
+        """Actualiza AnimeScreen y cambia de ventana"""
+        self.animeScreen = AnimeScreen(self.stacked_widget, anime)
+        self.stacked_widget.setCurrentIndex(3)
     
+    def toMangakaPage(self, mangaka: Mangaka.Mangaka):  
+        """Actualiza MangakaScreen y cambia de ventana"""
+        self.mangakaScreen = MangakaScreen(self.stacked_widget, mangaka)
+        self.stacked_widget.setCurrentIndex(4)
 
+    def toEstudioPage(self, estudio: Estudio.Estudio):
+        """Actualiza EstudioScreen y cambia de ventana"""
+        self.estudioScreen = EstudioScreen(self.stacked_widget, estudio)
+        self.stacked_widget.setCurrentIndex(5)
+    
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
-    # Creamos un QStackedWidget para manejar las pantallas
+    # Crear el QStackedWidget
     stacked_widget = QStackedWidget()
 
-    # Creamos las pantallas y las agregamos al QStackedWidget
+    # Crear pantallas sin datos iniciales
     login_screen = Login(stacked_widget)
-    home_screen = HomeScreen(stacked_widget)
     manga_screen = MangaScreen(stacked_widget, None)
+    anime_screen = AnimeScreen(stacked_widget, None)
+    mangaka_screen = MangakaScreen(stacked_widget, None)
+    estudio_screen = EstudioScreen(stacked_widget, None)
 
-    stacked_widget.addWidget(login_screen)  # Índice 0
-    stacked_widget.addWidget(home_screen)   # Índice 1
-    stacked_widget.addWidget(manga_screen)  # Índice 2
+    # Pasar las pantallas a HomeScreen para poder actualizarlas
+    home_screen = HomeScreen(stacked_widget)
 
-    stacked_widget.setCurrentIndex(0)  # Empezamos en la pantalla de Login
+    # Agregar pantallas al QStackedWidget
+    stacked_widget.addWidget(login_screen)            # Índice 0
+    stacked_widget.addWidget(home_screen)             # Índice 1
+    stacked_widget.addWidget(manga_screen)            # Índice 2
+    stacked_widget.addWidget(anime_screen)            # Índice 3
+    stacked_widget.addWidget(mangaka_screen)          # Índice 4
+    stacked_widget.addWidget(estudio_screen)          # Índice 5
+
+    # Iniciar en la pantalla de Login
+    stacked_widget.setCurrentIndex(0)
     stacked_widget.show()
 
     app.exec()
