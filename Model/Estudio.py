@@ -6,9 +6,10 @@
 ## )
 
 class Estudio():
-    def __init__(self, nombre, pais, animes):
+    def __init__(self, nombre, pais, imagen, animes):
         self.nombre = nombre
         self.pais = pais
+        self.imagen = imagen
         self.animes = animes
 
     def getAnimes(self):

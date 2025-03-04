@@ -10,12 +10,12 @@ class EstudioRepo():
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
-        cursor.execute("SELECT * FROM ESTUDIOS")
+        cursor.execute("SELECT * FROM ESTUDIO")
         estudiosBD = cursor.fetchall()
         estudios = []
 
         for estudioBD in estudiosBD:
-            estudio = Model.Estudio(estudioBD[0], estudioBD[1], estudioBD[2], estudioBD[3])
+            estudio = Model.Estudio.Estudio(estudioBD[0], estudioBD[1], estudioBD[2], estudioBD[3])
             estudios.append(estudio)
 
         return estudios

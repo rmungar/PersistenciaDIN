@@ -18,7 +18,7 @@ class AnimeRepo():
         animes = []
 
         for animeBD in animesBD:
-            anime = Model.Anime(animeBD[0], animeBD[1], animeBD[2], animeBD[3], animeBD[4], animeBD[5], animeBD[6], animeBD[7], animeBD[8])
+            anime = Model.Anime.Anime(animeBD[0], animeBD[1], animeBD[2], animeBD[3], animeBD[4], animeBD[5], animeBD[6], animeBD[7], animeBD[8])
             animes.append(anime)
 
         return animes

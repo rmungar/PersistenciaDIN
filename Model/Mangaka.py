@@ -8,11 +8,12 @@
 ## )
 
 class Mangaka():
-    def __init__(self, _id, nombre, nacimiento, nacionalidad, obras):
+    def __init__(self, _id, nombre, nacimiento, nacionalidad, imagen, obras):
         self._id = _id
         self.nombre = nombre
         self.nacimiento = nacimiento
         self.nacionalidad = nacionalidad
+        self.imagen = imagen
         self.obras = obras
 
     def getNacimiento(self):

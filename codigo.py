@@ -14,7 +14,9 @@ from PyQt6.QtGui import QIcon
 from Model import Anime, Estudio, Manga, Mangaka
 from Model.Usuario import Usuario
 from Repository.animeRepo import AnimeRepo
+from Repository.estudioRepo import EstudioRepo
 from Repository.mangaRepo import MangaRepo
+from Repository.mangakaRepo import MangakaRepo
 from Repository.usuarioRepo import UsuarioRepo
 
 basedir = os.path.dirname(__file__)
@@ -77,75 +79,102 @@ class HomeScreen(QMainWindow):
 
         usuarioRepo = UsuarioRepo()
         mangaRepo = MangaRepo()
-        mangaList = mangaRepo.getMangas()
         animeRepo = AnimeRepo()
+        mangakaRepo = MangakaRepo()
+        estudioRepo = EstudioRepo()
+
+        # Obtener listas de datos
+        mangaList = mangaRepo.getMangas()
         animeList = animeRepo.getAnime()
-        ## estudioRepo = EstudioRepo()
-        ## mangakaRepo = MangakaRepo()
+        mangakaList = mangakaRepo.getMangakas()
+        estudioList = estudioRepo.getEstudios()
 
-        
-        self.animeTop1.setText("")
-        self.animeTop1.setStyleSheet("background: transparent; border: none;")
-        self.animeTop1.setIcon(QIcon(mangaList[0].imagen))
-        self.animeTop1.setIconSize(QSize(370, 400))
+        # Listas de imágenes (ajustadas según la disposición)
+        self.image_paths_anime = [
+            os.path.join(basedir, animeList[1].imagen),  # Izquierda
+            os.path.join(basedir, animeList[0].imagen),  # Centro
+            os.path.join(basedir, animeList[2].imagen)   # Derecha
+        ]
 
-        self.animeTop2.setText("")
-        self.animeTop2.setStyleSheet("background: transparent; border: none;")
-        self.animeTop2.setIcon(QIcon(mangaList[1].imagen))
-        self.animeTop2.setIconSize(QSize(370, 400))
+        self.image_paths_manga = [
+            os.path.join(basedir, mangaList[0].imagen),  # Centro
+            os.path.join(basedir, mangaList[1].imagen),  # Izquierda
+            os.path.join(basedir, mangaList[2].imagen)   # Derecha
+        ]
 
-        self.animeTop3.setText("")
-        self.animeTop3.setStyleSheet("background: transparent; border: none;")
-        self.animeTop3.setIcon(QIcon(mangaList[2].imagen))
-        self.animeTop3.setIconSize(QSize(370, 400))
+        self.image_paths_mangaka = [
+            os.path.join(basedir, mangakaList[0].imagen),
+            os.path.join(basedir, mangakaList[1].imagen),
+            os.path.join(basedir, mangakaList[2].imagen)
+        ]
 
-        
-        self.animeTop2.clicked.connect(lambda: self.moverImagenAnime(2))
-        self.animeTop3.clicked.connect(lambda: self.moverImagenAnime(3))
+        self.image_paths_estudio = [
+            os.path.join(basedir, estudioList[0].imagen),
+            os.path.join(basedir, estudioList[1].imagen),
+            os.path.join(basedir, estudioList[2].imagen)
+        ]
 
+        # Configurar imágenes en UI
+        self.setImagenesAnime()
+        self.setImagenesManga()
+        self.setImagenesMangaka()
+        self.setImagenesEstudio()
 
+    def setImagenesAnime(self):
+        """Configura los botones de anime con imágenes y eventos de rotación"""
+        self.configurarBoton(self.animeTop1, self.image_paths_anime[1])
+        self.configurarBoton(self.animeTop2, self.image_paths_anime[0])
+        self.configurarBoton(self.animeTop3, self.image_paths_anime[2])
 
-        self.mangaTop1.setText("")
-        self.mangaTop1.setStyleSheet("background: transparent; border: none;")
-        self.mangaTop1.setIcon(QIcon(self.mangaImagePaths[0]))
-        self.mangaTop1.setIconSize(QSize(370, 400))
+        self.animeTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 2))
+        self.animeTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 3))
 
-        self.mangaTop2.setText("")
-        self.mangaTop2.setStyleSheet("background: transparent; border: none;")
-        self.mangaTop2.setIcon(QIcon(self.mangaImagePaths[1]))
-        self.mangaTop2.setIconSize(QSize(370, 400))
+    def setImagenesManga(self):
+        """Configura los botones de manga con imágenes y eventos de rotación"""
+        self.configurarBoton(self.mangaTop1, self.image_paths_manga[0])
+        self.configurarBoton(self.mangaTop2, self.image_paths_manga[1])
+        self.configurarBoton(self.mangaTop3, self.image_paths_manga[2])
 
-        self.mangaTop3.setText("")
-        self.mangaTop3.setStyleSheet("background: transparent; border: none;")
-        self.mangaTop3.setIcon(QIcon(self.mangaImagePaths[2]))
-        self.mangaTop3.setIconSize(QSize(370, 400))
+        self.mangaTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_manga, self.mangaTop1, self.mangaTop2, self.mangaTop3, 2))
+        self.mangaTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_manga, self.mangaTop1, self.mangaTop2, self.mangaTop3, 3))
 
-        self.mangaTop2.clicked.connect(lambda: self.moverImagenManga(2))
-        self.mangaTop3.clicked.connect(lambda: self.moverImagenManga(3))
-                    
-    def moverImagenAnime(self, boton_presionado):
-        
-        if boton_presionado == 2:  # Si se presiona el de la izquierda, rotar a la derecha
-            self.animeImagePaths = [self.animeImagePaths[1], self.animeImagePaths[2], self.animeImagePaths[0]]
-        elif boton_presionado == 3:  # Si se presiona el de la derecha, rotar a la izquierda
-            self.animeImagePaths = [self.animeImagePaths[2], self.animeImagePaths[0], self.animeImagePaths[1]]
-        
-        # Actualizar los iconos con la nueva rotación
-        self.animeTop1.setIcon(QIcon(self.animeImagePaths[0]))
-        self.animeTop2.setIcon(QIcon(self.animeImagePaths[1]))
-        self.animeTop3.setIcon(QIcon(self.animeImagePaths[2]))
+    def setImagenesMangaka(self):
+        """Configura los botones de mangaka con imágenes"""
+        self.configurarBoton(self.mangakaTop1, self.image_paths_mangaka[0])
+        self.configurarBoton(self.mangakaTop2, self.image_paths_mangaka[1])
+        self.configurarBoton(self.mangakaTop3, self.image_paths_mangaka[2])
 
-    def moverImagenManga(self, boton_presionado):
-        
-        if boton_presionado == 2:  # Si se presiona el de la izquierda, rotar a la derecha
-            self.mangaImagePaths = [self.mangaImagePaths[1], self.mangaImagePaths[2], self.mangaImagePaths[0]]
-        elif boton_presionado == 3:  # Si se presiona el de la derecha, rotar a la izquierda
-            self.mangaImagePaths = [self.mangaImagePaths[2], self.mangaImagePaths[0], self.mangaImagePaths[1]]
+        self.mangakaTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_mangaka, self.mangakaTop1, self.mangakaTop2, self.mangakaTop3, 2))
+        self.mangakaTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_mangaka, self.mangakaTop1, self.mangakaTop2, self.mangakaTop3, 3))
 
-        # Actualizar los iconos con la nueva rotación
-        self.mangaTop1.setIcon(QIcon(self.mangaImagePaths[0]))
-        self.mangaTop2.setIcon(QIcon(self.mangaImagePaths[1]))
-        self.mangaTop3.setIcon(QIcon(self.mangaImagePaths[2]))
+    def setImagenesEstudio(self):
+        """Configura los botones de estudio con imágenes"""
+        self.configurarBoton(self.estudiosTop1, self.image_paths_estudio[0])
+        self.configurarBoton(self.estudiosTop2, self.image_paths_estudio[1])
+        self.configurarBoton(self.estudiosTop3, self.image_paths_estudio[2])
+
+        self.estudiosTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_estudio, self.estudiosTop1, self.estudiosTop2, self.estudiosTop3, 2))
+        self.estudiosTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_estudio, self.estudiosTop1, self.estudiosTop2, self.estudiosTop3, 3))
+
+    def configurarBoton(self, boton, imagen):
+        """Configura un botón con la imagen proporcionada"""
+        boton.setText("")
+        boton.setStyleSheet("background: transparent; border: none;")
+        boton.setIcon(QIcon(imagen))
+        boton.setIconSize(QSize(370, 400))
+
+    def moverImagen(self, image_paths, boton_centro, boton_izq, boton_der, boton_presionado):
+        """Rota las imágenes en la dirección correspondiente"""
+        if boton_presionado == 2:  # Rotación a la derecha
+            image_paths[:] = [image_paths[1], image_paths[2], image_paths[0]]
+        elif boton_presionado == 3:  # Rotación a la izquierda
+            image_paths[:] = [image_paths[2], image_paths[0], image_paths[1]]
+
+        # Aplicar los nuevos iconos
+        boton_centro.setIcon(QIcon(image_paths[0]))
+        boton_izq.setIcon(QIcon(image_paths[1]))
+        boton_der.setIcon(QIcon(image_paths[2]))
+
     
 
 
