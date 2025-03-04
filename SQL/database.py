@@ -49,6 +49,7 @@ cursor.execute(
     nombre VARCHAR(255) NOT NULL,
     nacimiento DATE NOT NULL,
     nacionalidad VARCHAR(255) NOT NULL,
+    imagen VARCHAR(255) NOT NULL,
     obras JSON)"""
 )
 
@@ -56,6 +57,7 @@ cursor.execute(
     """CREATE TABLE IF NOT EXISTS ESTUDIO (
     nombre VARCHAR(255) PRIMARY KEY NOT NULL,
     pais VARCHAR(255) NOT NULL,
+    imagen VARCHAR(255) NOT NULL,
     animes JSON)"""
 )
 
@@ -83,22 +85,22 @@ datosMangas = [
     ('BLE-TIT', 'Bleach', 'Bleach es un manga japonés escrito e ilustrado por Tite Kubo. Comenzó a publicarse en la revista Weekly Shōnen Jump el 7 de agosto de 2001.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Tite Kubo', 'Resources/Manga/BLEACH.jpg', 74, 686, json.dumps([]))
 ]
 datosAnimes = [
-    ('DBZ-TOEI', 'Dragon Ball Z', 'Goku y sus amigos protegen la Tierra de amenazas cósmicas.', 'Acción, Aventura, Fantasía', 'Toei Animation', 'Resources/Anime/DBZ.jpg', 9, 291, '[]'),
-    ('NARUTO-PIERROT', 'Naruto', 'Un joven ninja busca el reconocimiento y sueña con ser Hokage.', 'Acción, Aventura', 'Studio Pierrot', 'Resources/Anime/NARUTO.jpg', 9, 220, '[]'),
-    ('AOT-WIT', 'Attack on Titan', 'La humanidad lucha contra titanes devoradores de hombres.', 'Acción, Drama', 'Wit Studio', 'Resources/Anime/AOT.jpg', 4, 87, '[]'),
-    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspenso, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, '[]')
+    ('DBZ-TOEI', 'Dragon Ball Z', 'Goku y sus amigos protegen la Tierra de amenazas cósmicas.', 'Acción, Aventura, Fantasía', 'Toei Animation', 'Resources/Anime/DBZ.jpg', 9, 291, json.dumps([])),
+    ('NARUTO-PIERROT', 'Naruto', 'Un joven ninja busca el reconocimiento y sueña con ser Hokage.', 'Acción, Aventura', 'Studio Pierrot', 'Resources/Anime/NARUTO.jpg', 9, 220, json.dumps([])),
+    ('AOT-WIT', 'Attack on Titan', 'La humanidad lucha contra titanes devoradores de hombres.', 'Acción, Drama', 'Wit Studio', 'Resources/Anime/AOT.jpg', 4, 87, json.dumps([])),
+    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspenso, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([]))
 ]
 datosMangakas = [
-    ('Eiichiro Oda', 'Eiichiro Oda', '1975-01-01', 'Japonesa', '["One Piece"]'),
-    ('Masashi Kishimoto', 'Masashi Kishimoto', '1974-11-08', 'Japonesa', '["Naruto", "Boruto"]'),
-    ('Hajime Isayama', 'Hajime Isayama', '1986-08-29', 'Japonesa', '["Attack on Titan"]'),
-    ('Tsugumi Ohba', 'Tsugumi Ohba', '1962-00-00', 'Japonesa', '["Death Note", "Bakuman"]')
+    ('Eiichiro Oda', 'Eiichiro Oda', '1975-01-01', 'Japonesa', 'Resources/Mangaka/ODA.jpg', '["One Piece"]'),
+    ('Masashi Kishimoto', 'Masashi Kishimoto', '1974-11-08', 'Japonesa', 'Resources/Mangaka/KISHIMOTO.jpg', '["Naruto", "Boruto"]'),
+    ('Hajime Isayama', 'Hajime Isayama', '1986-08-29', 'Japonesa', 'Resources/Mangaka/ISAYAMA.jpg', '["Attack on Titan"]'),
+    ('Tite Kubo', 'Tite Kubo', '1977-06-26', 'Japonesa', 'Resources/Mangaka/KUBO.jpg', '["Bleach"]')
 ]
 datosEstudios = [
-    ('Toei Animation', 'Japón', '["Dragon Ball Z", "One Piece"]'),
-    ('Studio Pierrot', 'Japón', '["Naruto", "Bleach"]'),
-    ('Wit Studio', 'Japón', '["Attack on Titan", "Vinland Saga"]'),
-    ('Madhouse', 'Japón', '["Death Note", "One Punch Man"]')
+    ('Toei Animation', 'Japón', 'Resources/Estudios/TOEI.png', '["Dragon Ball Z", "One Piece"]'),
+    ('Studio Pierrot', 'Japón', 'Resources/Estudios/PIERROT.jpg', '["Naruto", "Bleach"]'),
+    ('Wit Studio', 'Japón', 'Resources/Estudios/WIT.jpg', '["Attack on Titan", "Vinland Saga"]'),
+    ('Madhouse', 'Japón', 'Resources/Estudios/MADHOUSE.png', '["Death Note", "One Punch Man"]')
 ]
 ## datosComentarios = [
 ##     ('1', 'Morri', 'DBZ-TOEI', None, 'Me encanta la saga de los Saiyajin.', '2024-02-20'),
@@ -110,8 +112,8 @@ datosEstudios = [
 
 cursor.executemany("INSERT INTO MANGA (_id, nombre, sinopsis, genero, autor, imagen, tomos, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosMangas)
 cursor.executemany("INSERT INTO ANIME (_id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosAnimes)
-cursor.executemany("INSERT INTO MANGAKA (_id, nombre, nacimiento, nacionalidad, obras) VALUES (?, ?, ?, ?, ?)", datosMangakas)
-cursor.executemany("INSERT INTO ESTUDIO (nombre, pais, animes) VALUES (?, ?, ?)", datosEstudios)
+cursor.executemany("INSERT INTO MANGAKA (_id, nombre, nacimiento, nacionalidad, imagen, obras) VALUES (?, ?, ?, ?, ?, ?)", datosMangakas)
+cursor.executemany("INSERT INTO ESTUDIO (nombre, pais, imagen, animes) VALUES (?, ?, ?, ?)", datosEstudios)
 
 
 cursor.execute("SELECT * FROM MANGA")

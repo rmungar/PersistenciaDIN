@@ -83,33 +83,20 @@ class HomeScreen(QMainWindow):
         ## estudioRepo = EstudioRepo()
         ## mangakaRepo = MangakaRepo()
 
-        self.animeImagePaths = [
-            os.path.join(basedir, animeList[0][5]),
-            os.path.join(basedir, animeList[1][5]),
-            os.path.join(basedir, animeList[2][5])
-        ]
-
-        self.mangaImagePaths = [
-            os.path.join(basedir, mangaList[0][5]),
-            os.path.join(basedir, mangaList[1][5]),
-            os.path.join(basedir, mangaList[2][5])
-        ]
-
-
         
         self.animeTop1.setText("")
         self.animeTop1.setStyleSheet("background: transparent; border: none;")
-        self.animeTop1.setIcon(QIcon(self.animeImagePaths[0]))
+        self.animeTop1.setIcon(QIcon(mangaList[0].imagen))
         self.animeTop1.setIconSize(QSize(370, 400))
 
         self.animeTop2.setText("")
         self.animeTop2.setStyleSheet("background: transparent; border: none;")
-        self.animeTop2.setIcon(QIcon(self.animeImagePaths[1]))
+        self.animeTop2.setIcon(QIcon(mangaList[1].imagen))
         self.animeTop2.setIconSize(QSize(370, 400))
 
         self.animeTop3.setText("")
         self.animeTop3.setStyleSheet("background: transparent; border: none;")
-        self.animeTop3.setIcon(QIcon(self.animeImagePaths[2]))
+        self.animeTop3.setIcon(QIcon(mangaList[2].imagen))
         self.animeTop3.setIconSize(QSize(370, 400))
 
         
