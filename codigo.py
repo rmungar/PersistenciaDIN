@@ -10,7 +10,7 @@ import pyrebase
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage
 from PyQt6.QtCore import QSize
 from PyQt6 import uic
-from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QIcon, QPixmap
 from Model import Anime, Estudio, Manga, Mangaka
 from Model.Usuario import Usuario
 from Repository.animeRepo import AnimeRepo
@@ -69,6 +69,26 @@ class Login(QMainWindow):
             QErrorMessage(self).showMessage("Usuario ya registrado")
 
 
+class MangaScreen(QMainWindow):
+    def __init__(self, stacked_widget, manga):
+        super(MangaScreen, self).__init__()
+        
+        uic.loadUi(os.path.join(basedir, 'Ui/mangaPage.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+        if manga is not None:
+            self.title.setText(manga.nombre)
+            self.synopsisvalue.setText(manga.sinopsis)
+            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, manga.imagen)))
+            self.placeholderimage.setScaledContents(True)
+            self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
+        else:
+            self.title.setText("Sin información")
+            self.synopsisvalue.setText("No se ha seleccionado un manga.")
+            self.placeholderimage.clear()  # Limpia la imagen
+            self.information.setText("Información no disponible.")
+
+
 class HomeScreen(QMainWindow):
     def __init__(self, stacked_widget):
         super(HomeScreen, self).__init__()
@@ -84,34 +104,34 @@ class HomeScreen(QMainWindow):
         estudioRepo = EstudioRepo()
 
         # Obtener listas de datos
-        mangaList = mangaRepo.getMangas()
-        animeList = animeRepo.getAnime()
-        mangakaList = mangakaRepo.getMangakas()
-        estudioList = estudioRepo.getEstudios()
+        self.mangaList = mangaRepo.getMangas()
+        self.animeList = animeRepo.getAnime()
+        self.mangakaList = mangakaRepo.getMangakas()
+        self.estudioList = estudioRepo.getEstudios()
 
         # Listas de imágenes (ajustadas según la disposición)
         self.image_paths_anime = [
-            os.path.join(basedir, animeList[1].imagen),  # Izquierda
-            os.path.join(basedir, animeList[0].imagen),  # Centro
-            os.path.join(basedir, animeList[2].imagen)   # Derecha
+            os.path.join(basedir, self.animeList[1].imagen),  # Izquierda
+            os.path.join(basedir, self.animeList[0].imagen),  # Centro
+            os.path.join(basedir, self.animeList[2].imagen)   # Derecha
         ]
 
         self.image_paths_manga = [
-            os.path.join(basedir, mangaList[0].imagen),  # Centro
-            os.path.join(basedir, mangaList[1].imagen),  # Izquierda
-            os.path.join(basedir, mangaList[2].imagen)   # Derecha
+            os.path.join(basedir, self.mangaList[0].imagen),  # Centro
+            os.path.join(basedir, self.mangaList[1].imagen),  # Izquierda
+            os.path.join(basedir, self.mangaList[2].imagen)   # Derecha
         ]
 
         self.image_paths_mangaka = [
-            os.path.join(basedir, mangakaList[0].imagen),
-            os.path.join(basedir, mangakaList[1].imagen),
-            os.path.join(basedir, mangakaList[2].imagen)
+            os.path.join(basedir, self.mangakaList[0].imagen),
+            os.path.join(basedir, self.mangakaList[1].imagen),
+            os.path.join(basedir, self.mangakaList[2].imagen)
         ]
 
         self.image_paths_estudio = [
-            os.path.join(basedir, estudioList[0].imagen),
-            os.path.join(basedir, estudioList[1].imagen),
-            os.path.join(basedir, estudioList[2].imagen)
+            os.path.join(basedir, self.estudioList[0].imagen),
+            os.path.join(basedir, self.estudioList[1].imagen),
+            os.path.join(basedir, self.estudioList[2].imagen)
         ]
 
         # Configurar imágenes en UI
@@ -126,6 +146,7 @@ class HomeScreen(QMainWindow):
         self.configurarBoton(self.animeTop2, self.image_paths_anime[0])
         self.configurarBoton(self.animeTop3, self.image_paths_anime[2])
 
+        
         self.animeTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 2))
         self.animeTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_anime, self.animeTop1, self.animeTop2, self.animeTop3, 3))
 
@@ -135,6 +156,7 @@ class HomeScreen(QMainWindow):
         self.configurarBoton(self.mangaTop2, self.image_paths_manga[1])
         self.configurarBoton(self.mangaTop3, self.image_paths_manga[2])
 
+        self.mangaTop1.clicked.connect(lambda: self.toMangaPage(self.mangaList[0]))
         self.mangaTop2.clicked.connect(lambda: self.moverImagen(self.image_paths_manga, self.mangaTop1, self.mangaTop2, self.mangaTop3, 2))
         self.mangaTop3.clicked.connect(lambda: self.moverImagen(self.image_paths_manga, self.mangaTop1, self.mangaTop2, self.mangaTop3, 3))
 
@@ -175,6 +197,11 @@ class HomeScreen(QMainWindow):
         boton_izq.setIcon(QIcon(image_paths[1]))
         boton_der.setIcon(QIcon(image_paths[2]))
 
+    def toMangaPage(self, manga: Manga.Manga):
+        self.mangaScreen = MangaScreen(self.stacked_widget, manga)
+        self.stacked_widget.addWidget(self.mangaScreen)
+        self.stacked_widget.setCurrentWidget(self.mangaScreen)
+
     
 
 
@@ -187,9 +214,11 @@ if __name__ == '__main__':
     # Creamos las pantallas y las agregamos al QStackedWidget
     login_screen = Login(stacked_widget)
     home_screen = HomeScreen(stacked_widget)
+    manga_screen = MangaScreen(stacked_widget, None)
 
     stacked_widget.addWidget(login_screen)  # Índice 0
     stacked_widget.addWidget(home_screen)   # Índice 1
+    stacked_widget.addWidget(manga_screen)  # Índice 2
 
     stacked_widget.setCurrentIndex(0)  # Empezamos en la pantalla de Login
     stacked_widget.show()
