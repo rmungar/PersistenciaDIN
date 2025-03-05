@@ -29,75 +29,59 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_5 = QGridLayout(self.centralwidget)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_5.addItem(self.horizontalSpacer_3, 4, 0, 1, 1)
+
+        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_5.addItem(self.horizontalSpacer_9, 4, 3, 1, 1)
+
         self.horizontalSpacer_6 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_6, 5, 2, 1, 1)
-
-        self.Title = QLabel(self.centralwidget)
-        self.Title.setObjectName(u"Title")
-        font = QFont()
-        font.setFamilies([u"Pinky Show"])
-        font.setPointSize(24)
-        font.setBold(False)
-        font.setItalic(False)
-        self.Title.setFont(font)
-        self.Title.setStyleSheet(u"font: 24pt \"Pinky Show\";")
-
-        self.gridLayout_5.addWidget(self.Title, 1, 2, 1, 1)
+        self.gridLayout_5.addItem(self.horizontalSpacer_6, 6, 2, 1, 1)
 
         self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.gridLayout_5.addItem(self.verticalSpacer_2, 0, 2, 1, 1)
 
-        self.gridLayout_4 = QGridLayout()
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.registerButton = QPushButton(self.centralwidget)
-        self.registerButton.setObjectName(u"registerButton")
-        self.registerButton.setMinimumSize(QSize(200, 50))
-        self.registerButton.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"font: 700 11pt \"Segoe UI\";\n"
-"color: rgb(36, 61, 95);")
+        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addWidget(self.registerButton, 0, 4, 1, 1)
+        self.gridLayout_5.addItem(self.horizontalSpacer_8, 4, 1, 1, 1)
 
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addItem(self.horizontalSpacer, 0, 1, 1, 1)
+        self.gridLayout_5.addItem(self.horizontalSpacer_7, 3, 2, 1, 1)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
+        self.gridLayout_5.addItem(self.horizontalSpacer_5, 5, 2, 1, 1)
 
-        self.loginButton = QPushButton(self.centralwidget)
-        self.loginButton.setObjectName(u"loginButton")
-        self.loginButton.setMinimumSize(QSize(200, 50))
-        self.loginButton.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"font: 700 11pt \"Segoe UI\";\n"
-"color: rgb(36, 61, 95);")
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_4.addWidget(self.loginButton, 0, 2, 1, 1)
+        self.gridLayout_5.addItem(self.horizontalSpacer_4, 4, 4, 1, 1)
 
-        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_4.addItem(self.horizontalSpacer_10, 0, 3, 1, 1)
-
-
-        self.gridLayout_5.addLayout(self.gridLayout_4, 6, 2, 1, 1)
+        self.gridLayout_5.addItem(self.verticalSpacer_3, 8, 2, 1, 1)
 
         self.gridLayout = QGridLayout()
         self.gridLayout.setObjectName(u"gridLayout")
         self.email = QLabel(self.centralwidget)
         self.email.setObjectName(u"email")
+        self.email.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.email, 1, 0, 1, 1)
 
         self.Pregunta = QLabel(self.centralwidget)
         self.Pregunta.setObjectName(u"Pregunta")
+        self.Pregunta.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.Pregunta, 10, 1, 1, 1)
 
         self.VisiblePass = QCheckBox(self.centralwidget)
         self.VisiblePass.setObjectName(u"VisiblePass")
+        self.VisiblePass.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.VisiblePass, 10, 0, 1, 1)
 
@@ -115,6 +99,7 @@ class Ui_MainWindow(object):
 
         self.password_2 = QLabel(self.centralwidget)
         self.password_2.setObjectName(u"password_2")
+        self.password_2.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.password_2, 7, 0, 1, 2)
 
@@ -124,7 +109,7 @@ class Ui_MainWindow(object):
         self.emailText.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.emailText.setAutoFillBackground(True)
         self.emailText.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"font: 16pt \"Segoe UI\";\n"
+"font: 16pt;\n"
 "color: rgb(0, 0, 0);")
         self.emailText.setFrameShape(QFrame.Shape.StyledPanel)
         self.emailText.setFrameShadow(QFrame.Shadow.Sunken)
@@ -138,35 +123,63 @@ class Ui_MainWindow(object):
         self.gridLayout.addItem(self.verticalSpacer_5, 6, 0, 1, 1)
 
 
-        self.gridLayout_5.addLayout(self.gridLayout, 3, 2, 1, 1)
+        self.gridLayout_5.addLayout(self.gridLayout, 4, 2, 1, 1)
 
-        self.horizontalSpacer_7 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.Title = QLabel(self.centralwidget)
+        self.Title.setObjectName(u"Title")
+        font = QFont()
+        font.setFamilies([u"Pinky Show"])
+        font.setPointSize(24)
+        font.setBold(False)
+        font.setItalic(False)
+        self.Title.setFont(font)
+        self.Title.setStyleSheet(u"font: 24pt \"Pinky Show\";\n"
+"color: rgb(255, 255, 255);")
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_7, 2, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.Title, 2, 2, 1, 1)
 
-        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.gridLayout_4 = QGridLayout()
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_9, 3, 3, 1, 1)
+        self.gridLayout_4.addItem(self.horizontalSpacer_10, 0, 3, 1, 1)
 
-        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.loginButton = QPushButton(self.centralwidget)
+        self.loginButton.setObjectName(u"loginButton")
+        self.loginButton.setMinimumSize(QSize(200, 50))
+        self.loginButton.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"font: 700 11pt \"Segoe UI\";\n"
+"color: rgb(36, 61, 95);")
 
-        self.gridLayout_5.addItem(self.verticalSpacer_3, 7, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.loginButton, 0, 2, 1, 1)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_3, 3, 0, 1, 1)
+        self.gridLayout_4.addItem(self.horizontalSpacer_2, 0, 5, 1, 1)
 
-        self.horizontalSpacer_8 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.registerButton = QPushButton(self.centralwidget)
+        self.registerButton.setObjectName(u"registerButton")
+        self.registerButton.setMinimumSize(QSize(200, 50))
+        self.registerButton.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
+"font: 700 11pt \"Segoe UI\";\n"
+"color: rgb(36, 61, 95);")
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_8, 3, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.registerButton, 0, 4, 1, 1)
 
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_4, 3, 4, 1, 1)
+        self.gridLayout_4.addItem(self.horizontalSpacer, 0, 1, 1, 1)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.verticalSpacer_4 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.gridLayout_5.addItem(self.horizontalSpacer_5, 4, 2, 1, 1)
+        self.gridLayout_4.addItem(self.verticalSpacer_4, 1, 3, 1, 1)
+
+
+        self.gridLayout_5.addLayout(self.gridLayout_4, 7, 2, 1, 1)
+
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_5.addItem(self.verticalSpacer, 1, 2, 1, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
@@ -180,9 +193,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.Title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Anigiri</p></body></html>", None))
-        self.registerButton.setText(QCoreApplication.translate("MainWindow", u"Registrarse", None))
-        self.loginButton.setText(QCoreApplication.translate("MainWindow", u"Iniciar sesi\u00f3n", None))
         self.email.setText(QCoreApplication.translate("MainWindow", u"Email", None))
         self.Pregunta.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"right\">\u00bfA\u00fan no tienes cuenta? Reg\u00edstrate</p></body></html>", None))
         self.VisiblePass.setText(QCoreApplication.translate("MainWindow", u"Mostrar Contrase\u00f1a", None))
@@ -203,5 +213,8 @@ class Ui_MainWindow(object):
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:16pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:10.5pt;\"><br /></p></body></html>", None))
+        self.Title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">Anigiri</p></body></html>", None))
+        self.loginButton.setText(QCoreApplication.translate("MainWindow", u"Iniciar sesi\u00f3n", None))
+        self.registerButton.setText(QCoreApplication.translate("MainWindow", u"Registrarse", None))
     # retranslateUi
 

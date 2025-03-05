@@ -98,6 +98,9 @@
     </item>
     <item row="6" column="1">
      <widget class="QPushButton" name="mangaButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Mangas</string>
       </property>
@@ -105,6 +108,9 @@
     </item>
     <item row="5" column="1">
      <widget class="QPushButton" name="animeButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Animes</string>
       </property>
@@ -130,8 +136,8 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>0</y>
-              <width>957</width>
+              <y>-361</y>
+              <width>962</width>
               <height>2224</height>
              </rect>
             </property>
@@ -139,17 +145,21 @@
              <item row="10" column="0">
               <widget class="QLabel" name="label_5">
                <property name="styleSheet">
-                <string notr="true">font: 18pt &quot;Segoe UI&quot;;</string>
+                <string notr="true">font: 18pt &quot;Segoe UI&quot;;
+color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>Mangakas</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Mangakas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
              <item row="7" column="0">
               <widget class="QLabel" name="label_4">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);</string>
+               </property>
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Estudios&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Estudios&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -768,20 +778,20 @@
              <item row="0" column="0">
               <widget class="QLabel" name="label_2">
                <property name="styleSheet">
-                <string notr="true"/>
+                <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Animes&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Animes&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_3">
                <property name="styleSheet">
-                <string notr="true"/>
+                <string notr="true">color: rgb(255, 255, 255);</string>
                </property>
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt;&quot;&gt;Mangas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Mangas&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
               </widget>
              </item>
@@ -1048,7 +1058,8 @@
     <item row="0" column="1" rowspan="2">
      <widget class="QLabel" name="label">
       <property name="styleSheet">
-       <string notr="true">font: 24pt &quot;Pinky Show&quot;;</string>
+       <string notr="true">font: 24pt &quot;Pinky Show&quot;;
+color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Anigiri&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -1116,6 +1127,9 @@
     </item>
     <item row="8" column="1">
      <widget class="QPushButton" name="mangakaButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Mangakas</string>
       </property>
@@ -1123,6 +1137,9 @@
     </item>
     <item row="7" column="1">
      <widget class="QPushButton" name="estudioButton">
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);</string>
+      </property>
       <property name="text">
        <string>Estudios</string>
       </property>

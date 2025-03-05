@@ -55,11 +55,13 @@ class Ui_MainWindow(object):
 
         self.mangaButton = QPushButton(self.centralwidget)
         self.mangaButton.setObjectName(u"mangaButton")
+        self.mangaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.mangaButton, 6, 1, 1, 1)
 
         self.animeButton = QPushButton(self.centralwidget)
         self.animeButton.setObjectName(u"animeButton")
+        self.animeButton.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.animeButton, 5, 1, 1, 1)
 
@@ -76,17 +78,19 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 957, 2224))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -361, 962, 2224))
         self.gridLayout_6 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_5 = QLabel(self.scrollAreaWidgetContents_2)
         self.label_5.setObjectName(u"label_5")
-        self.label_5.setStyleSheet(u"font: 18pt \"Segoe UI\";")
+        self.label_5.setStyleSheet(u"font: 18pt \"Segoe UI\";\n"
+"color: rgb(255, 255, 255);")
 
         self.gridLayout_6.addWidget(self.label_5, 10, 0, 1, 1)
 
         self.label_4 = QLabel(self.scrollAreaWidgetContents_2)
         self.label_4.setObjectName(u"label_4")
+        self.label_4.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout_6.addWidget(self.label_4, 7, 0, 1, 1)
 
@@ -331,13 +335,13 @@ class Ui_MainWindow(object):
 
         self.label_2 = QLabel(self.scrollAreaWidgetContents_2)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setStyleSheet(u"")
+        self.label_2.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout_6.addWidget(self.label_2, 0, 0, 1, 1)
 
         self.label_3 = QLabel(self.scrollAreaWidgetContents_2)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setStyleSheet(u"")
+        self.label_3.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout_6.addWidget(self.label_3, 4, 0, 1, 1)
 
@@ -442,7 +446,8 @@ class Ui_MainWindow(object):
 
         self.label = QLabel(self.centralwidget)
         self.label.setObjectName(u"label")
-        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";")
+        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";\n"
+"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.label, 0, 1, 2, 1)
 
@@ -474,11 +479,13 @@ class Ui_MainWindow(object):
 
         self.mangakaButton = QPushButton(self.centralwidget)
         self.mangakaButton.setObjectName(u"mangakaButton")
+        self.mangakaButton.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.mangakaButton, 8, 1, 1, 1)
 
         self.estudioButton = QPushButton(self.centralwidget)
         self.estudioButton.setObjectName(u"estudioButton")
+        self.estudioButton.setStyleSheet(u"color: rgb(255, 255, 255);")
 
         self.gridLayout.addWidget(self.estudioButton, 7, 1, 1, 1)
 
@@ -493,8 +500,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
-        self.label_5.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
-        self.label_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt;\">Estudios</span></p></body></html>", None))
+        self.label_5.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-weight:700;\">Mangakas</span></p></body></html>", None))
+        self.label_4.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Estudios</span></p></body></html>", None))
         self.mangaTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.mangaTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.mangaTop1.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
@@ -504,8 +511,8 @@ class Ui_MainWindow(object):
         self.estudiosTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.estudiosTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.estudiosTop1.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
-        self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt;\">Animes</span></p></body></html>", None))
-        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt;\">Mangas</span></p></body></html>", None))
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Animes</span></p></body></html>", None))
+        self.label_3.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">Mangas</span></p></body></html>", None))
         self.animeTop3.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.animeTop1.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.animeTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
