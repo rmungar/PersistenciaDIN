@@ -7,10 +7,10 @@
 import sys
 import os
 import pyrebase
-from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage
-from PyQt6.QtCore import QSize
+from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit
+from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
-from PyQt6.QtGui import QIcon, QPixmap
+from PyQt6.QtGui import QIcon, QPixmap, QFont
 from Model import Anime, Estudio, Manga, Mangaka
 from Model.Usuario import Usuario
 from Repository.animeRepo import AnimeRepo
@@ -33,14 +33,17 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 userLogged = auth.current_user
 
-class Login(QMainWindow):
+class LoginScreen(QMainWindow):
     def __init__(self, stacked_widget):
-        super(Login, self).__init__()
+
+        
+        super(LoginScreen, self).__init__()
         uic.loadUi(os.path.join(basedir, 'Ui/login.ui'), self)
         self.setWindowTitle("Anigiri")
-        
-        self.stacked_widget = stacked_widget  # Referencia al `QStackedWidget`
-        
+        font = QFont()
+        font.setPointSize(16)
+        self.emailText.setFont(font)
+        self.stacked_widget = stacked_widget  # Referencia al `QStackedWidget
         self.loginButton.clicked.connect(self.login)
         self.registerButton.clicked.connect(self.register)
 
@@ -54,6 +57,7 @@ class Login(QMainWindow):
             print("Login exitoso:", user)
 
             # Cambia a la pantalla de inicio
+            self.stacked_widget.addWidget(HomeScreen(stacked_widget))
             self.stacked_widget.setCurrentIndex(1)
         except:
             QErrorMessage(self).showMessage("Usuario o contraseña incorrectos")
@@ -79,7 +83,8 @@ class MangaScreen(QMainWindow):
         if manga is not None:
             self.title.setText(manga.nombre)
             self.synopsisvalue.setText(manga.sinopsis)
-            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, manga.imagen)))
+            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, manga.imagen)).size())
+            
             self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
         else:
             self.title.setText("Sin información")
@@ -149,6 +154,8 @@ class HomeScreen(QMainWindow):
     def __init__(self, stacked_widget):
         super(HomeScreen, self).__init__()
 
+        self.login_screen = LoginScreen(stacked_widget)
+
         uic.loadUi(os.path.join(basedir, 'Ui/homePage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
@@ -167,8 +174,8 @@ class HomeScreen(QMainWindow):
 
         # Listas de imágenes (ajustadas según la disposición)
         self.image_paths_anime = [
-            os.path.join(basedir, self.animeList[1].imagen),  # Izquierda
-            os.path.join(basedir, self.animeList[0].imagen),  # Centro
+            os.path.join(basedir, self.animeList[0].imagen),  # Izquierda
+            os.path.join(basedir, self.animeList[1].imagen),  # Centro
             os.path.join(basedir, self.animeList[2].imagen)   # Derecha
         ]
 
@@ -256,23 +263,27 @@ class HomeScreen(QMainWindow):
         boton_der.setIcon(QIcon(image_paths[2]))
 
     def toMangaPage(self, manga: Manga.Manga):
-        self.mangaScreen = MangaScreen(self.stacked_widget, manga)
-        self.stacked_widget.setCurrentWidget(self.mangaScreen)
+        manga_screen = MangaScreen(stacked_widget, manga)
+        stacked_widget.addWidget(manga_screen)
+        stacked_widget.setCurrentWidget(manga_screen)   
 
     def toAnimePage(self, anime: Anime.Anime):
         """Actualiza AnimeScreen y cambia de ventana"""
-        self.animeScreen = AnimeScreen(self.stacked_widget, anime)
-        self.stacked_widget.setCurrentIndex(3)
+        animeScreen = AnimeScreen(self.stacked_widget, anime)
+        stacked_widget.addWidget(animeScreen)
+        stacked_widget.setCurrentWidget(animeScreen)   
     
     def toMangakaPage(self, mangaka: Mangaka.Mangaka):  
         """Actualiza MangakaScreen y cambia de ventana"""
-        self.mangakaScreen = MangakaScreen(self.stacked_widget, mangaka)
-        self.stacked_widget.setCurrentIndex(4)
+        mangakaScreen = MangakaScreen(self.stacked_widget, mangaka)
+        stacked_widget.addWidget(mangakaScreen)
+        stacked_widget.setCurrentWidget(mangakaScreen)   
 
     def toEstudioPage(self, estudio: Estudio.Estudio):
         """Actualiza EstudioScreen y cambia de ventana"""
-        self.estudioScreen = EstudioScreen(self.stacked_widget, estudio)
-        self.stacked_widget.setCurrentIndex(5)
+        estudioScreen = EstudioScreen(self.stacked_widget, estudio)
+        stacked_widget.addWidget(estudioScreen)
+        stacked_widget.setCurrentWidget(estudioScreen)   
     
 
 if __name__ == '__main__':
@@ -280,26 +291,9 @@ if __name__ == '__main__':
 
     # Crear el QStackedWidget
     stacked_widget = QStackedWidget()
-
-    # Crear pantallas sin datos iniciales
-    login_screen = Login(stacked_widget)
-    manga_screen = MangaScreen(stacked_widget, None)
-    anime_screen = AnimeScreen(stacked_widget, None)
-    mangaka_screen = MangakaScreen(stacked_widget, None)
-    estudio_screen = EstudioScreen(stacked_widget, None)
-
-    # Pasar las pantallas a HomeScreen para poder actualizarlas
-    home_screen = HomeScreen(stacked_widget)
-
-    # Agregar pantallas al QStackedWidget
-    stacked_widget.addWidget(login_screen)            # Índice 0
-    stacked_widget.addWidget(home_screen)             # Índice 1
-    stacked_widget.addWidget(manga_screen)            # Índice 2
-    stacked_widget.addWidget(anime_screen)            # Índice 3
-    stacked_widget.addWidget(mangaka_screen)          # Índice 4
-    stacked_widget.addWidget(estudio_screen)          # Índice 5
-
+    loginScreen = LoginScreen(stacked_widget)
     # Iniciar en la pantalla de Login
+    stacked_widget.addWidget(loginScreen)
     stacked_widget.setCurrentIndex(0)
     stacked_widget.show()
 
