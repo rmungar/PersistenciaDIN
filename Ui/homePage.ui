@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1139</width>
-    <height>644</height>
+    <width>1031</width>
+    <height>750</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1031</width>
+    <height>750</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1031</width>
+    <height>750</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -136,8 +148,8 @@
             <property name="geometry">
              <rect>
               <x>0</x>
-              <y>-361</y>
-              <width>962</width>
+              <y>0</y>
+              <width>854</width>
               <height>2224</height>
              </rect>
             </property>
@@ -1102,25 +1114,23 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">QPushButton {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;  
-    background-color: #3498db; 
-    color: white;
-    font-size: 16px;
-    border: none;
+    border-radius: 25px; 
+    background-color: rgb(20, 90, 182); 
+    color: white; 
+    border: none; 
+    font-size: 14px;
 }</string>
       </property>
       <property name="text">
-       <string>👾</string>
+       <string/>
       </property>
       <property name="icon">
-       <iconset theme="QIcon::ThemeIcon::UserOffline"/>
+       <iconset theme="QIcon::ThemeIcon::UserAvailable"/>
       </property>
       <property name="iconSize">
        <size>
-        <width>40</width>
-        <height>40</height>
+        <width>30</width>
+        <height>30</height>
        </size>
       </property>
      </widget>

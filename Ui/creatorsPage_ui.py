@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'allTemplate.ui'
+## Form generated from reading UI file 'creatorsPage.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.2
 ##
@@ -15,8 +15,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QMainWindow,
+    QPushButton, QSizePolicy, QSpacerItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -73,6 +73,41 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"")
         self.gridLayout_2 = QGridLayout(self.widget)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.title = QLabel(self.widget)
+        self.title.setObjectName(u"title")
+        self.title.setMinimumSize(QSize(0, 100))
+        self.title.setMaximumSize(QSize(16777215, 100))
+        self.title.setStyleSheet(u"background-color: rgb(0, 85, 127);\n"
+"font: 700 26pt \"Trebuchet MS\";")
+
+        self.gridLayout_2.addWidget(self.title, 1, 3, 1, 2)
+
+        self.biographyvalue = QLabel(self.widget)
+        self.biographyvalue.setObjectName(u"biographyvalue")
+        self.biographyvalue.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+        self.biographyvalue.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+
+        self.gridLayout_2.addWidget(self.biographyvalue, 2, 3, 1, 1)
+
+        self.obras = QLabel(self.widget)
+        self.obras.setObjectName(u"obras")
+        self.obras.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+        self.obras.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+
+        self.gridLayout_2.addWidget(self.obras, 3, 3, 1, 1)
+
+        self.placeholderimage = QLabel(self.widget)
+        self.placeholderimage.setObjectName(u"placeholderimage")
+        self.placeholderimage.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+
+        self.gridLayout_2.addWidget(self.placeholderimage, 2, 4, 2, 1)
+
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 
@@ -141,6 +176,10 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
+        self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
+        self.biographyvalue.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
+        self.obras.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
+        self.placeholderimage.setText("")
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))

@@ -23,7 +23,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1139, 644)
+        MainWindow.resize(1031, 750)
+        MainWindow.setMinimumSize(QSize(1031, 750))
+        MainWindow.setMaximumSize(QSize(1031, 750))
         MainWindow.setStyleSheet(u"background-color: rgb(21, 32, 60);")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -78,7 +80,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -361, 962, 2224))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 854, 2224))
         self.gridLayout_6 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.label_5 = QLabel(self.scrollAreaWidgetContents_2)
@@ -463,17 +465,15 @@ class Ui_MainWindow(object):
         self.userButton.setObjectName(u"userButton")
         self.userButton.setMinimumSize(QSize(55, 55))
         self.userButton.setStyleSheet(u"QPushButton {\n"
-"    width: 50px;\n"
-"    height: 50px;\n"
-"    border-radius: 25px;  \n"
-"    background-color: #3498db; \n"
-"    color: white;\n"
-"    font-size: 16px;\n"
-"    border: none;\n"
+"    border-radius: 25px; \n"
+"    background-color: rgb(20, 90, 182); \n"
+"    color: white; \n"
+"    border: none; \n"
+"    font-size: 14px;\n"
 "}")
-        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.UserOffline))
+        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.UserAvailable))
         self.userButton.setIcon(icon)
-        self.userButton.setIconSize(QSize(40, 40))
+        self.userButton.setIconSize(QSize(30, 30))
 
         self.gridLayout.addWidget(self.userButton, 0, 4, 2, 1)
 
@@ -517,7 +517,7 @@ class Ui_MainWindow(object):
         self.animeTop1.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.animeTop2.setText(QCoreApplication.translate("MainWindow", u"PushButton", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
-        self.userButton.setText(QCoreApplication.translate("MainWindow", u"\ud83d\udc7e", None))
+        self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
     # retranslateUi
