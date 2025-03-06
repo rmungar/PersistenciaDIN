@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'estudioPage.ui'
+## Form generated from reading UI file 'mangaPage.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.2
 ##
@@ -115,7 +115,7 @@ class Ui_MainWindow(object):
         self.placeholderimage = QLabel(self.contentwidget)
         self.placeholderimage.setObjectName(u"placeholderimage")
         self.placeholderimage.setStyleSheet(u"background-color: #cccac6")
-        self.placeholderimage.setPixmap(QPixmap(u"../../../../kynrh/Downloads/frierenMangaka.png"))
+        self.placeholderimage.setPixmap(QPixmap(u"../../../../kynrh/Downloads/FrierenImg.jpg"))
         self.placeholderimage.setScaledContents(True)
 
         self.gridContenido.addWidget(self.placeholderimage, 1, 1, 1, 1)
@@ -137,23 +137,29 @@ class Ui_MainWindow(object):
 
         self.gridContenido.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
+        self.ranking = QLabel(self.contentwidget)
+        self.ranking.setObjectName(u"ranking")
+        self.ranking.setStyleSheet(u"background-color: #cccac6")
+
+        self.gridContenido.addWidget(self.ranking, 1, 2, 2, 1)
+
         self.information = QLabel(self.contentwidget)
         self.information.setObjectName(u"information")
         self.information.setStyleSheet(u"background-color: #cccac6")
 
         self.gridContenido.addWidget(self.information, 2, 1, 1, 1)
 
-        self.detailsvalue = QLabel(self.contentwidget)
-        self.detailsvalue.setObjectName(u"detailsvalue")
-        self.detailsvalue.setStyleSheet(u"background-color: #cccac6")
+        self.synopsisvalue = QLabel(self.contentwidget)
+        self.synopsisvalue.setObjectName(u"synopsisvalue")
+        self.synopsisvalue.setStyleSheet(u"background-color: #cccac6")
 
-        self.gridContenido.addWidget(self.detailsvalue, 1, 0, 1, 1)
+        self.gridContenido.addWidget(self.synopsisvalue, 1, 0, 1, 1)
 
-        self.anime = QLabel(self.contentwidget)
-        self.anime.setObjectName(u"anime")
-        self.anime.setStyleSheet(u"background-color: #cccac6")
+        self.comments = QLabel(self.contentwidget)
+        self.comments.setObjectName(u"comments")
+        self.comments.setStyleSheet(u"background-color: #cccac6")
 
-        self.gridContenido.addWidget(self.anime, 2, 0, 1, 1)
+        self.gridContenido.addWidget(self.comments, 2, 0, 1, 1)
 
         self.gridContenido.setRowStretch(0, 1)
 
@@ -163,14 +169,11 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
-        self.pushButton = QPushButton(self.contentwidget)
-        self.pushButton.setObjectName(u"pushButton")
-        font = QFont()
-        font.setFamilies([u"Pinky Show"])
-        font.setPointSize(24)
-        self.pushButton.setFont(font)
+        self.label = QLabel(self.contentwidget)
+        self.label.setObjectName(u"label")
+        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";")
 
-        self.gridLayout_4.addWidget(self.pushButton, 0, 0, 1, 2)
+        self.gridLayout_4.addWidget(self.label, 0, 0, 1, 2)
 
         MainWindow.setCentralWidget(self.contentwidget)
 
@@ -186,15 +189,25 @@ class Ui_MainWindow(object):
         self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
         self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.placeholderimage.setText("")
-        self.title.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.title.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">ESTUDIO: BEYOND micasa'S END</span></p></body></html>", None))
-        self.information.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:24pt; font-weight:700;\">FRIEREN: BEYOND JOURNEY'S END</span></p></body></html>", None))
+        self.ranking.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"hr { height: 1px; border-width: 0; }\n"
+"li.unchecked::marker { content: \"\\2610\"; }\n"
+"li.checked::marker { content: \"\\2612\"; }\n"
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Ranking</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-ser"
+                        "if'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p></body></html>", None))
+        self.information.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
@@ -205,30 +218,30 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans"
                         "-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.detailsvalue.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.synopsisvalue.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Details</span></p>\n"
-"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe U"
-                        "I Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p>\n"
-"<p align=\"justi"
-                        "fy\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;\"><br /></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Synopsis</span></p>\n"
+"<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe "
+                        "UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p>\n"
+"<p align=\"just"
+                        "ify\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:24pt;\"><br /></p>\n"
 "<p align=\"justify\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> text look at me I'm such a good anime oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo oooooooooooooooo oooooooo oooooooo oooooooooooo oooooooooooooooooooooooooooooooo oooooooooooo oooooooooooooooooooo oooooooooooo</p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", None))
-        self.anime.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.comments.setProperty(u"html", QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Anime</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif"
-                        "'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p></body></html>", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"ANIGIRI", None))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Comments</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-se"
+                        "rif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p></body></html>", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
     # retranslateUi
 

@@ -83,14 +83,22 @@ class MangaScreen(QMainWindow):
         if manga is not None:
             self.title.setText(manga.nombre)
             self.synopsisvalue.setText(manga.sinopsis)
-            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, manga.imagen)).size())
-            
+            self.placeholderimage.setPixmap(
+                QPixmap(os.path.join(basedir, manga.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
+            )
+            self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+            self.ranking.setText("RANKING DE MANGAS")
             self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
         else:
             self.title.setText("Sin información")
             self.synopsisvalue.setText("No se ha seleccionado un manga.")
             self.placeholderimage.clear()  # Limpia la imagen
             self.information.setText("Información no disponible.")
+
+    def toHomeScreen(self):
+        home_Screen = HomeScreen(stacked_widget)
+        stacked_widget.addWidget(home_Screen)
+        stacked_widget.setCurrentWidget(home_Screen)
 
 
 class AnimeScreen(QMainWindow):
@@ -103,13 +111,23 @@ class AnimeScreen(QMainWindow):
         if anime is not None:
             self.title.setText(anime.nombre)
             self.synopsisvalue.setText(anime.sinopsis)
-            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, anime.imagen)))
+            self.placeholderimage.setPixmap(
+                QPixmap(os.path.join(basedir, anime.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
+            )
+            self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+            self.ranking.setText("RANKING DE ANIMES")
             self.information.setText(f"Generos: {anime.genero}\nTemporadas: {anime.temporadas}\nCapítulos: {anime.capitulos}\nEstudio: {anime.estudio}")
         else:
             self.title.setText("Sin información")
             self.synopsisvalue.setText("No se ha seleccionado un manga.")
             self.placeholderimage.clear()  # Limpia la imagen
             self.information.setText("Información no disponible.")
+
+    def toHomeScreen(self):
+        home_Screen = HomeScreen(stacked_widget)
+        stacked_widget.addWidget(home_Screen)
+        stacked_widget.setCurrentWidget(home_Screen)
+    
 
 
 class MangakaScreen(QMainWindow):
@@ -122,13 +140,19 @@ class MangakaScreen(QMainWindow):
         if mangaka is not None:
             self.title.setText(mangaka.nombre)
             self.biographyvalue.setText(f"Nacimiento: {mangaka.nacimiento}\nNacionalidad: {mangaka.nacionalidad}")
-            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, mangaka.imagen)))
+            self.placeholderimage.setPixmap(
+                QPixmap(os.path.join(basedir, mangaka.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
+            )
             self.mangas.setText(f"Obras: {mangaka.obras}")
         else:
             self.title.setText("Sin información")
             self.biographyvalue.setText("No se ha seleccionado un mangaka.")
             self.placeholderimage.clear()  # Limpia la imagen
             self.mangas.setText("Información no disponible.")
+    def toHomeScreen(self):
+        home_Screen = HomeScreen(stacked_widget)
+        stacked_widget.addWidget(home_Screen)
+        stacked_widget.setCurrentWidget(home_Screen)
 
 
 class EstudioScreen(QMainWindow):

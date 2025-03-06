@@ -25,27 +25,27 @@ class Usuario():
         self.favoritos = favoritos
 
     def updateVistos(self, visto):
-        if visto is Manga:
+        if visto is Manga.Manga():
             self.vistos.append(visto)
-        elif visto is Anime:
+        elif visto is Anime.Anime():
             self.vistos.append(visto)
         else:
             print("No se pudo agregar a vistos")
 
 
     def updateEmpezados(self, empezado):
-        if empezado is Manga:
+        if empezado is Manga.Manga():
             self.empezados.append(empezado)
-        elif empezado is Anime:
+        elif empezado is Anime.Anime():
             self.empezados.append(empezado)
         else:
             print("No se pudo agregar a empezados")
 
 
     def updateGuardados(self, guardado):
-        if guardado is Manga:
+        if guardado is Manga.Manga():
             self.guardados.append(guardado)
-        elif guardado is Anime:
+        elif guardado is Anime.Anime():
             self.guardados.append(guardado)
         else:
             print("No se pudo agregar a guardados")
@@ -57,9 +57,9 @@ class Usuario():
 
 
     def updateFavoritos(self, favorito):
-        if favorito is Manga:
+        if favorito is Manga.Manga():
             self.favoritos.append(favorito)
-        elif favorito is Anime:
+        elif favorito is Anime.Anime():
             self.favoritos.append(favorito)
     
 

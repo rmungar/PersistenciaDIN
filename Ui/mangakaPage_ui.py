@@ -16,8 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QMainWindow,
-    QPushButton, QSizePolicy, QSpacerItem, QTextEdit,
-    QWidget)
+    QPushButton, QSizePolicy, QSpacerItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -116,12 +115,12 @@ class Ui_MainWindow(object):
         self.placeholderimage = QLabel(self.contentwidget)
         self.placeholderimage.setObjectName(u"placeholderimage")
         self.placeholderimage.setStyleSheet(u"background-color: #cccac6")
-        self.placeholderimage.setPixmap(QPixmap(u"C:/Users/kynrh/Downloads/frierenMangaka.png"))
+        self.placeholderimage.setPixmap(QPixmap(u"../../../../kynrh/Downloads/frierenMangaka.png"))
         self.placeholderimage.setScaledContents(True)
 
         self.gridContenido.addWidget(self.placeholderimage, 1, 1, 1, 1)
 
-        self.title = QTextEdit(self.contentwidget)
+        self.title = QLabel(self.contentwidget)
         self.title.setObjectName(u"title")
         self.title.setEnabled(True)
         sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Maximum)
@@ -138,19 +137,19 @@ class Ui_MainWindow(object):
 
         self.gridContenido.addItem(self.horizontalSpacer_2, 1, 3, 1, 1)
 
-        self.information = QTextEdit(self.contentwidget)
+        self.information = QLabel(self.contentwidget)
         self.information.setObjectName(u"information")
         self.information.setStyleSheet(u"background-color: #cccac6")
 
         self.gridContenido.addWidget(self.information, 2, 1, 1, 1)
 
-        self.biographyvalue = QTextEdit(self.contentwidget)
+        self.biographyvalue = QLabel(self.contentwidget)
         self.biographyvalue.setObjectName(u"biographyvalue")
         self.biographyvalue.setStyleSheet(u"background-color: #cccac6")
 
         self.gridContenido.addWidget(self.biographyvalue, 1, 0, 1, 1)
 
-        self.mangas = QTextEdit(self.contentwidget)
+        self.mangas = QLabel(self.contentwidget)
         self.mangas.setObjectName(u"mangas")
         self.mangas.setStyleSheet(u"background-color: #cccac6")
 
@@ -164,11 +163,14 @@ class Ui_MainWindow(object):
 
         self.gridLayout_4.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
-        self.label = QLabel(self.contentwidget)
-        self.label.setObjectName(u"label")
-        self.label.setStyleSheet(u"font: 24pt \"Pinky Show\";")
+        self.pushButton = QPushButton(self.contentwidget)
+        self.pushButton.setObjectName(u"pushButton")
+        font = QFont()
+        font.setFamilies([u"Pinky Show"])
+        font.setPointSize(24)
+        self.pushButton.setFont(font)
 
-        self.gridLayout_4.addWidget(self.label, 0, 0, 1, 2)
+        self.gridLayout_4.addWidget(self.pushButton, 0, 0, 1, 2)
 
         MainWindow.setCentralWidget(self.contentwidget)
 
@@ -227,6 +229,6 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:700;\">Manga</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif"
                         "'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span><a name=\"post-title-t3_li8zpf\"></a><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af</span><span style=\" font-family:'-apple-system','BlinkMacSystemFont','Segoe UI','Roboto','Helvetica Neue','Arial','Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','sans-serif'; font-size:xx-large; font-weight:600; color:#000000;\">\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af\u00af</span></p></body></html>", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Anigiri</p></body></html>", None))
+        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"ANIGIRI", None))
     # retranslateUi
 
