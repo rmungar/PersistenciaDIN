@@ -15,8 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QPushButton,
-    QSizePolicy, QSpacerItem, QWidget)
+from PySide6.QtWidgets import (QApplication, QGridLayout, QListWidget, QListWidgetItem,
+    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -73,6 +74,11 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"")
         self.gridLayout_2 = QGridLayout(self.widget)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
+        self.listWidget = QListWidget(self.widget)
+        self.listWidget.setObjectName(u"listWidget")
+
+        self.gridLayout_2.addWidget(self.listWidget, 0, 0, 1, 1)
+
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 

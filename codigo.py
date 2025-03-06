@@ -7,7 +7,7 @@
 import sys
 import os
 import pyrebase
-from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit
+from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap, QFont
@@ -72,28 +72,110 @@ class LoginScreen(QMainWindow):
         except:
             QErrorMessage(self).showMessage("Usuario ya registrado")
 
+# Clases para las pantallas que muestran listados
+
+class AllAnimeScreen(QMainWindow):
+    def __init__(self, stacked_widget):
+        super(AllAnimeScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+
+        self.listWidget = self.findChild(QListWidget, "listWidget")  # Asegurar acceso
+
+        if self.listWidget is None:
+            print("Error: listWidget no encontrado en la UI.")
+            return  # Evita fallos si el widget no se encuentra
+        
+        animeRepo = AnimeRepo()
+        self.animeList = animeRepo.getAnime()
+
+        self.displayAnimeList()
+
+    def displayAnimeList(self):
+        """Muestra los animes en el QListWidget"""
+        self.listWidget.clear()  # Limpia la lista antes de agregar nuevos elementos
+
+        for anime in self.animeList:
+            item = QListWidgetItem(anime.nombre)  # Muestra el nombre del anime
+            item.setData(1, anime)  # Guarda el objeto completo para referencia futura
+            self.listWidget.addItem(item)
+
+        print("Número de elementos en listWidget:", self.listWidget.count())
+
+        self.listWidget.update()
+        self.listWidget.repaint()
+
+        self.listWidget.itemClicked.connect(self.onAnimeClicked)
+
+    def onAnimeClicked(self, item):
+        anime = item.data(1)
+        animeScreen = AnimeScreen(self.stacked_widget, anime)
+        self.stacked_widget.addWidget(animeScreen)
+        self.stacked_widget.setCurrentWidget(animeScreen)
+
+        
+
+class AllMangaScreen(QMainWindow):
+    def __init__(self, stacked_widget):
+        super(AllMangaScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+
+        #mangaRepo = MangaRepo()
+        #self.mangaList = mangaRepo.getMangas()
+        #self.mangaList = [Manga.Manga(1, "Naruto", "Naruto es un ninja de la aldea de Konoha, que tiene un sueño
+
+class AllMangakaScreen(QMainWindow):
+    def __init__(self, stacked_widget):
+        super(AllMangakaScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+
+        #mangakaRepo = MangakaRepo()
+        #self.mangakaList = mangakaRepo.getMangakas()
+        #self.mangakaList = [Mangaka.Mangaka(1, "Naruto", "Naruto es un ninja de la aldea de Konoha, que tiene un sueño
+
+class AllEstudioScreen(QMainWindow):
+    def __init__(self, stacked_widget):
+        super(AllEstudioScreen, self).__init__()
+
+        uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.stacked_widget = stacked_widget
+
+        #estudioRepo = EstudioRepo()
+        #self.estudioList = estudioRepo.getEstudios()
+        #self.estudioList = [Estudio.Estudio(1, "Naruto", "Naruto es un ninja de la aldea de Konoha, que tiene un sueño
+
 
 class MangaScreen(QMainWindow):
     def __init__(self, stacked_widget, manga):
         super(MangaScreen, self).__init__()
         
-        uic.loadUi(os.path.join(basedir, 'Ui/mangaPage.ui'), self)
+        uic.loadUi(os.path.join(basedir, 'Ui/contentPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
-        if manga is not None:
-            self.title.setText(manga.nombre)
-            self.synopsisvalue.setText(manga.sinopsis)
-            self.placeholderimage.setPixmap(
-                QPixmap(os.path.join(basedir, manga.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
-            )
-            self.homeButton.clicked.connect(lambda: self.toHomeScreen())
-            self.ranking.setText("RANKING DE MANGAS")
-            self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
-        else:
-            self.title.setText("Sin información")
-            self.synopsisvalue.setText("No se ha seleccionado un manga.")
-            self.placeholderimage.clear()  # Limpia la imagen
-            self.information.setText("Información no disponible.")
+
+        #if manga is not None:
+        #    self.title.setText(manga.nombre)
+        #    self.synopsisvalue.setText(manga.sinopsis)
+        #    self.placeholderimage.setPixmap(
+        #        QPixmap(os.path.join(basedir, manga.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
+        #    )
+        #    self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        #    self.ranking.setText("RANKING DE MANGAS")
+        #    self.information.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
+        #else:
+        #    self.title.setText("Sin información")
+        #    self.synopsisvalue.setText("No se ha seleccionado un manga.")
+        #    self.placeholderimage.clear()  # Limpia la imagen
+        #    self.information.setText("Información no disponible.")
 
     def toHomeScreen(self):
         home_Screen = HomeScreen(stacked_widget)
@@ -105,23 +187,36 @@ class AnimeScreen(QMainWindow):
     def __init__(self, stacked_widget, anime):
         super(AnimeScreen, self).__init__()
 
-        uic.loadUi(os.path.join(basedir, 'Ui/animePage.ui'), self)
+        uic.loadUi(os.path.join(basedir, 'Ui/contentPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
+        
         if anime is not None:
-            self.title.setText(anime.nombre)
-            self.synopsisvalue.setText(anime.sinopsis)
-            self.placeholderimage.setPixmap(
-                QPixmap(os.path.join(basedir, anime.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
-            )
             self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+            self.animeButton.clicked.connect(lambda: self.toAnimePage())
+
+            self.title.setText(anime.nombre)
+            self.synopsis.setText(anime.sinopsis)
+            self.placeholderimage.setPixmap(
+                QPixmap(os.path.join(basedir, anime.imagen)).scaled(242, 305, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
+            )
             self.ranking.setText("RANKING DE ANIMES")
-            self.information.setText(f"Generos: {anime.genero}\nTemporadas: {anime.temporadas}\nCapítulos: {anime.capitulos}\nEstudio: {anime.estudio}")
+            self.descripcion.setText(f"Generos: {anime.genero}\nTemporadas: {anime.temporadas}\nCapítulos: {anime.capitulos}\nEstudio: {anime.estudio}")
+            self.comments.setText("COMENTARIOS")
         else:
             self.title.setText("Sin información")
-            self.synopsisvalue.setText("No se ha seleccionado un manga.")
-            self.placeholderimage.clear()  # Limpia la imagen
+            self.synopsis.setText("No se ha seleccionado un manga.")
+            self.descripcion.setText("Información no disponible.")
+            self.placeholderimage.clear()
             self.information.setText("Información no disponible.")
+            self.comments.setText("COMENTARIOS")
+            self.ranking.setText("RANKING DE ANIMES")
+
+    def toAnimePage(self):
+        anime_Screen = AllAnimeScreen(stacked_widget)
+        stacked_widget.addWidget(anime_Screen)
+        stacked_widget.setCurrentWidget(anime_Screen)
+
 
     def toHomeScreen(self):
         home_Screen = HomeScreen(stacked_widget)
@@ -134,21 +229,23 @@ class MangakaScreen(QMainWindow):
     def __init__(self, stacked_widget, mangaka):
         super(MangakaScreen, self).__init__()
 
-        uic.loadUi(os.path.join(basedir, 'Ui/mangakaPage.ui'), self)
+        uic.loadUi(os.path.join(basedir, 'Ui/creatorsPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
-        if mangaka is not None:
-            self.title.setText(mangaka.nombre)
-            self.biographyvalue.setText(f"Nacimiento: {mangaka.nacimiento}\nNacionalidad: {mangaka.nacionalidad}")
-            self.placeholderimage.setPixmap(
-                QPixmap(os.path.join(basedir, mangaka.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
-            )
-            self.mangas.setText(f"Obras: {mangaka.obras}")
-        else:
-            self.title.setText("Sin información")
-            self.biographyvalue.setText("No se ha seleccionado un mangaka.")
-            self.placeholderimage.clear()  # Limpia la imagen
-            self.mangas.setText("Información no disponible.")
+
+        #if mangaka is not None:
+        #    self.title.setText(mangaka.nombre)
+        #    self.biographyvalue.setText(f"Nacimiento: {mangaka.nacimiento}\nNacionalidad: {mangaka.nacionalidad}")
+        #    self.placeholderimage.setPixmap(
+        #        QPixmap(os.path.join(basedir, mangaka.imagen)).scaled(500, 600, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
+        #    )
+        #    self.mangas.setText(f"Obras: {mangaka.obras}")
+        #else:
+        #    self.title.setText("Sin información")
+        #    self.biographyvalue.setText("No se ha seleccionado un mangaka.")
+        #    self.placeholderimage.clear()  # Limpia la imagen
+        #    self.mangas.setText("Información no disponible.")
+
     def toHomeScreen(self):
         home_Screen = HomeScreen(stacked_widget)
         stacked_widget.addWidget(home_Screen)
@@ -159,19 +256,20 @@ class EstudioScreen(QMainWindow):
     def __init__(self, stacked_widget, estudio):
         super(EstudioScreen, self).__init__()
 
-        uic.loadUi(os.path.join(basedir, 'Ui/estudioPage.ui'), self)
+        uic.loadUi(os.path.join(basedir, 'Ui/creatorsPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
-        if estudio is not None:
-            self.title.setText(estudio.nombre)
-            self.detailsvalue.setText(f"País: {estudio.pais}")
-            self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, estudio.imagen)))
-            self.animes.setText(f"Animes: {estudio.animes}")
-        else:
-            self.title.setText("Sin información")
-            self.detailsvalue.setText("No se ha seleccionado un estudio.")
-            self.placeholderimage.clear()  # Limpia la imagen
-            self.anime.setText("Información no disponible.")
+
+        #if estudio is not None:
+        #    self.title.setText(estudio.nombre)
+        #    self.detailsvalue.setText(f"País: {estudio.pais}")
+        #    self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, estudio.imagen)))
+        #    self.animes.setText(f"Animes: {estudio.animes}")
+        #else:
+        #    self.title.setText("Sin información")
+        #    self.detailsvalue.setText("No se ha seleccionado un estudio.")
+        #    self.placeholderimage.clear()  # Limpia la imagen
+        #    self.anime.setText("Información no disponible.")
 
 
 class HomeScreen(QMainWindow):

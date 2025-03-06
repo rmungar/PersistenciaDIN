@@ -135,7 +135,11 @@
         <property name="styleSheet">
          <string notr="true"/>
         </property>
-        <layout class="QGridLayout" name="gridLayout_2" columnstretch="0"/>
+        <layout class="QGridLayout" name="gridLayout_2" columnstretch="0">
+         <item row="0" column="0">
+          <widget class="QListWidget" name="listWidget"/>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
