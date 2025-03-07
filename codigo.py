@@ -7,7 +7,7 @@
 import sys
 import os
 import pyrebase
-from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem
+from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem, QDialogButtonBox, QVBoxLayout, QDialog, QLabel
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap, QFont
@@ -103,10 +103,9 @@ class AllAnimeScreen(QMainWindow):
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
         self.listWidget = self.findChild(QListWidget, "listWidget")  # Asegurar acceso
+        
 
-        if self.listWidget is None:
-            print("Error: listWidget no encontrado en la UI.")
-            return  # Evita fallos si el widget no se encuentra
+    
         
         animeRepo = AnimeRepo()
         self.animeList = animeRepo.getAnime()
@@ -502,6 +501,7 @@ class AnimeScreen(QMainWindow):
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
+        self.commentButton.clicked.connect(self.abrir_formulario)
 
         if anime is not None:
             self.title.setText(anime.nombre)
@@ -526,6 +526,18 @@ class AnimeScreen(QMainWindow):
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.ranking.setText("RANKING DE ANIMES")
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+    def abrir_formulario(self):
+        dialogo = FormularioEmergente()
+        resultado = dialogo.exec()  # Ejecuta la ventana emergente
+
+        if resultado == 1:
+            datos = dialogo.obtener_datos()
+            print("Datos ingresados:", datos)
+        else:
+            print("no coincide")
+    
+
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
@@ -674,6 +686,7 @@ class EstudioScreen(QMainWindow):
         stacked_widget.setCurrentWidget(userScreen)
 
 class UserScreen(QMainWindow):
+
     def __init__(self, stacked_widget, usuario: Usuario):
         super(UserScreen, self).__init__()
         self.currentUser = usuario
@@ -689,6 +702,9 @@ class UserScreen(QMainWindow):
         if usuario is not None:
             self.nombre.setText(usuario.nombre)
             self.email.setText(usuario.email)
+            ruta_imagen = os.path.join(basedir, "Resources/User/userImage.png")
+            pixmap = QPixmap(ruta_imagen)
+            self.userImg.setPixmap(QPixmap(pixmap).scaled(191,191, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation))
         else:
             self.nombre.setText("Sin información")
             self.email.setText("Sin información")
@@ -850,6 +866,38 @@ class HomeScreen(QMainWindow):
         stacked_widget.addWidget(userScreen)
         stacked_widget.setCurrentWidget(userScreen)
     
+
+class FormularioEmergente(QDialog):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Añadir un comentario")
+        self.setGeometry(100, 100, 300, 200)
+
+        # Layout principal
+        layout = QVBoxLayout()
+        self.comentario_input = QLineEdit(self)
+        self.comentario_input.setPlaceholderText("Comentario")
+        layout.addWidget(QLabel("Comentar"))
+        layout.addWidget(self.comentario_input)
+
+        # Botones de Aceptar y Cancelar
+        botones = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, 
+            self
+        )
+        botones.accepted.connect(self.accept)  # Cierra el diálogo y retorna `QDialog.Accepted`
+        botones.rejected.connect(self.reject)  # Cierra el diálogo y retorna `QDialog.Rejected`
+        layout.addWidget(botones)
+
+        self.setLayout(layout)
+
+    def obtener_datos(self):
+        return {
+            "Comentario": self.comentario_input.text(),
+        }
+
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 

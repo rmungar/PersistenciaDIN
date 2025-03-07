@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFormLayout, QGridLayout, QLabel,
-    QMainWindow, QPushButton, QSizePolicy, QSpacerItem,
-    QWidget)
+    QListView, QMainWindow, QPushButton, QSizePolicy,
+    QSpacerItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -52,33 +52,55 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"background-color: rgb(227, 227, 227);")
         self.formLayoutWidget = QWidget(self.widget)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(290, 190, 231, 62))
+        self.formLayoutWidget.setGeometry(QRect(290, 190, 241, 70))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
+        self.formLayout.setHorizontalSpacing(20)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.nombreLabel = QLabel(self.formLayoutWidget)
         self.nombreLabel.setObjectName(u"nombreLabel")
+        self.nombreLabel.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.nombreLabel)
 
         self.emailLabel = QLabel(self.formLayoutWidget)
         self.emailLabel.setObjectName(u"emailLabel")
+        self.emailLabel.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.emailLabel)
 
         self.email = QLabel(self.formLayoutWidget)
         self.email.setObjectName(u"email")
+        self.email.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.email)
 
         self.nombre = QLabel(self.formLayoutWidget)
         self.nombre.setObjectName(u"nombre")
+        self.nombre.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.nombre)
 
         self.userImg = QLabel(self.widget)
         self.userImg.setObjectName(u"userImg")
         self.userImg.setGeometry(QRect(70, 60, 191, 191))
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.userImg.sizePolicy().hasHeightForWidth())
+        self.userImg.setSizePolicy(sizePolicy)
+        self.comentariosList = QListView(self.widget)
+        self.comentariosList.setObjectName(u"comentariosList")
+        self.comentariosList.setGeometry(QRect(40, 540, 681, 192))
+        self.label = QLabel(self.widget)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(40, 510, 131, 20))
+        self.label.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 
@@ -152,11 +174,12 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
-        self.nombreLabel.setText(QCoreApplication.translate("MainWindow", u"Nombre", None))
-        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"Email", None))
+        self.nombreLabel.setText(QCoreApplication.translate("MainWindow", u"Nombre:", None))
+        self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"Email:", None))
         self.email.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.nombre.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.userImg.setText("")
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Comentarios:", None))
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
         self.homeButton.setText(QCoreApplication.translate("MainWindow", u"ANIGIRI", None))
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))

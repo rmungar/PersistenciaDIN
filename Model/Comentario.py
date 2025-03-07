@@ -8,14 +8,19 @@
 ##     fecha DATE NOT NULL)"""
 ## )
 
+from Model.Usuario import Usuario
+from Model.Manga import Manga
+from Model.Anime import Anime
+
 class Comentario():
-    def __init__(self, _id, usuario, anime, manga, texto, fecha):
+    def __init__(self, _id, usuario: Usuario, anime, manga, texto, fecha):
         self._id = _id
         self.usuario = usuario
         self.anime = anime
         self.manga = manga
         self.texto = texto
         self.fecha = fecha
+
 
     def getAnime(self):
         return self.anime

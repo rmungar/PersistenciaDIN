@@ -78,27 +78,42 @@
           <rect>
            <x>290</x>
            <y>190</y>
-           <width>231</width>
-           <height>62</height>
+           <width>241</width>
+           <height>70</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="formLayout">
+          <property name="horizontalSpacing">
+           <number>20</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="nombreLabel">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
             <property name="text">
-             <string>Nombre</string>
+             <string>Nombre:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="emailLabel">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
             <property name="text">
-             <string>Email</string>
+             <string>Email:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QLabel" name="email">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
             <property name="text">
              <string>TextLabel</string>
             </property>
@@ -106,6 +121,10 @@
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="nombre">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
             <property name="text">
              <string>TextLabel</string>
             </property>
@@ -122,8 +141,41 @@
            <height>191</height>
           </rect>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="text">
           <string/>
+         </property>
+        </widget>
+        <widget class="QListView" name="comentariosList">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>540</y>
+           <width>681</width>
+           <height>192</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>510</y>
+           <width>131</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+         </property>
+         <property name="text">
+          <string>Comentarios:</string>
          </property>
         </widget>
        </widget>
