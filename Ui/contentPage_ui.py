@@ -81,21 +81,23 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.placeholderimage, 1, 1, 1, 1)
 
-        self.comments = QLabel(self.widget)
-        self.comments.setObjectName(u"comments")
+        self.descripcion = QLabel(self.widget)
+        self.descripcion.setObjectName(u"descripcion")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.comments.sizePolicy().hasHeightForWidth())
-        self.comments.setSizePolicy(sizePolicy)
-        self.comments.setMinimumSize(QSize(242, 305))
-        self.comments.setMaximumSize(QSize(242, 305))
-        self.comments.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+        sizePolicy.setHeightForWidth(self.descripcion.sizePolicy().hasHeightForWidth())
+        self.descripcion.setSizePolicy(sizePolicy)
+        self.descripcion.setMinimumSize(QSize(242, 305))
+        self.descripcion.setMaximumSize(QSize(242, 305))
+        self.descripcion.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
-        self.comments.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.descripcion.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
+        self.descripcion.setWordWrap(True)
+        self.descripcion.setMargin(10)
 
-        self.gridLayout_2.addWidget(self.comments, 2, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.descripcion, 2, 1, 1, 1)
 
         self.synopsis = QLabel(self.widget)
         self.synopsis.setObjectName(u"synopsis")
@@ -111,21 +113,6 @@ class Ui_MainWindow(object):
         self.synopsis.setMargin(10)
 
         self.gridLayout_2.addWidget(self.synopsis, 1, 0, 1, 1)
-
-        self.descripcion = QLabel(self.widget)
-        self.descripcion.setObjectName(u"descripcion")
-        sizePolicy.setHeightForWidth(self.descripcion.sizePolicy().hasHeightForWidth())
-        self.descripcion.setSizePolicy(sizePolicy)
-        self.descripcion.setMinimumSize(QSize(242, 305))
-        self.descripcion.setMaximumSize(QSize(242, 305))
-        self.descripcion.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
-"color: rgb(0, 0, 0);\n"
-"font: 14pt \"Segoe UI Symbol\";")
-        self.descripcion.setAlignment(Qt.AlignmentFlag.AlignLeading|Qt.AlignmentFlag.AlignLeft|Qt.AlignmentFlag.AlignTop)
-        self.descripcion.setWordWrap(True)
-        self.descripcion.setMargin(10)
-
-        self.gridLayout_2.addWidget(self.descripcion, 2, 1, 1, 1)
 
         self.title = QLabel(self.widget)
         self.title.setObjectName(u"title")
@@ -149,6 +136,27 @@ class Ui_MainWindow(object):
         self.ranking.setMargin(10)
 
         self.gridLayout_2.addWidget(self.ranking, 1, 2, 2, 1)
+
+        self.gridLayout_4 = QGridLayout()
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.commentButton = QPushButton(self.widget)
+        self.commentButton.setObjectName(u"commentButton")
+        self.commentButton.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+
+        self.gridLayout_4.addWidget(self.commentButton, 1, 0, 1, 1)
+
+        self.comments = QLabel(self.widget)
+        self.comments.setObjectName(u"comments")
+        self.comments.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+
+        self.gridLayout_4.addWidget(self.comments, 0, 0, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout_4, 2, 0, 1, 1)
 
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
@@ -219,11 +227,12 @@ class Ui_MainWindow(object):
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
         self.placeholderimage.setText("")
-        self.comments.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
-        self.synopsis.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
         self.descripcion.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
+        self.synopsis.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
         self.ranking.setText("")
+        self.commentButton.setText(QCoreApplication.translate("MainWindow", u"comentar", None))
+        self.comments.setText("")
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
