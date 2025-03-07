@@ -11,7 +11,10 @@ from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMes
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap, QFont
-from Model import Anime, Estudio, Manga, Mangaka
+from Model.Anime import Anime
+from Model.Estudio import Estudio
+from Model.Manga import Manga
+from Model.Mangaka import Mangaka
 from Model.Usuario import Usuario
 from Repository.animeRepo import AnimeRepo
 from Repository.estudioRepo import EstudioRepo
@@ -32,6 +35,18 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 userLogged = auth.current_user
+usuarioFound = False
+
+def getUsuario(email: str, psswd: str) -> Usuario:
+    usuarios = UsuarioRepo.getUsuarios()
+    for usuario in usuarios:
+        if usuario.email == email and usuario.passwd == psswd:
+            currentUser = usuario
+            usuarioFound = True
+    if not usuarioFound:
+        raise Exception
+    else:
+        return currentUser
 
 class LoginScreen(QMainWindow):
     def __init__(self, stacked_widget):
@@ -53,11 +68,10 @@ class LoginScreen(QMainWindow):
         password = self.passwordText.toPlainText()
 
         try:
-            user = auth.sign_in_with_email_and_password(email, password)  
-            print("Login exitoso:", user)
-
+            auth.sign_in_with_email_and_password(email, password)  
+            currentUser: Usuario = getUsuario(email, password)
             # Cambia a la pantalla de inicio
-            homeScreen = HomeScreen(self.stacked_widget)
+            homeScreen = HomeScreen(self.stacked_widget, currentUser)
             self.stacked_widget.addWidget(homeScreen)
             self.stacked_widget.setCurrentWidget(homeScreen)
         except:
@@ -66,23 +80,24 @@ class LoginScreen(QMainWindow):
     def register(self):
         email = self.emailText.toPlainText()
         password = self.passwordText.toPlainText()
-
+        usuarioRepo = UsuarioRepo()
         try:
-            user = auth.create_user_with_email_and_password(email, password)
-            print("Usuario registrado:", user)
+            auth.create_user_with_email_and_password(email, password)
+            usuarioRepo.addUsuario(Usuario("",password, email, [], []))
         except:
             QErrorMessage(self).showMessage("Usuario ya registrado")
 
 # Clases para las pantallas que muestran listados
 
 class AllAnimeScreen(QMainWindow):
-    def __init__(self, stacked_widget):
+    def __init__(self, stacked_widget, currentUser: Usuario):
         super(AllAnimeScreen, self).__init__()
-
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -123,41 +138,47 @@ class AllAnimeScreen(QMainWindow):
 
     def onAnimeClicked(self, item):
         anime = item.data(1)
-        animeScreen = AnimeScreen(self.stacked_widget, anime)
+        animeScreen = AnimeScreen(self.stacked_widget, anime, self.currentUser)
         self.stacked_widget.addWidget(animeScreen)
         self.stacked_widget.setCurrentWidget(animeScreen)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
         stacked_widget.setCurrentIndex(1)
+
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
       
 class AllMangaScreen(QMainWindow):
-    def __init__(self, stacked_widget):
+    def __init__(self, stacked_widget, currentUser: Usuario):
         super(AllMangaScreen, self).__init__()
-
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -196,41 +217,47 @@ class AllMangaScreen(QMainWindow):
 
     def onMangaClicked(self, item):
         manga = item.data(1)
-        mangaScreen = MangaScreen(self.stacked_widget, manga)
+        mangaScreen = MangaScreen(self.stacked_widget, manga, self.currentUser)
         self.stacked_widget.addWidget(mangaScreen)
         self.stacked_widget.setCurrentWidget(mangaScreen)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
-        stacked_widget.setCurrentIndex(1)   
+        stacked_widget.setCurrentIndex(1)
+
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)   
 
 class AllMangakaScreen(QMainWindow):
-    def __init__(self, stacked_widget):
+    def __init__(self, stacked_widget, currentUser: Usuario):
         super(AllMangakaScreen, self).__init__()
-
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -269,41 +296,47 @@ class AllMangakaScreen(QMainWindow):
 
     def onMangakaClicked(self, item):
         mangaka = item.data(1)
-        mangakaScreen = MangakaScreen(self.stacked_widget, mangaka)
+        mangakaScreen = MangakaScreen(self.stacked_widget, mangaka, self.currentUser)
         self.stacked_widget.addWidget(mangakaScreen)
         self.stacked_widget.setCurrentWidget(mangakaScreen)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
         stacked_widget.setCurrentIndex(1)
 
-class AllEstudioScreen(QMainWindow):
-    def __init__(self, stacked_widget):
-        super(AllEstudioScreen, self).__init__()
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
 
+class AllEstudioScreen(QMainWindow):
+    def __init__(self, stacked_widget, currentUser: Usuario):
+        super(AllEstudioScreen, self).__init__()
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/allTemplate.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -342,50 +375,56 @@ class AllEstudioScreen(QMainWindow):
 
     def onEstudioClicked(self, item):
         estudio = item.data(1)
-        estudioScreen = EstudioScreen(self.stacked_widget, estudio)
+        estudioScreen = EstudioScreen(self.stacked_widget, estudio, self.currentUser)
         self.stacked_widget.addWidget(estudioScreen)
         self.stacked_widget.setCurrentWidget(estudioScreen)
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
-        home_Screen = HomeScreen(stacked_widget)
+        home_Screen = HomeScreen(stacked_widget, self.currentUser)
         stacked_widget.addWidget(home_Screen)
         stacked_widget.setCurrentWidget(home_Screen)
         
     def toHomeScreen(self):
-        home_Screen = HomeScreen(stacked_widget)
+        home_Screen = HomeScreen(stacked_widget, self.currentUser)
         stacked_widget.addWidget(home_Screen)
         stacked_widget.setCurrentWidget(home_Screen)
 
     def toHomeScreen(self):
         self.stacked_widget.setCurrentIndex(1) 
 
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
+
 class MangaScreen(QMainWindow):
-    def __init__(self, stacked_widget, manga):
+    def __init__(self, stacked_widget, manga: Manga, currentUser: Usuario):
         super(MangaScreen, self).__init__()
-        
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/contentPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -418,41 +457,47 @@ class MangaScreen(QMainWindow):
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
-        home_Screen = HomeScreen(stacked_widget)
+        home_Screen = HomeScreen(stacked_widget, self.currentUser)
         stacked_widget.addWidget(home_Screen)
         stacked_widget.setCurrentWidget(home_Screen)
 
     def toHomeScreen(self):
         stacked_widget.setCurrentIndex(1)
 
-class AnimeScreen(QMainWindow):
-    def __init__(self, stacked_widget, anime):
-        super(AnimeScreen, self).__init__()
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
 
+class AnimeScreen(QMainWindow):
+    def __init__(self, stacked_widget, anime: Anime, currentUser: Usuario):
+        super(AnimeScreen, self).__init__()
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/contentPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -483,36 +528,42 @@ class AnimeScreen(QMainWindow):
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
         stacked_widget.setCurrentIndex(1)
+
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
     
 class MangakaScreen(QMainWindow):
-    def __init__(self, stacked_widget, mangaka):
+    def __init__(self, stacked_widget, mangaka: Mangaka, currentUser: Usuario):
         super(MangakaScreen, self).__init__()
-
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/creatorsPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -537,36 +588,43 @@ class MangakaScreen(QMainWindow):
 
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
     def toHomeScreen(self):
         stacked_widget.setCurrentIndex(1)
 
-class EstudioScreen(QMainWindow):
-    def __init__(self, stacked_widget, estudio):
-        super(EstudioScreen, self).__init__()
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
 
+class EstudioScreen(QMainWindow):
+
+    def __init__(self, stacked_widget, estudio: Estudio, currentUser: Usuario):
+        super(EstudioScreen, self).__init__()
+        self.currentUser = currentUser
         uic.loadUi(os.path.join(basedir, 'Ui/creatorsPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -588,22 +646,70 @@ class EstudioScreen(QMainWindow):
             self.obras.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(allMangakaPage)
+        stacked_widget.setCurrentWidget(allMangakaPage) 
+
+    def toHomeScreen(self):
+        stacked_widget.setCurrentIndex(1)
+
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
+
+class UserScreen(QMainWindow):
+    def __init__(self, stacked_widget, usuario: Usuario):
+        super(UserScreen, self).__init__()
+        self.currentUser = usuario
+        uic.loadUi(os.path.join(basedir, 'Ui/userUi.ui'), self)
+        self.setWindowTitle("Anigiri")
+        self.homeButton.clicked.connect(lambda: self.toHomeScreen())
+        self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
+        self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
+        self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
+        self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
+        self.stacked_widget = stacked_widget
+
+        if usuario is not None:
+            self.nombre.setText(usuario.nombre)
+            self.email.setText(usuario.email)
+        else:
+            self.nombre.setText("Sin información")
+            self.email.setText("Sin información")
+
+    def toAllAnimePage(self):
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(allAnimePage)
+        stacked_widget.setCurrentWidget(allAnimePage) 
+
+    def toAllMangaPage(self):
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(allMangaPage)
+        stacked_widget.setCurrentWidget(allMangaPage)  
+
+    def toAllEstudioPage(self):
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(allEstudioPage)
+        stacked_widget.setCurrentWidget(allEstudioPage)  
+
+    def toAllMangakaPage(self):
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage) 
 
@@ -611,14 +717,15 @@ class EstudioScreen(QMainWindow):
         stacked_widget.setCurrentIndex(1)
 
 class HomeScreen(QMainWindow):
-    def __init__(self, stacked_widget):
+    def __init__(self, stacked_widget, currentUser: Usuario):
         super(HomeScreen, self).__init__()
-
+        self.currentUser = currentUser
         self.login_screen = LoginScreen(stacked_widget)
 
         uic.loadUi(os.path.join(basedir, 'Ui/homePage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
+        self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
@@ -695,48 +802,53 @@ class HomeScreen(QMainWindow):
         
         btn_centro.clicked.connect(lambda: funcion_navegar(lista[indices[1]]))  # Siempre top1 lleva a la página correcta
 
-    def toMangaPage(self, manga: Manga.Manga):
-        manga_screen = MangaScreen(stacked_widget, manga)
+    def toMangaPage(self, manga: Manga):
+        manga_screen = MangaScreen(stacked_widget, manga, self.currentUser)
         stacked_widget.addWidget(manga_screen)
         stacked_widget.setCurrentWidget(manga_screen)   
 
-    def toAnimePage(self, anime: Anime.Anime):
+    def toAnimePage(self, anime: Anime):
         """Actualiza AnimeScreen y cambia de ventana"""
-        animeScreen = AnimeScreen(self.stacked_widget, anime)
+        animeScreen = AnimeScreen(self.stacked_widget, anime, self.currentUser)
         stacked_widget.addWidget(animeScreen)
         stacked_widget.setCurrentWidget(animeScreen)   
     
-    def toMangakaPage(self, mangaka: Mangaka.Mangaka):  
+    def toMangakaPage(self, mangaka: Mangaka):  
         """Actualiza MangakaScreen y cambia de ventana"""
-        mangakaScreen = MangakaScreen(self.stacked_widget, mangaka)
+        mangakaScreen = MangakaScreen(self.stacked_widget, mangaka, self.currentUser)
         stacked_widget.addWidget(mangakaScreen)
         stacked_widget.setCurrentWidget(mangakaScreen)   
 
-    def toEstudioPage(self, estudio: Estudio.Estudio):
+    def toEstudioPage(self, estudio: Estudio):
         """Actualiza EstudioScreen y cambia de ventana"""
-        estudioScreen = EstudioScreen(self.stacked_widget, estudio)
+        estudioScreen = EstudioScreen(self.stacked_widget, estudio, self.currentUser)
         stacked_widget.addWidget(estudioScreen)
         stacked_widget.setCurrentWidget(estudioScreen)   
 
     def toAllAnimePage(self):
-        allAnimePage = AllAnimeScreen(self.stacked_widget)
+        allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allAnimePage)
         stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
-        allMangaPage = AllMangaScreen(self.stacked_widget)
+        allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangaPage)
         stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
-        allEstudioPage = AllEstudioScreen(self.stacked_widget)
+        allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allEstudioPage)
         stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
-        allMangakaPage = AllMangakaScreen(self.stacked_widget)
+        allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(allMangakaPage)
         stacked_widget.setCurrentWidget(allMangakaPage)  
+
+    def toUserScreen(self):
+        userScreen = UserScreen(self.stacked_widget, self.currentUser)
+        stacked_widget.addWidget(userScreen)
+        stacked_widget.setCurrentWidget(userScreen)
     
 if __name__ == '__main__':
     app = QApplication(sys.argv)

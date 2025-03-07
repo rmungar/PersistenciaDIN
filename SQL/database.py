@@ -10,9 +10,6 @@ cursor.execute(
     nombre VARCHAR(255) NOT NULL PRIMARY KEY,
     passwd VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    vistos JSON,
-    empezados JSON,
-    guardados JSON,
     comentarios JSON,
     favoritos JSON)"""
 )
@@ -72,12 +69,10 @@ cursor.execute(
 )
 
 # Forma de insertar datos
-## datosUsuarios = [
-##     ('Morri', '1234', 'morri@gmail.com', json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([])),
-##     ('Lara', '5678', 'lara@gmail.com', json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([])),
-##     ('Raul', '9101', 'raul@gmail.com', json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([])),
-##     ('César', '1121', 'cesar@gmail.com', json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]), json.dumps([]))
-## ]
+datosUsuarios = [
+    ('prueba', 'passwordPrueba', 'prueba@gmail.com', json.dumps([]), json.dumps([])),
+    
+]
 datosMangas = [
     ('ONE-ODA', 'One Piece', 'One Piece es un manga japonés escrito e ilustrado por Eiichirō Oda. Comenzó a publicarse en la revista Weekly Shōnen Jump el 22 de julio de 1997.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Eiichirō Oda', 'Resources/Manga/OP.jpg', 98, 1000, json.dumps([])),
     ('NAR-KIS', 'Naruto', 'Naruto es un manga japonés escrito e ilustrado por Masashi Kishimoto. Comenzó a publicarse en la revista Weekly Shōnen Jump el 21 de septiembre de 1999.', 'Aventura, Acción, Comedia, Drama, Fantasía', 'Masashi Kishimoto', 'Resources/Manga/NARUTO.jpg', 72, 700, json.dumps([])),
@@ -102,14 +97,9 @@ datosEstudios = [
     ('Wit Studio', 'Japón', 'Resources/Estudios/WIT.jpg', '["Attack on Titan", "Vinland Saga"]'),
     ('Madhouse', 'Japón', 'Resources/Estudios/MADHOUSE.png', '["Death Note", "One Punch Man"]')
 ]
-## datosComentarios = [
-##     ('1', 'Morri', 'DBZ-TOEI', None, 'Me encanta la saga de los Saiyajin.', '2024-02-20'),
-##     ('2', 'Lara', 'AOT-WIT', 'AOT-ISAYAMA', 'El final me dejó en shock.', '2024-02-21'),
-##     ('3', 'Raul', None, 'NARUTO-KISHIMOTO', 'El desarrollo de Sasuke fue increíble.', '2024-02-22'),
-##     ('4', 'César', 'DEATHNOTE-MADHOUSE', None, 'La batalla entre Light y L es legendaria.', '2024-02-23')
-## ]
 
 
+cursor.executemany("INSERT INTO USUARIO (nombre, passwd, email, comentarios, favoritos) VALUES (?, ?, ?, ?, ?)", datosUsuarios)
 cursor.executemany("INSERT INTO MANGA (_id, nombre, sinopsis, genero, autor, imagen, tomos, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosMangas)
 cursor.executemany("INSERT INTO ANIME (_id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", datosAnimes)
 cursor.executemany("INSERT INTO MANGAKA (_id, nombre, nacimiento, nacionalidad, imagen, obras) VALUES (?, ?, ?, ?, ?, ?)", datosMangakas)

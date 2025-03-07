@@ -14,13 +14,10 @@ from Model import Anime, Comentario, Manga
 
 
 class Usuario():
-    def __init__(self, nombre, passwd, email, vistos, empezados, guardados, comentarios, favoritos):
-        self.nombre = nombre
+    def __init__(self, nombre: str, passwd: str, email: str, comentarios: list, favoritos: list):
+        self.nombre = email.split("@")[0]
         self.passwd = passwd
         self.email = email
-        self.vistos = vistos
-        self.empezados = empezados
-        self.guardados = guardados
         self.comentarios = comentarios
         self.favoritos = favoritos
 

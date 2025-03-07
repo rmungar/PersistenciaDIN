@@ -231,7 +231,7 @@ class Ui_MainWindow(object):
         self.synopsis.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
         self.ranking.setText("")
-        self.commentButton.setText(QCoreApplication.translate("MainWindow", u"comentar", None))
+        self.commentButton.setText(QCoreApplication.translate("MainWindow", u"Comentar", None))
         self.comments.setText("")
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))

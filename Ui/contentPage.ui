@@ -305,7 +305,7 @@ color: rgb(0, 0, 0);
 font: 14pt &quot;Segoe UI Symbol&quot;;</string>
              </property>
              <property name="text">
-              <string>comentar</string>
+              <string>Comentar</string>
              </property>
             </widget>
            </item>
