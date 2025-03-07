@@ -88,7 +88,7 @@ datosAnimes = [
     ('DBZ-TOEI', 'Dragon Ball Z', 'Goku y sus amigos protegen la Tierra de amenazas cósmicas.', 'Acción, Aventura, Fantasía', 'Toei Animation', 'Resources/Anime/DBZ.jpg', 9, 291, json.dumps([])),
     ('NARUTO-PIERROT', 'Naruto', 'Un joven ninja busca el reconocimiento y sueña con ser Hokage.', 'Acción, Aventura', 'Studio Pierrot', 'Resources/Anime/NARUTO.jpg', 9, 220, json.dumps([])),
     ('AOT-WIT', 'Attack on Titan', 'La humanidad lucha contra titanes devoradores de hombres.', 'Acción, Drama', 'Wit Studio', 'Resources/Anime/AOT.jpg', 4, 87, json.dumps([])),
-    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspenso, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([]))
+    ('DEATHNOTE-MADHOUSE', 'Death Note', 'Un estudiante encuentra un cuaderno con poderes mortales.', 'Suspense, Misterio', 'Madhouse', 'Resources/Anime/DEATHNOTE.jpg', 1, 37, json.dumps([]))
 ]
 datosMangakas = [
     ('Eiichiro Oda', 'Eiichiro Oda', '1975-01-01', 'Japonesa', 'Resources/Mangaka/ODA.jpg', '["One Piece"]'),
@@ -134,15 +134,15 @@ estudios = cursor.fetchall()
 cursor.execute("SELECT * FROM COMENTARIO")
 copmentarios = cursor.fetchall()
 
-print("Mangas\n")
+print("Mangas/n")
 for manga in mangas:
     print(f"{manga}\n")
 
-print("Animes\n")
+print("Animes/n")
 for anime in animes:
     print(f"{anime}\n")
 
-print("Usuarios\n")
+print("Usuarios/n")
 for usuario in usuarios:
     print(f"{usuario}\n")
 

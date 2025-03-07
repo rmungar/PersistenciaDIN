@@ -103,8 +103,14 @@ class AllAnimeScreen(QMainWindow):
         self.listWidget.clear()  # Limpia la lista antes de agregar nuevos elementos
 
         for anime in self.animeList:
-            item = QListWidgetItem(anime.nombre)  # Muestra el nombre del anime
-            item.setData(1, anime)  # Guarda el objeto completo para referencia futura
+        
+            font = QFont()
+            font.setPointSize(16)  # Cambia 16 por el tamaño que desees
+            item = QListWidgetItem(anime.nombre)  # Asigna el icono y el nombre
+            item.setData(1, anime)  # Guarda el objeto para referencia futura
+            item.setFont(font)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -171,8 +177,12 @@ class AllMangaScreen(QMainWindow):
         self.listWidget.clear()  # Limpia la lista antes de agregar nuevos elementos
 
         for manga in self.mangaList:
-            item = QListWidgetItem(manga.nombre)  # Muestra el nombre del anime
-            item.setData(1, manga)  # Guarda el objeto completo para referencia futura
+            font = QFont()
+            font.setPointSize(16)  # Cambia 16 por el tamaño que desees
+            item = QListWidgetItem(manga.nombre)  # Asigna el icono y el nombre
+            item.setData(1, manga)  # Guarda el objeto para referencia futura
+            item.setFont(font)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -239,8 +249,12 @@ class AllMangakaScreen(QMainWindow):
         self.listWidget.clear()  # Limpia la lista antes de agregar nuevos elementos
 
         for mangaka in self.mangakaList:
-            item = QListWidgetItem(mangaka.nombre)  # Muestra el nombre del anime
-            item.setData(1, mangaka)  # Guarda el objeto completo para referencia futura
+            font = QFont()
+            font.setPointSize(16)  # Cambia 16 por el tamaño que desees
+            item = QListWidgetItem(mangaka.nombre)  # Asigna el icono y el nombre
+            item.setData(1, mangaka)  # Guarda el objeto para referencia futura
+            item.setFont(font)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -307,8 +321,12 @@ class AllEstudioScreen(QMainWindow):
         self.listWidget.clear()  # Limpia la lista antes de agregar nuevos elementos
 
         for estudio in self.estudioList:
-            item = QListWidgetItem(estudio.nombre)  # Muestra el nombre del anime
-            item.setData(1, estudio)  # Guarda el objeto completo para referencia futura
+            font = QFont()
+            font.setPointSize(16)  # Cambia 16 por el tamaño que desees
+            item = QListWidgetItem(estudio.nombre)  # Asigna el icono y el nombre
+            item.setData(1, estudio)  # Guarda el objeto para referencia futura
+            item.setFont(font)
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -371,22 +389,30 @@ class MangaScreen(QMainWindow):
 
         if manga is not None:   
             self.title.setText(manga.nombre)
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText(manga.sinopsis)
             self.placeholderimage.setPixmap(
                 QPixmap(os.path.join(basedir, manga.imagen)).scaled(242, 305, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
             )
             self.homeButton.clicked.connect(lambda: self.toHomeScreen())
             self.ranking.setText("RANKING DE MANGAS")
-            self.descripcion.setText(f"Generos: {manga.genero}\nVolúmenes: {manga.tomos}\nCapítulos: {manga.capitulos}\nMangaka: {manga.autor}")
+            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.descripcion.setText(f"· Géneros: {manga.genero}\n· Volúmenes: {manga.tomos}\n· Capítulos: {manga.capitulos}\n· Mangaka: {manga.autor}")            
             self.comments.setText("COMENTARIOS")
-            self.ranking.setText("RANKING DE ANIMES")
+            self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         else:
             self.title.setText("Sin información")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText("No se ha seleccionado un manga.")
+            self.synopsis.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.placeholderimage.clear()  # Limpia la imagen
             self.descripcion.setText("Información no disponible.")
+            self.descripcion.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.comments.setText("COMENTARIOS")
+            self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.ranking.setText("RANKING DE ANIMES")
+            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget)
         stacked_widget.addWidget(allAnimePage)
@@ -430,21 +456,27 @@ class AnimeScreen(QMainWindow):
 
         if anime is not None:
             self.title.setText(anime.nombre)
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText(anime.sinopsis)
             self.placeholderimage.setPixmap(
                 QPixmap(os.path.join(basedir, anime.imagen)).scaled(242, 305, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
             )
-            self.ranking.setText("RANKING DE ANIMES")
-            self.descripcion.setText(f"Generos: {anime.genero}\nTemporadas: {anime.temporadas}\nCapítulos: {anime.capitulos}\nEstudio: {anime.estudio}")
+            self.descripcion.setText(f"· Géneros: {anime.genero}\n· Temporadas: {anime.temporadas}\n· Capítulos: {anime.capitulos}\n· Estudio: {anime.estudio}")
             self.comments.setText("COMENTARIOS")
+            self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.ranking.setText("RANKING DE ANIMES")
+            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         else:
             self.title.setText("Sin información")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText("No se ha seleccionado un manga.")
             self.descripcion.setText("Información no disponible.")
             self.placeholderimage.clear()
             self.information.setText("Información no disponible.")
             self.comments.setText("COMENTARIOS")
+            self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.ranking.setText("RANKING DE ANIMES")
+            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget)
@@ -484,16 +516,20 @@ class MangakaScreen(QMainWindow):
 
         if mangaka is not None:
             self.title.setText(mangaka.nombre)
-            self.biographyvalue.setText(f"Nacimiento: {mangaka.nacimiento}\nNacionalidad: {mangaka.nacionalidad}")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.biographyvalue.setText(f"· Nacimiento: {mangaka.nacimiento}\n· Nacionalidad: {mangaka.nacionalidad}")
             self.placeholderimage.setPixmap(
                 QPixmap(os.path.join(basedir, mangaka.imagen)).scaled(300, 400, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
             )
             self.obras.setText(f"Obras: {mangaka.obras}")
         else:
             self.title.setText("Sin información")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.biographyvalue.setText("No se ha seleccionado un mangaka.")
+            self.biographyvalue.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.placeholderimage.clear()  # Limpia la imagen
             self.obras.setText("Información no disponible.")
+            self.obras.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
 
     def toAllAnimePage(self):
@@ -534,14 +570,18 @@ class EstudioScreen(QMainWindow):
 
         if estudio is not None:
             self.title.setText(estudio.nombre)
-            self.biographyvalue.setText(f"País: {estudio.pais}")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.biographyvalue.setText(f"· País: {estudio.pais}")
             self.placeholderimage.setPixmap(QPixmap(os.path.join(basedir, estudio.imagen)).scaled(300, 400, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation))  # Ajusta el tamaño
             self.obras.setText(f"Animes: {estudio.animes}")
         else:
             self.title.setText("Sin información")
+            self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.biographyvalue.setText("No se ha seleccionado un estudio.")
+            self.biographyvalue.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.placeholderimage.clear()  # Limpia la imagen
             self.obras.setText("Información no disponible.")
+            self.obras.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget)
@@ -575,6 +615,10 @@ class HomeScreen(QMainWindow):
         uic.loadUi(os.path.join(basedir, 'Ui/homePage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
+        self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
+        self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
+        self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
+        self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
 
         usuarioRepo = UsuarioRepo()
         mangaRepo = MangaRepo()
