@@ -110,6 +110,7 @@ class AllAnimeScreen(QMainWindow):
             item.setData(1, anime)  # Guarda el objeto para referencia futura
             item.setFont(font)
             item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item.setSizeHint(QSize(100, 100))
             
             self.listWidget.addItem(item)
 
@@ -183,6 +184,7 @@ class AllMangaScreen(QMainWindow):
             item.setData(1, manga)  # Guarda el objeto para referencia futura
             item.setFont(font)
             item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item.setSizeHint(QSize(100, 100))
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -255,6 +257,7 @@ class AllMangakaScreen(QMainWindow):
             item.setData(1, mangaka)  # Guarda el objeto para referencia futura
             item.setFont(font)
             item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item.setSizeHint(QSize(100, 100))
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
@@ -327,6 +330,7 @@ class AllEstudioScreen(QMainWindow):
             item.setData(1, estudio)  # Guarda el objeto para referencia futura
             item.setFont(font)
             item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            item.setSizeHint(QSize(100, 100))
             self.listWidget.addItem(item)
 
         print("Número de elementos en listWidget:", self.listWidget.count())
