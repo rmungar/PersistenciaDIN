@@ -150,9 +150,9 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.estudioButton, 7, 1, 1, 1)
 
-        self.pushButton = QPushButton(self.centralwidget)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setStyleSheet(u"QPushButton {\n"
+        self.homeButton = QPushButton(self.centralwidget)
+        self.homeButton.setObjectName(u"homeButton")
+        self.homeButton.setStyleSheet(u"QPushButton {\n"
 "    background: transparent; \n"
 "    border: none;\n"
 "    color: white; \n"
@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
 "    background: transparent; \n"
 "}")
 
-        self.gridLayout.addWidget(self.pushButton, 0, 1, 2, 1)
+        self.gridLayout.addWidget(self.homeButton, 0, 1, 2, 1)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -183,6 +183,6 @@ class Ui_MainWindow(object):
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"ANIGIRI", None))
+        self.homeButton.setText(QCoreApplication.translate("MainWindow", u"ANIGIRI", None))
     # retranslateUi
 
