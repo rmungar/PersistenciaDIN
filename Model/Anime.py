@@ -11,7 +11,7 @@
 ##     comentarios JSON)"""
 ## )
 
-from Model import Comentario
+## from Model.Comentario import Comentario
 
 
 class Anime():
@@ -60,5 +60,3 @@ class Anime():
     def __str__(self):
         return f"Anime: {self.nombre} - {self.sinopsis} - {self.genero} - {self.estudio} - {self.imagen} - {self.temporadas} - {self.capitulos} - {self.comentarios}"
 
-#    def setEstudio(self, estudio):
-#        self.estudio = estudio

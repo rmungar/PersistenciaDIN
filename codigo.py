@@ -16,11 +16,14 @@ from Model.Estudio import Estudio
 from Model.Manga import Manga
 from Model.Mangaka import Mangaka
 from Model.Usuario import Usuario
+from Model.Comentario import Comentario
 from Repository.animeRepo import AnimeRepo
 from Repository.estudioRepo import EstudioRepo
 from Repository.mangaRepo import MangaRepo
 from Repository.mangakaRepo import MangakaRepo
 from Repository.usuarioRepo import UsuarioRepo
+from Repository.comentarioRepo import ComentarioRepo
+from datetime import date
 
 basedir = os.path.dirname(__file__)
 
@@ -501,9 +504,9 @@ class AnimeScreen(QMainWindow):
         self.mangaButton.clicked.connect(lambda: self.toAllMangaPage())
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
-        self.commentButton.clicked.connect(self.abrir_formulario)
-
+        
         if anime is not None:
+            self.commentButton.clicked.connect(lambda: self.abrir_formulario(anime, currentUser))
             self.title.setText(anime.nombre)
             self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText(anime.sinopsis)
@@ -527,12 +530,22 @@ class AnimeScreen(QMainWindow):
             self.ranking.setText("RANKING DE ANIMES")
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
 
-    def abrir_formulario(self):
+    def abrir_formulario(self, anime:Anime, usuario:Usuario):
         dialogo = FormularioEmergente()
         resultado = dialogo.exec()  # Ejecuta la ventana emergente
 
         if resultado == 1:
             datos = dialogo.obtener_datos()
+
+            comentarioRepo = ComentarioRepo()
+            comentarioRepo.addComentario(
+                Comentario(
+                    f"{anime.nombre}-{usuario.nombre}",
+                    usuario.email,
+                    datos["Comentario"],
+                    date.today()
+                )   
+            )
             print("Datos ingresados:", datos)
         else:
             print("no coincide")

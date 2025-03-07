@@ -62,8 +62,6 @@ cursor.execute(
     """CREATE TABLE IF NOT EXISTS COMENTARIO (
     _id VARCHAR(255) PRIMARY KEY, 
     usuario VARCHAR(255) NOT NULL,
-    anime VARCHAR(255),
-    manga VARCHAR(255),
     texto TEXT NOT NULL,
     fecha DATE NOT NULL)"""
 )
