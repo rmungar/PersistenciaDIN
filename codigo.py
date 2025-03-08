@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     from Screens.LoginScreen import LoginScreen
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(f"{os.getcwd()}/Resources/LogoAnigiri.ico"))
+    app.setWindowIcon(QIcon(f"{os.getcwd()}/_internal/Resources/LogoAnigiri.ico"))
     # Crear el QStackedWidget
     stacked_widget = QStackedWidget()
     loginScreen = LoginScreen(stacked_widget)
