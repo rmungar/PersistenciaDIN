@@ -74,15 +74,34 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"")
         self.gridLayout_2 = QGridLayout(self.widget)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.title = QLabel(self.widget)
-        self.title.setObjectName(u"title")
-        self.title.setMinimumSize(QSize(0, 0))
-        self.title.setMaximumSize(QSize(903, 100))
-        self.title.setStyleSheet(u"background-color: rgb(0, 85, 127);\n"
-"font: 700 26pt \"Trebuchet MS\";")
-        self.title.setWordWrap(True)
+        self.gridLayout_5 = QGridLayout()
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.synopsis = QLabel(self.widget)
+        self.synopsis.setObjectName(u"synopsis")
+        self.synopsis.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
 
-        self.gridLayout_2.addWidget(self.title, 0, 0, 1, 3)
+        self.gridLayout_5.addWidget(self.synopsis, 0, 0, 1, 1)
+
+        self.favoriteButton = QPushButton(self.widget)
+        self.favoriteButton.setObjectName(u"favoriteButton")
+        self.favoriteButton.setStyleSheet(u"background-color:rgb(185, 70, 87);\n"
+"color: rgb(255, 255, 255);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+
+        self.gridLayout_5.addWidget(self.favoriteButton, 1, 0, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout_5, 1, 0, 1, 1)
+
+        self.placeholderimage = QLabel(self.widget)
+        self.placeholderimage.setObjectName(u"placeholderimage")
+        self.placeholderimage.setMinimumSize(QSize(242, 305))
+        self.placeholderimage.setMaximumSize(QSize(242, 305))
+        self.placeholderimage.setStyleSheet(u"background-color: rgb(170, 170, 170);")
+
+        self.gridLayout_2.addWidget(self.placeholderimage, 1, 1, 1, 1)
 
         self.gridLayout_4 = QGridLayout()
         self.gridLayout_4.setObjectName(u"gridLayout_4")
@@ -105,35 +124,6 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addLayout(self.gridLayout_4, 2, 0, 1, 1)
 
-        self.placeholderimage = QLabel(self.widget)
-        self.placeholderimage.setObjectName(u"placeholderimage")
-        self.placeholderimage.setMinimumSize(QSize(242, 305))
-        self.placeholderimage.setMaximumSize(QSize(242, 305))
-        self.placeholderimage.setStyleSheet(u"background-color: rgb(170, 170, 170);")
-
-        self.gridLayout_2.addWidget(self.placeholderimage, 1, 1, 1, 1)
-
-        self.gridLayout_5 = QGridLayout()
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.synopsis = QLabel(self.widget)
-        self.synopsis.setObjectName(u"synopsis")
-        self.synopsis.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
-"color: rgb(0, 0, 0);\n"
-"font: 14pt \"Segoe UI Symbol\";")
-
-        self.gridLayout_5.addWidget(self.synopsis, 0, 0, 1, 1)
-
-        self.favoriteButton = QPushButton(self.widget)
-        self.favoriteButton.setObjectName(u"favoriteButton")
-        self.favoriteButton.setStyleSheet(u"background-color:rgb(185, 70, 87);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 14pt \"Segoe UI Symbol\";")
-
-        self.gridLayout_5.addWidget(self.favoriteButton, 1, 0, 1, 1)
-
-
-        self.gridLayout_2.addLayout(self.gridLayout_5, 1, 0, 1, 1)
-
         self.descripcion = QLabel(self.widget)
         self.descripcion.setObjectName(u"descripcion")
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Ignored)
@@ -152,15 +142,36 @@ class Ui_MainWindow(object):
 
         self.gridLayout_2.addWidget(self.descripcion, 2, 1, 1, 1)
 
+        self.title = QLabel(self.widget)
+        self.title.setObjectName(u"title")
+        self.title.setMinimumSize(QSize(0, 0))
+        self.title.setMaximumSize(QSize(903, 100))
+        self.title.setStyleSheet(u"background-color: rgb(0, 85, 127);\n"
+"font: 700 26pt \"Trebuchet MS\";")
+        self.title.setWordWrap(True)
+
+        self.gridLayout_2.addWidget(self.title, 0, 0, 1, 3)
+
+        self.gridLayout_6 = QGridLayout()
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.rankingList = QLabel(self.widget)
+        self.rankingList.setObjectName(u"rankingList")
+        self.rankingList.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+"color: rgb(0, 0, 0);\n"
+"font: 14pt \"Segoe UI Symbol\";")
+
+        self.gridLayout_6.addWidget(self.rankingList, 0, 0, 1, 1)
+
         self.ranking = QListWidget(self.widget)
         self.ranking.setObjectName(u"ranking")
-        self.ranking.setMinimumSize(QSize(243, 616))
-        self.ranking.setMaximumSize(QSize(243, 616))
         self.ranking.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
 
-        self.gridLayout_2.addWidget(self.ranking, 1, 2, 2, 1)
+        self.gridLayout_6.addWidget(self.ranking, 1, 0, 1, 1)
+
+
+        self.gridLayout_2.addLayout(self.gridLayout_6, 1, 2, 2, 1)
 
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
@@ -230,13 +241,14 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))
         self.animeButton.setText(QCoreApplication.translate("MainWindow", u"Animes", None))
-        self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
-        self.commentButton.setText(QCoreApplication.translate("MainWindow", u"Comentar", None))
-        self.comments.setText("")
-        self.placeholderimage.setText("")
         self.synopsis.setText("")
         self.favoriteButton.setText(QCoreApplication.translate("MainWindow", u"A\u00f1adir a favoritos", None))
+        self.placeholderimage.setText("")
+        self.commentButton.setText(QCoreApplication.translate("MainWindow", u"Comentar", None))
+        self.comments.setText("")
         self.descripcion.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
+        self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
+        self.rankingList.setText("")
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))

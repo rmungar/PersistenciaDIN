@@ -136,48 +136,10 @@
          <string notr="true"/>
         </property>
         <layout class="QGridLayout" name="gridLayout_2" columnstretch="0,0,0">
-         <item row="0" column="0" colspan="3">
-          <widget class="QLabel" name="title">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>903</width>
-             <height>100</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(0, 85, 127);
-font: 700 26pt &quot;Trebuchet MS&quot;;</string>
-           </property>
-           <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-           </property>
-           <property name="wordWrap">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <layout class="QGridLayout" name="gridLayout_4">
-           <item row="1" column="0">
-            <widget class="QPushButton" name="commentButton">
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(0, 85, 127);
-color: rgb(255, 255, 255);
-font: 14pt &quot;Segoe UI Symbol&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Comentar</string>
-             </property>
-            </widget>
-           </item>
+         <item row="1" column="0">
+          <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
-            <widget class="QLabel" name="comments">
+            <widget class="QLabel" name="synopsis">
              <property name="styleSheet">
               <string notr="true">background-color:rgb(227, 227, 227);
 color: rgb(0, 0, 0);
@@ -185,6 +147,18 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="favoriteButton">
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(185, 70, 87);
+color: rgb(255, 255, 255);
+font: 14pt &quot;Segoe UI Symbol&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Añadir a favoritos</string>
              </property>
             </widget>
            </item>
@@ -212,10 +186,22 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
-          <layout class="QGridLayout" name="gridLayout_5">
+         <item row="2" column="0">
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="commentButton">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(0, 85, 127);
+color: rgb(255, 255, 255);
+font: 14pt &quot;Segoe UI Symbol&quot;;</string>
+             </property>
+             <property name="text">
+              <string>Comentar</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="synopsis">
+            <widget class="QLabel" name="comments">
              <property name="styleSheet">
               <string notr="true">background-color:rgb(227, 227, 227);
 color: rgb(0, 0, 0);
@@ -223,18 +209,6 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
              </property>
              <property name="text">
               <string/>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="favoriteButton">
-             <property name="styleSheet">
-              <string notr="true">background-color:rgb(185, 70, 87);
-color: rgb(255, 255, 255);
-font: 14pt &quot;Segoe UI Symbol&quot;;</string>
-             </property>
-             <property name="text">
-              <string>Añadir a favoritos</string>
              </property>
             </widget>
            </item>
@@ -279,26 +253,56 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2" rowspan="2">
-          <widget class="QListWidget" name="ranking">
+         <item row="0" column="0" colspan="3">
+          <widget class="QLabel" name="title">
            <property name="minimumSize">
             <size>
-             <width>243</width>
-             <height>616</height>
+             <width>0</width>
+             <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>243</width>
-             <height>616</height>
+             <width>903</width>
+             <height>100</height>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color:rgb(227, 227, 227);
-color: rgb(0, 0, 0);
-font: 14pt &quot;Segoe UI Symbol&quot;;</string>
+            <string notr="true">background-color: rgb(0, 85, 127);
+font: 700 26pt &quot;Trebuchet MS&quot;;</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
            </property>
           </widget>
+         </item>
+         <item row="1" column="2" rowspan="2">
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <widget class="QLabel" name="rankingList">
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(227, 227, 227);
+color: rgb(0, 0, 0);
+font: 14pt &quot;Segoe UI Symbol&quot;;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QListWidget" name="ranking">
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(227, 227, 227);
+color: rgb(0, 0, 0);
+font: 14pt &quot;Segoe UI Symbol&quot;;</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
