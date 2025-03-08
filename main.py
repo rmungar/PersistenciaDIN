@@ -2,6 +2,9 @@
 
 # prueba@gmail.com
 # passwordPrueba
+
+# pyinstaller --name "Anigiri" --windowed --icon=Resources/logoAnigiri.ico --add-data="Resources/*;Resources" --add-data="Model/*;Model" --add-data="Repository/*;Repository" --add-data="Screens/*;Screens" --add-data="Ui/*;Ui" --add-data="Utils/*;Utils" --add-data="default.db;." --add-data="SQL/*;SQL" --add-data="Config/*;Config"  main.py
+
 import os
 import sys
 from PyQt6.QtWidgets import QApplication, QStackedWidget
