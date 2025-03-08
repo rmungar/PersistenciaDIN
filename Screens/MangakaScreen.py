@@ -5,10 +5,15 @@ from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 from PyQt6 import uic
 
-from Model import Mangaka, Usuario
+
 
 
 class MangakaScreen(QMainWindow):
+
+    from Model.Mangaka import Mangaka
+    from Model.Usuario import Usuario
+
+
     def __init__(self, stacked_widget, mangaka: Mangaka, currentUser: Usuario):
         super(MangakaScreen, self).__init__()
         self.currentUser = currentUser

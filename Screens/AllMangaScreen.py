@@ -6,16 +6,14 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtCore import Qt, QSize
 from PyQt6 import uic
 
-from Model import Usuario
-from Repository.mangaRepo import MangaRepo
 
-from Screens import UserScreen
-from Screens.AnimeScreens import AllAnimeScreen
-from Screens.EstudioScreens import AllEstudioScreen
-from Screens.MangaScreens import MangaScreen
-from Screens.MangakaScreen import AllMangakaScreen
 
 class AllMangaScreen(QMainWindow):
+
+    from Model.Usuario import Usuario
+    from Repository.mangaRepo import MangaRepo
+    
+
     def __init__(self, stacked_widget, currentUser: Usuario):
         super(AllMangaScreen, self).__init__()
         self.currentUser = currentUser
@@ -34,7 +32,7 @@ class AllMangaScreen(QMainWindow):
             print("Error: listWidget no encontrado en la UI.")
             return  # Evita fallos si el widget no se encuentra
         
-        mangaRepo = MangaRepo()
+        mangaRepo = self.MangaRepo()
         self.mangaList = mangaRepo.getMangas()
 
         self.displayMangaList()
@@ -61,12 +59,14 @@ class AllMangaScreen(QMainWindow):
         self.listWidget.itemClicked.connect(self.onMangaClicked)
 
     def onMangaClicked(self, item):
+        from Screens.MangaScreens import MangaScreen
         manga = item.data(1)
         mangaScreen = MangaScreen(self.stacked_widget, manga, self.currentUser)
         self.stacked_widget.addWidget(mangaScreen)
         self.stacked_widget.setCurrentWidget(mangaScreen)
 
     def toAllAnimePage(self):
+        from Screens.AllAnimeScreen import AllAnimeScreen
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allAnimePage)
         self.stacked_widget.setCurrentWidget(allAnimePage) 
@@ -77,11 +77,13 @@ class AllMangaScreen(QMainWindow):
         self.stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
+        from Screens.AllEstudioScreen import AllEstudioScreen
         allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allEstudioPage)
         self.stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
+        from Screens.AllMangakaScreen import AllMangakaScreen
         allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allMangakaPage)
         self.stacked_widget.setCurrentWidget(allMangakaPage) 
@@ -90,6 +92,7 @@ class AllMangaScreen(QMainWindow):
         self.stacked_widget.setCurrentIndex(1)
 
     def toUserScreen(self):
+        from Screens.UserScreen import UserScreen
         userScreen = UserScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(userScreen)
         self.stacked_widget.setCurrentWidget(userScreen)

@@ -5,17 +5,13 @@ from PyQt6.QtGui import QFont, QPixmap, QBrush, QColor
 from PyQt6.QtCore import Qt
 from PyQt6 import uic
 
-from Model import Usuario
-from Repository.comentarioRepo import ComentarioRepo
 
-
-from Screens.AnimeScreens import AllAnimeScreen
-from Screens.EstudioScreens import AllEstudioScreen
-from Screens.MangaScreens import AllMangaScreen
-from Screens.MangakaScreen import AllMangakaScreen
 
 class UserScreen(QMainWindow):
 
+    from Model.Usuario import Usuario
+    from Repository.comentarioRepo import ComentarioRepo
+    
     def __init__(self, stacked_widget, usuario: Usuario):
         super(UserScreen, self).__init__()
         self.currentUser = usuario
@@ -42,7 +38,7 @@ class UserScreen(QMainWindow):
 
 
     def setComentarios(self, usuario: Usuario):
-        comentarioRepo = ComentarioRepo()
+        comentarioRepo = self.ComentarioRepo()
         comments = comentarioRepo.getComentariosByUser(usuario)
 
         self.comentariosList.clear()  # Limpiar lista antes de agregar nuevos comentarios
@@ -61,21 +57,25 @@ class UserScreen(QMainWindow):
 
 
     def toAllAnimePage(self):
+        from Screens.AllAnimeScreen import AllAnimeScreen
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allAnimePage)
         self.stacked_widget.setCurrentWidget(allAnimePage) 
 
     def toAllMangaPage(self):
+        from Screens.AllMangaScreen import AllMangaScreen
         allMangaPage = AllMangaScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allMangaPage)
         self.stacked_widget.setCurrentWidget(allMangaPage)  
 
     def toAllEstudioPage(self):
+        from Screens.AllEstudioScreen import AllEstudioScreen
         allEstudioPage = AllEstudioScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allEstudioPage)
         self.stacked_widget.setCurrentWidget(allEstudioPage)  
 
     def toAllMangakaPage(self):
+        from Screens.AllMangakaScreen import AllMangakaScreen
         allMangakaPage = AllMangakaScreen(self.stacked_widget, self.currentUser)
         self.stacked_widget.addWidget(allMangakaPage)
         self.stacked_widget.setCurrentWidget(allMangakaPage) 

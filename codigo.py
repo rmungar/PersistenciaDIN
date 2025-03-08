@@ -5,11 +5,6 @@
 
 import sys
 from PyQt6.QtWidgets import QApplication, QStackedWidget
-from Model.Usuario import Usuario
-from Repository.usuarioRepo import UsuarioRepo
-
-
-
 
 if __name__ == '__main__':
 

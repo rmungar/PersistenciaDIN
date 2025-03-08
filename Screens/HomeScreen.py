@@ -6,20 +6,23 @@ from PyQt6.QtCore import QSize
 from PyQt6 import uic
 
 
-from Model.Anime import Anime
-from Model.Estudio import Estudio
-from Model.Manga import Manga
-from Model.Mangaka import Mangaka
-from Model.Usuario import Usuario
-from Repository.animeRepo import AnimeRepo
-from Repository.estudioRepo import EstudioRepo
-from Repository.mangaRepo import MangaRepo
-from Repository.mangakaRepo import MangakaRepo
-from Repository.usuarioRepo import UsuarioRepo
+
 
 
 
 class HomeScreen(QMainWindow):
+
+    from Model.Anime import Anime
+    from Model.Estudio import Estudio
+    from Model.Manga import Manga
+    from Model.Mangaka import Mangaka
+    from Model.Usuario import Usuario
+    from Repository.animeRepo import AnimeRepo
+    from Repository.estudioRepo import EstudioRepo
+    from Repository.mangaRepo import MangaRepo
+    from Repository.mangakaRepo import MangakaRepo
+    from Repository.usuarioRepo import UsuarioRepo
+
     def __init__(self, stacked_widget, currentUser: Usuario):
         from Screens.LoginScreen import LoginScreen
         super(HomeScreen, self).__init__()
@@ -35,11 +38,10 @@ class HomeScreen(QMainWindow):
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
 
-        usuarioRepo = UsuarioRepo()
-        mangaRepo = MangaRepo()
-        animeRepo = AnimeRepo()
-        mangakaRepo = MangakaRepo()
-        estudioRepo = EstudioRepo()
+        mangaRepo = self.MangaRepo()
+        animeRepo = self.AnimeRepo()
+        mangakaRepo = self.MangakaRepo()
+        estudioRepo = self.EstudioRepo()
 
         # Obtener listas de datos
         self.animeList = animeRepo.getAnime()

@@ -6,14 +6,18 @@ from PyQt6.QtGui import QFont, QPixmap, QBrush, QColor
 from PyQt6.QtCore import Qt
 from PyQt6 import uic
 
-from Model import Manga, Usuario
-from Model.Comentario import Comentario
-from Repository.comentarioRepo import ComentarioRepo
-from Repository.mangaRepo import MangaRepo
-from Utils.Utils import FormularioEmergente
 
+from Model.Comentario import Comentario
 
 class MangaScreen(QMainWindow):
+
+    from Model.Manga import Manga
+    from Model.Usuario import Usuario
+    from Repository.comentarioRepo import ComentarioRepo
+    from Repository.mangaRepo import MangaRepo
+    from Utils.Utils import FormularioEmergente
+
+
     def __init__(self, stacked_widget, manga: Manga, currentUser: Usuario):
         super(MangaScreen, self).__init__()
         self.currentUser = currentUser
@@ -65,7 +69,7 @@ class MangaScreen(QMainWindow):
 
     def updateRanking(self):
         cont = 1
-        mangaRepo= MangaRepo()
+        mangaRepo = self.MangaRepo()
         mangaList = mangaRepo.getMangas()
         for manga in mangaList:
             item = QListWidgetItem(f"{cont} - {manga.nombre}")
@@ -77,15 +81,15 @@ class MangaScreen(QMainWindow):
             cont += 1
 
     def abrir_formulario(self, manga:Manga, usuario:Usuario):
-        dialogo = FormularioEmergente()
+        dialogo = self.FormularioEmergente()
         resultado = dialogo.exec()
 
         if resultado == 1:
             datos = dialogo.obtener_datos()
 
-            comentarioRepo = ComentarioRepo()
+            comentarioRepo = self.ComentarioRepo()
             comentarioRepo.addComentarioToAnime(
-                Comentario(
+                self.Comentario(
                     f"M-{manga.nombre}-{usuario.nombre}",
                     usuario.email,
                     datos["Comentario"],
@@ -108,7 +112,7 @@ class MangaScreen(QMainWindow):
 
     def updateComentarios(self, manga: Manga):
         text = "COMENTARIOS\n"
-        comentarioRepo = ComentarioRepo()
+        comentarioRepo = self.ComentarioRepo()
         comments: list[Comentario] = comentarioRepo.getComentarios()
         for comentario in comments:
             if comentario._id.split("-")[0] == "M" and comentario._id.split("-")[1] == manga.nombre:

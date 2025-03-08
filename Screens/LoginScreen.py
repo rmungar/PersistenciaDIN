@@ -7,9 +7,7 @@ from PyQt6.QtWidgets import QMainWindow, QErrorMessage
 from PyQt6.QtGui import QFont
 from PyQt6 import uic
 
-from Model.Usuario import Usuario
-from Repository.usuarioRepo import UsuarioRepo
-from Screens import HomeScreen
+
 
 config = {
     "apiKey": "AIzaSyB7fn2d5cm8YtiBrelexmoxleAezCNiU9E",
@@ -24,9 +22,13 @@ auth = firebase.auth()
 userLogged = auth.current_user
 
 class LoginScreen(QMainWindow):
+
+    from Model.Usuario import Usuario
+    from Repository.usuarioRepo import UsuarioRepo
+    
+    
     def __init__(self, stacked_widget):
 
-        
         super(LoginScreen, self).__init__()
         uic.loadUi(os.path.join(basedir, 'Ui/login.ui'), self)
         self.setWindowTitle("Anigiri")
@@ -38,7 +40,7 @@ class LoginScreen(QMainWindow):
         self.registerButton.clicked.connect(self.register)
     
     def getUsuario(self, email: str, psswd: str) -> Usuario:
-        usuarios = UsuarioRepo.getUsuarios()
+        usuarios = self.UsuarioRepo.getUsuarios()
         print("Usuarios en la base de datos:")
         for u in usuarios:
             print(f"Email: '{u.email}', Password: '{u.passwd}'")  # DEBUG
@@ -54,6 +56,7 @@ class LoginScreen(QMainWindow):
 
 
     def login(self):
+        from Screens.HomeScreen import HomeScreen
         email = self.emailText.toPlainText()
         password = self.passwordText.toPlainText()
 
@@ -71,9 +74,9 @@ class LoginScreen(QMainWindow):
     def register(self):
         email = self.emailText.toPlainText()
         password = self.passwordText.toPlainText()
-        usuarioRepo = UsuarioRepo()
+        usuarioRepo = self.UsuarioRepo()
         try:
             auth.create_user_with_email_and_password(email, password)
-            usuarioRepo.addUsuario(Usuario("",password, email, [], []))
+            usuarioRepo.addUsuario(self.Usuario("",password, email, [], []))
         except:
             QErrorMessage(self).showMessage("Usuario ya registrado")

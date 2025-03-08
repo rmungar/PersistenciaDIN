@@ -5,11 +5,13 @@ from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 from PyQt6 import uic
 
-from Model import Usuario
-from Model.Estudio import Estudio
+
 
 
 class EstudioScreen(QMainWindow):
+    from Model.Usuario import Usuario
+    from Model.Estudio import Estudio
+    
     def __init__(self, stacked_widget, estudio: Estudio, currentUser: Usuario):
         super(EstudioScreen, self).__init__()
         self.currentUser = currentUser

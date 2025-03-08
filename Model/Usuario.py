@@ -75,13 +75,22 @@ class Usuario():
         from Model.Manga import Manga
         from Model.Anime import Anime
         removed = False
-        if isinstance(favorito, Manga) or isinstance(favorito, Anime):
-            for fav in self.favoritos:  
-                if favorito._id == fav["_id"] if isinstance(fav, dict) else fav._id:
-                    self.favoritos.remove(fav)
-                    removed = True
+        if isinstance(favorito, (Manga, Anime)):
+            # Usamos una lista temporal para evitar modificarla mientras iteramos
+            for fav in list(self.favoritos):  
+                if isinstance(fav, dict):
+                    if favorito._id == fav["_id"]:
+                        self.favoritos.remove(fav)
+                        removed = True
+                        break  # Sale del bucle si ya se ha eliminado
+                elif isinstance(fav, (Manga, Anime)):
+                    if favorito._id == fav._id:
+                        self.favoritos.remove(fav)
+                        removed = True
+                        break  # Sale del bucle si ya se ha eliminado
             if not removed:    
                 self.favoritos.append(favorito)
+            
             self.save_favoritos()
 
     def save_favoritos(self):

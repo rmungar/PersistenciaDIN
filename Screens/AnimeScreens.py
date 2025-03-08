@@ -5,15 +5,18 @@ from PyQt6.QtWidgets import QMainWindow, QListWidgetItem, QMessageBox
 from PyQt6.QtGui import QFont, QPixmap, QBrush, QColor
 from PyQt6.QtCore import Qt
 from PyQt6 import uic
-
-from Model import Anime, Usuario
 from Model.Comentario import Comentario
-from Repository.comentarioRepo import ComentarioRepo
-from Repository.mangaRepo import MangaRepo
-from Utils.Utils import FormularioEmergente
 
 
 class AnimeScreen(QMainWindow):
+
+    from Model.Anime import Anime
+    from Model.Usuario import Usuario
+    from Repository.comentarioRepo import ComentarioRepo
+    from Repository.mangaRepo import MangaRepo
+    from Utils.Utils import FormularioEmergente
+
+
     def __init__(self, stacked_widget, anime: Anime, currentUser: Usuario):
         super(AnimeScreen, self).__init__()
         self.currentUser = currentUser
@@ -59,13 +62,13 @@ class AnimeScreen(QMainWindow):
         self.mostrar_notificacion("Favoritos Actualizados")
 
     def abrir_formulario(self, anime: Anime, usuario: Usuario):
-        dialogo = FormularioEmergente()
+        dialogo = self.FormularioEmergente()
         resultado = dialogo.exec()
 
         if resultado == 1:
             datos = dialogo.obtener_datos()
 
-            comentarioRepo = ComentarioRepo()
+            comentarioRepo = self.ComentarioRepo()
             comentarioRepo.addComentarioToAnime(
                 Comentario(
                     f"A-{anime.nombre}-{usuario.nombre}",
@@ -79,7 +82,7 @@ class AnimeScreen(QMainWindow):
 
     def updateComentarios(self, anime: Anime):
         text = "COMENTARIOS\n"
-        comentarioRepo = ComentarioRepo()
+        comentarioRepo = self.ComentarioRepo()
         comments: list[Comentario] = comentarioRepo.getComentarios()
         for comentario in comments:
             if comentario._id.split("-")[0] == "A" and comentario._id.split("-")[1] == anime.nombre:
@@ -96,7 +99,7 @@ class AnimeScreen(QMainWindow):
 
     def updateRanking(self):
         cont = 1
-        animeRepo = MangaRepo()
+        animeRepo = self.MangaRepo()
         animeList = animeRepo.getMangas()
         for anime in animeList:
             item = QListWidgetItem(f"{cont} - {anime.nombre}")
