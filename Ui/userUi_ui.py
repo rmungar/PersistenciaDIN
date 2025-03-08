@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"background-color: rgb(227, 227, 227);")
         self.formLayoutWidget = QWidget(self.widget)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(290, 190, 241, 98))
+        self.formLayoutWidget.setGeometry(QRect(290, 190, 291, 98))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setHorizontalSpacing(20)
