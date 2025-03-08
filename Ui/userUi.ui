@@ -79,7 +79,7 @@
            <x>290</x>
            <y>190</y>
            <width>241</width>
-           <height>70</height>
+           <height>98</height>
           </rect>
          </property>
          <layout class="QFormLayout" name="formLayout">
@@ -121,6 +121,28 @@ font: 16pt &quot;Segoe UI&quot;;</string>
           </item>
           <item row="0" column="1">
            <widget class="QLabel" name="nombre">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="favoritosLabel">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+font: 16pt &quot;Segoe UI&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Favoritos:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="favoritos">
             <property name="styleSheet">
              <string notr="true">color: rgb(0, 0, 0);
 font: 16pt &quot;Segoe UI&quot;;</string>

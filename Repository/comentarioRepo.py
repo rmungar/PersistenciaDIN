@@ -22,8 +22,6 @@ class ComentarioRepo():
         cursor.execute("SELECT * FROM COMENTARIO")
         comentariosBD = cursor.fetchall()  # Recuperar todos los resultados
 
-        print("Datos obtenidos de COMENTARIO:", comentariosBD)  # <-- Verificación de datos
-
         comentarios = []
         for comentarioBD in comentariosBD:
             comentario = Comentario(comentarioBD[0], comentarioBD[1], comentarioBD[2], comentarioBD[3])
@@ -43,8 +41,6 @@ class ComentarioRepo():
 
         cursor.execute("SELECT * FROM COMENTARIO WHERE USUARIO = ?",(usuario.email,))
         comentariosBD = cursor.fetchall()  # Recuperar todos los resultados
-
-        print("Datos obtenidos de COMENTARIO:", comentariosBD)  # <-- Verificación de datos
 
         comentarios = []
         for comentarioBD in comentariosBD:
@@ -91,7 +87,6 @@ class ComentarioRepo():
 
         conn.commit()  # Asegura que se guardan los cambios
         conn.close()
-        print(f"Comentario agregado correctamente a {comentario._id}")
 
 def main():
     print(ComentarioRepo.getComentarios())

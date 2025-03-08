@@ -148,6 +148,9 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
              <property name="text">
               <string/>
              </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
             </widget>
            </item>
            <item row="1" column="0">
@@ -209,6 +212,9 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
              </property>
              <property name="text">
               <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -282,7 +288,13 @@ font: 700 26pt &quot;Trebuchet MS&quot;;</string>
          <item row="1" column="2" rowspan="2">
           <layout class="QGridLayout" name="gridLayout_6">
            <item row="0" column="0">
-            <widget class="QLabel" name="rankingList">
+            <widget class="QLabel" name="rankingLabel">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:rgb(227, 227, 227);
 color: rgb(0, 0, 0);
@@ -295,6 +307,12 @@ font: 14pt &quot;Segoe UI Symbol&quot;;</string>
            </item>
            <item row="1" column="0">
             <widget class="QListWidget" name="ranking">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:rgb(227, 227, 227);
 color: rgb(0, 0, 0);

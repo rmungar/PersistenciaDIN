@@ -81,6 +81,7 @@ class Ui_MainWindow(object):
         self.synopsis.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
+        self.synopsis.setWordWrap(True)
 
         self.gridLayout_5.addWidget(self.synopsis, 0, 0, 1, 1)
 
@@ -118,6 +119,7 @@ class Ui_MainWindow(object):
         self.comments.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
+        self.comments.setWordWrap(True)
 
         self.gridLayout_4.addWidget(self.comments, 0, 0, 1, 1)
 
@@ -154,16 +156,26 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6 = QGridLayout()
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.rankingList = QLabel(self.widget)
-        self.rankingList.setObjectName(u"rankingList")
-        self.rankingList.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
+        self.rankingLabel = QLabel(self.widget)
+        self.rankingLabel.setObjectName(u"rankingLabel")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.rankingLabel.sizePolicy().hasHeightForWidth())
+        self.rankingLabel.setSizePolicy(sizePolicy1)
+        self.rankingLabel.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
 
-        self.gridLayout_6.addWidget(self.rankingList, 0, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.rankingLabel, 0, 0, 1, 1)
 
         self.ranking = QListWidget(self.widget)
         self.ranking.setObjectName(u"ranking")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.ranking.sizePolicy().hasHeightForWidth())
+        self.ranking.setSizePolicy(sizePolicy2)
         self.ranking.setStyleSheet(u"background-color:rgb(227, 227, 227);\n"
 "color: rgb(0, 0, 0);\n"
 "font: 14pt \"Segoe UI Symbol\";")
@@ -248,7 +260,7 @@ class Ui_MainWindow(object):
         self.comments.setText("")
         self.descripcion.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"justify\"><br/></p></body></html>", None))
         self.title.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\"><br/></p></body></html>", None))
-        self.rankingList.setText("")
+        self.rankingLabel.setText("")
         self.userButton.setText("")
         self.mangakaButton.setText(QCoreApplication.translate("MainWindow", u"Mangakas", None))
         self.estudioButton.setText(QCoreApplication.translate("MainWindow", u"Estudios", None))

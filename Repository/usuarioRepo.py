@@ -40,13 +40,3 @@ class UsuarioRepo():
         usuarioBD = cursor.fetchone()
 
         return Usuario(usuarioBD[0], usuarioBD[1], usuarioBD[2], usuarioBD[3], usuarioBD[4], usuarioBD[5], usuarioBD[6], usuarioBD[7])
-
-
-
-def Main():
-    usuario = UsuarioRepo.getUsuario("raul@gmail.com")
-    print(usuario)
-
-
-if __name__ == '__main__':
-    Main()

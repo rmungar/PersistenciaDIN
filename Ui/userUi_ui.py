@@ -52,7 +52,7 @@ class Ui_MainWindow(object):
         self.widget.setStyleSheet(u"background-color: rgb(227, 227, 227);")
         self.formLayoutWidget = QWidget(self.widget)
         self.formLayoutWidget.setObjectName(u"formLayoutWidget")
-        self.formLayoutWidget.setGeometry(QRect(290, 190, 241, 70))
+        self.formLayoutWidget.setGeometry(QRect(290, 190, 241, 98))
         self.formLayout = QFormLayout(self.formLayoutWidget)
         self.formLayout.setObjectName(u"formLayout")
         self.formLayout.setHorizontalSpacing(20)
@@ -84,6 +84,20 @@ class Ui_MainWindow(object):
 "font: 16pt \"Segoe UI\";")
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.nombre)
+
+        self.favoritosLabel = QLabel(self.formLayoutWidget)
+        self.favoritosLabel.setObjectName(u"favoritosLabel")
+        self.favoritosLabel.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.favoritosLabel)
+
+        self.favoritos = QLabel(self.formLayoutWidget)
+        self.favoritos.setObjectName(u"favoritos")
+        self.favoritos.setStyleSheet(u"color: rgb(0, 0, 0);\n"
+"font: 16pt \"Segoe UI\";")
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.favoritos)
 
         self.userImg = QLabel(self.widget)
         self.userImg.setObjectName(u"userImg")
@@ -178,6 +192,8 @@ class Ui_MainWindow(object):
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"Email:", None))
         self.email.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.nombre.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
+        self.favoritosLabel.setText(QCoreApplication.translate("MainWindow", u"Favoritos:", None))
+        self.favoritos.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.userImg.setText("")
         self.label.setText(QCoreApplication.translate("MainWindow", u"Comentarios:", None))
         self.mangaButton.setText(QCoreApplication.translate("MainWindow", u"Mangas", None))

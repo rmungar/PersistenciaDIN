@@ -6,8 +6,9 @@
 
 import sys
 import os
+import random
 import pyrebase
-from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem, QDialogButtonBox, QVBoxLayout, QDialog, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem, QDialogButtonBox, QVBoxLayout, QDialog, QLabel, QMessageBox
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
 from PyQt6.QtGui import QIcon, QPixmap, QFont, QBrush, QColor
@@ -425,6 +426,7 @@ class MangaScreen(QMainWindow):
         uic.loadUi(os.path.join(basedir, 'Ui/contentPage.ui'), self)
         self.setWindowTitle("Anigiri")
         self.stacked_widget = stacked_widget
+        
         self.homeButton.clicked.connect(lambda: self.toHomeScreen())
         self.userButton.clicked.connect(lambda: self.toUserScreen())
         self.animeButton.clicked.connect(lambda: self.toAllAnimePage())
@@ -432,7 +434,8 @@ class MangaScreen(QMainWindow):
         self.mangakaButton.clicked.connect(lambda: self.toAllMangakaPage())
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
 
-        if manga is not None:   
+        if manga is not None:  
+            self.favoriteButton.clicked.connect(lambda: self.addFav(currentUser, manga)) 
             self.commentButton.clicked.connect(lambda: self.abrir_formulario(manga, currentUser))
             self.title.setText(manga.nombre)
             self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -441,8 +444,9 @@ class MangaScreen(QMainWindow):
                 QPixmap(os.path.join(basedir, manga.imagen)).scaled(242, 305, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)  # Ajusta el tamaño
             )
             self.homeButton.clicked.connect(lambda: self.toHomeScreen())
-            self.ranking.setText("RANKING DE MANGAS")
-            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.rankingLabel.setText("RANKING DE MANGAS")
+            self.rankingLabel.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.updateRanking()
             self.descripcion.setText(f"· Géneros: {manga.genero}\n· Volúmenes: {manga.tomos}\n· Capítulos: {manga.capitulos}\n· Mangaka: {manga.autor}")            
             self.updateComentarios(manga)
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
@@ -456,8 +460,28 @@ class MangaScreen(QMainWindow):
             self.descripcion.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.comments.setText("COMENTARIOS")
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-            self.ranking.setText("RANKING DE ANIMES")
-            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.rankingLabel.setText("RANKING DE ANIMES")
+            self.rankingLabel.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+
+    def addFav(self, usuario: Usuario, manga: Manga):
+        usuario.updateFavoritos(manga)
+        self.mostrar_notificacion("Favoritos actualizados")
+        
+
+
+    def updateRanking(self):
+        cont = 1
+        mangaRepo= MangaRepo()
+        mangaList = mangaRepo.getMangas()
+        for manga in mangaList:
+            item = QListWidgetItem(f"{cont} - {manga.nombre}")
+            font = QFont()  # Crear un objeto de tipo QFont
+            font.setPointSize(12)  # Aumentar el tamaño de la fuente (ajusta el número según lo que necesites)
+            item.setFont(font)
+            item.setForeground(QBrush(QColor(0, 0, 0)))
+            self.ranking.addItem(item)
+            cont += 1
 
     def abrir_formulario(self, manga:Manga, usuario:Usuario):
         dialogo = FormularioEmergente()
@@ -476,10 +500,18 @@ class MangaScreen(QMainWindow):
                 )   
             )
             self.updateComentarios(manga)
-            print("Datos ingresados:", datos)
-        else:
-            print("no coincide")
+            self.mostrar_notificacion("Comentario añadido")
     
+
+    def mostrar_notificacion(self, mensaje):
+        
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setWindowTitle("Notificación")
+        msg.setText(mensaje)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+
 
     def updateComentarios(self, manga: Manga):
         text = "COMENTARIOS\n"
@@ -538,6 +570,7 @@ class AnimeScreen(QMainWindow):
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
         
         if anime is not None:
+            self.favoriteButton.clicked.connect(lambda: self.addFav(currentUser, anime)) 
             self.commentButton.clicked.connect(lambda: self.abrir_formulario(anime, currentUser))
             self.title.setText(anime.nombre)
             self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -548,8 +581,9 @@ class AnimeScreen(QMainWindow):
             self.descripcion.setText(f"· Géneros: {anime.genero}\n· Temporadas: {anime.temporadas}\n· Capítulos: {anime.capitulos}\n· Estudio: {anime.estudio}")
             self.updateComentarios(anime)
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-            self.ranking.setText("RANKING DE ANIMES")
-            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.updateRanking()
+            self.rankingLabel.setText("RANKING DE ANIMES")
+            self.rankingLabel.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         else:
             self.title.setText("Sin información")
             self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -559,8 +593,12 @@ class AnimeScreen(QMainWindow):
             self.information.setText("Información no disponible.")
             self.comments.setText("COMENTARIOS")
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
-            self.ranking.setText("RANKING DE ANIMES")
-            self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+            self.rankingLabel.setText("RANKING DE ANIMES")
+            self.rankingLabel.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+    def addFav(self, usuario: Usuario, anime: Anime):
+        usuario.updateFavoritos(anime)
+        self.mostrar_notificacion("Favoritos Actualizados")
 
     def abrir_formulario(self, anime:Anime, usuario:Usuario):
         dialogo = FormularioEmergente()
@@ -579,10 +617,7 @@ class AnimeScreen(QMainWindow):
                 )   
             )
             self.updateComentarios(anime)
-            print("Datos ingresados:", datos)
-        else:
-            print("no coincide")
-    
+            self.mostrar_notificacion("Comentario añadido")
 
     def updateComentarios(self, anime: Anime):
         text = "COMENTARIOS\n"
@@ -592,8 +627,28 @@ class AnimeScreen(QMainWindow):
             if comentario._id.split("-")[0] == "A" and comentario._id.split("-")[1] == anime.nombre:
                 text += f"{comentario.usuario.split("@")[0]}: {comentario.texto}\n"
         self.comments.setText(text)
+            
+    def mostrar_notificacion(self, mensaje):
+        
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setWindowTitle("Notificación")
+        msg.setText(mensaje)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
 
-
+    def updateRanking(self):
+        cont = 1
+        animeRepo = MangaRepo()
+        animeList = animeRepo.getMangas()
+        for anime in animeList:
+            item = QListWidgetItem(f"{cont} - {anime.nombre}")
+            font = QFont()  # Crear un objeto de tipo QFont
+            font.setPointSize(12)  # Aumentar el tamaño de la fuente (ajusta el número según lo que necesites)
+            item.setFont(font)
+            item.setForeground(QBrush(QColor(0, 0, 0)))
+            self.ranking.addItem(item)
+            cont += 1
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
@@ -759,6 +814,7 @@ class UserScreen(QMainWindow):
             self.setComentarios(usuario)
             self.nombre.setText(usuario.nombre)
             self.email.setText(usuario.email)
+            self.favoritos.setText(f"{len(usuario.favoritos)}")
             ruta_imagen = os.path.join(basedir, "Resources/User/userImage.png")
             pixmap = QPixmap(ruta_imagen)
             self.userImg.setPixmap(QPixmap(pixmap).scaled(191,191, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation))
@@ -941,8 +997,7 @@ class HomeScreen(QMainWindow):
     def toUserScreen(self):
         userScreen = UserScreen(self.stacked_widget, self.currentUser)
         stacked_widget.addWidget(userScreen)
-        stacked_widget.setCurrentWidget(userScreen)
-    
+        stacked_widget.setCurrentWidget(userScreen)    
 
 class FormularioEmergente(QDialog):
     def __init__(self):
@@ -973,7 +1028,6 @@ class FormularioEmergente(QDialog):
         return {
             "Comentario": self.comentario_input.text(),
         }
-
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
