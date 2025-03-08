@@ -519,7 +519,7 @@ class MangaScreen(QMainWindow):
         comments: list[Comentario] = comentarioRepo.getComentarios()
         for comentario in comments:
             if comentario._id.split("-")[0] == "M" and comentario._id.split("-")[1] == manga.nombre:
-                text += f"{comentario.usuario.split("@")[0]}: {comentario.texto}\n"
+                text += "{}: {}\n".format(comentario.usuario.split("@")[0], comentario.texto)
         self.comments.setText(text)
 
     def toAllAnimePage(self):
@@ -625,7 +625,7 @@ class AnimeScreen(QMainWindow):
         comments: list[Comentario] = comentarioRepo.getComentarios()
         for comentario in comments:
             if comentario._id.split("-")[0] == "A" and comentario._id.split("-")[1] == anime.nombre:
-                text += f"{comentario.usuario.split("@")[0]}: {comentario.texto}\n"
+                text += "{}: {}\n".format(comentario.usuario.split("@")[0], comentario.texto)
         self.comments.setText(text)
             
     def mostrar_notificacion(self, mensaje):
@@ -831,7 +831,7 @@ class UserScreen(QMainWindow):
 
         for comentario in comments:
             # Formatear el texto del comentario
-            texto_comentario = f"{comentario.fecha} - {comentario._id.split("-")[1]}: {comentario.texto}"
+            texto_comentario = f"{comentario.fecha} - {comentario._id.split('-')[1]}: {comentario.texto}"
 
             # Crear el item y añadirlo al QListWidget
             item = QListWidgetItem(texto_comentario)
