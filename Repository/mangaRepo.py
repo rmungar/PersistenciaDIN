@@ -17,7 +17,7 @@ class MangaRepo():
         Returns:
             list[Model.Manga.Manga]: Una lista de objetos de tipo Manga.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM MANGA")

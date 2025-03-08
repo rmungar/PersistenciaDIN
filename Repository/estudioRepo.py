@@ -18,7 +18,7 @@ class EstudioRepo():
         Returns:
             list[Model.Estudio.Estudio]: Una lista de objetos de tipo Estudio.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM ESTUDIO")

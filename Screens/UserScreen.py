@@ -29,7 +29,7 @@ class UserScreen(QMainWindow):
             self.nombre.setText(usuario.nombre)
             self.email.setText(usuario.email)
             self.favoritos.setText(f"{len(usuario.favoritos)}")
-            ruta_imagen = os.path.join(basedir, "Resources/User/userImage.png")
+            ruta_imagen = os.path.join(basedir, "Resources/userImage.png")
             pixmap = QPixmap(ruta_imagen)
             self.userImg.setPixmap(QPixmap(pixmap).scaled(191,191, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation))
         else:

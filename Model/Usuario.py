@@ -34,7 +34,7 @@ class Usuario():
         Carga la lista de favoritos del usuario desde la base de datos SQLite.
         Si no hay favoritos o hay un error en el formato JSON, se inicializa una lista vacía.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         query = "SELECT favoritos FROM USUARIO WHERE nombre = ?"
         cursor.execute(query, (self.nombre,))
@@ -98,7 +98,7 @@ class Usuario():
         Guarda la lista de favoritos del usuario en la base de datos SQLite.
         Convierte la lista de favoritos a formato JSON antes de guardarla.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         # Convertir la lista de favoritos a JSON
         favoritos_json = json.dumps([fav if isinstance(fav, dict) else fav.__dict__ for fav in self.favoritos])  # Suponiendo que Manga y Anime tienen atributos

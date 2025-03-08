@@ -25,7 +25,7 @@ class ComentarioRepo():
 
         from Model.Comentario import Comentario
 
-        db_path = os.path.abspath("_internal/default.db")  # Asegura que accedemos a la base de datos correcta
+        db_path = os.path.abspath("default.db")  # Asegura que accedemos a la base de datos correcta
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
 
@@ -54,7 +54,7 @@ class ComentarioRepo():
 
         from Model.Comentario import Comentario
 
-        db_path = os.path.abspath("_internal/default.db")  # Asegura que accedemos a la base de datos correcta
+        db_path = os.path.abspath("default.db")  # Asegura que accedemos a la base de datos correcta
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
 
@@ -78,7 +78,7 @@ class ComentarioRepo():
             comentario (Comentario): Objeto de tipo Comentario que se desea agregar.
         """
 
-        db_path = os.path.abspath("_internal/default.db")  # Asegura que usamos la base de datos correcta
+        db_path = os.path.abspath("default.db")  # Asegura que usamos la base de datos correcta
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
 

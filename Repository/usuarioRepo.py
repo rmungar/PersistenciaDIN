@@ -20,7 +20,7 @@ class UsuarioRepo():
         Returns:
             list[Usuario]: Una lista de objetos de tipo Usuario.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM USUARIO")
@@ -40,7 +40,7 @@ class UsuarioRepo():
         Args:
             usuario (Usuario): Objeto de tipo Usuario que se desea agregar.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("INSERT INTO USUARIO VALUES (?, ?, ?)", (usuario.nombre, usuario.email, usuario.password))
@@ -56,7 +56,7 @@ class UsuarioRepo():
         Returns:
             Usuario: Objeto de tipo Usuario correspondiente al correo electrónico proporcionado.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM USUARIO WHERE email = ?", (email,))

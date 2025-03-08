@@ -20,7 +20,7 @@ class AnimeRepo():
         Returns:
             list[Model.Anime.Anime]: Una lista de objetos de tipo Anime.
         """
-        conn = sqlite3.connect('_internal/default.db')
+        conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
         cursor.execute("SELECT * FROM ANIME")
