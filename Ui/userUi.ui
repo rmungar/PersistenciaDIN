@@ -151,16 +151,6 @@ font: 16pt &quot;Segoe UI&quot;;</string>
           <string/>
          </property>
         </widget>
-        <widget class="QListView" name="comentariosList">
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>540</y>
-           <width>681</width>
-           <height>192</height>
-          </rect>
-         </property>
-        </widget>
         <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
@@ -176,6 +166,16 @@ font: 16pt &quot;Segoe UI&quot;;</string>
          </property>
          <property name="text">
           <string>Comentarios:</string>
+         </property>
+        </widget>
+        <widget class="QListWidget" name="comentariosList">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>540</y>
+           <width>701</width>
+           <height>192</height>
+          </rect>
          </property>
         </widget>
        </widget>

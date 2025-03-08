@@ -10,7 +10,7 @@ import pyrebase
 from PyQt6.QtWidgets import QApplication, QMainWindow, QStackedWidget, QErrorMessage, QLineEdit, QListWidget, QListWidgetItem, QDialogButtonBox, QVBoxLayout, QDialog, QLabel
 from PyQt6.QtCore import QSize, Qt
 from PyQt6 import uic
-from PyQt6.QtGui import QIcon, QPixmap, QFont
+from PyQt6.QtGui import QIcon, QPixmap, QFont, QBrush, QColor
 from Model.Anime import Anime
 from Model.Estudio import Estudio
 from Model.Manga import Manga
@@ -433,6 +433,7 @@ class MangaScreen(QMainWindow):
         self.estudioButton.clicked.connect(lambda: self.toAllEstudioPage())
 
         if manga is not None:   
+            self.commentButton.clicked.connect(lambda: self.abrir_formulario(manga, currentUser))
             self.title.setText(manga.nombre)
             self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.synopsis.setText(manga.sinopsis)
@@ -443,7 +444,7 @@ class MangaScreen(QMainWindow):
             self.ranking.setText("RANKING DE MANGAS")
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.descripcion.setText(f"· Géneros: {manga.genero}\n· Volúmenes: {manga.tomos}\n· Capítulos: {manga.capitulos}\n· Mangaka: {manga.autor}")            
-            self.comments.setText("COMENTARIOS")
+            self.updateComentarios(manga)
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         else:
             self.title.setText("Sin información")
@@ -457,6 +458,37 @@ class MangaScreen(QMainWindow):
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.ranking.setText("RANKING DE ANIMES")
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+
+    def abrir_formulario(self, manga:Manga, usuario:Usuario):
+        dialogo = FormularioEmergente()
+        resultado = dialogo.exec()  # Ejecuta la ventana emergente
+
+        if resultado == 1:
+            datos = dialogo.obtener_datos()
+
+            comentarioRepo = ComentarioRepo()
+            comentarioRepo.addComentarioToAnime(
+                Comentario(
+                    f"M-{manga.nombre}-{usuario.nombre}",
+                    usuario.email,
+                    datos["Comentario"],
+                    f"{date.today()}"
+                )   
+            )
+            self.updateComentarios(manga)
+            print("Datos ingresados:", datos)
+        else:
+            print("no coincide")
+    
+
+    def updateComentarios(self, manga: Manga):
+        text = "COMENTARIOS\n"
+        comentarioRepo = ComentarioRepo()
+        comments: list[Comentario] = comentarioRepo.getComentarios()
+        for comentario in comments:
+            if comentario._id.split("-")[0] == "M" and comentario._id.split("-")[1] == manga.nombre:
+                text += f"{comentario.usuario.split("@")[0]}: {comentario.texto}\n"
+        self.comments.setText(text)
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)
@@ -514,7 +546,7 @@ class AnimeScreen(QMainWindow):
                 QPixmap(os.path.join(basedir, anime.imagen)).scaled(242, 305, Qt.AspectRatioMode.IgnoreAspectRatio, Qt.TransformationMode.SmoothTransformation)
             )
             self.descripcion.setText(f"· Géneros: {anime.genero}\n· Temporadas: {anime.temporadas}\n· Capítulos: {anime.capitulos}\n· Estudio: {anime.estudio}")
-            self.comments.setText("COMENTARIOS")
+            self.updateComentarios(anime)
             self.comments.setAlignment(Qt.AlignmentFlag.AlignHCenter)
             self.ranking.setText("RANKING DE ANIMES")
             self.ranking.setAlignment(Qt.AlignmentFlag.AlignHCenter)
@@ -540,16 +572,27 @@ class AnimeScreen(QMainWindow):
             comentarioRepo = ComentarioRepo()
             comentarioRepo.addComentarioToAnime(
                 Comentario(
-                    f"{anime.nombre}-{usuario.nombre}",
+                    f"A-{anime.nombre}-{usuario.nombre}",
                     usuario.email,
                     datos["Comentario"],
                     f"{date.today()}"
                 )   
             )
+            self.updateComentarios(anime)
             print("Datos ingresados:", datos)
         else:
             print("no coincide")
     
+
+    def updateComentarios(self, anime: Anime):
+        text = "COMENTARIOS\n"
+        comentarioRepo = ComentarioRepo()
+        comments: list[Comentario] = comentarioRepo.getComentarios()
+        for comentario in comments:
+            if comentario._id.split("-")[0] == "A" and comentario._id.split("-")[1] == anime.nombre:
+                text += f"{comentario.usuario.split("@")[0]}: {comentario.texto}\n"
+        self.comments.setText(text)
+
 
 
     def toAllAnimePage(self):
@@ -713,6 +756,7 @@ class UserScreen(QMainWindow):
         self.stacked_widget = stacked_widget
 
         if usuario is not None:
+            self.setComentarios(usuario)
             self.nombre.setText(usuario.nombre)
             self.email.setText(usuario.email)
             ruta_imagen = os.path.join(basedir, "Resources/User/userImage.png")
@@ -721,6 +765,26 @@ class UserScreen(QMainWindow):
         else:
             self.nombre.setText("Sin información")
             self.email.setText("Sin información")
+
+
+    def setComentarios(self, usuario: Usuario):
+        comentarioRepo = ComentarioRepo()
+        comments = comentarioRepo.getComentariosByUser(usuario)
+
+        self.comentariosList.clear()  # Limpiar lista antes de agregar nuevos comentarios
+
+        for comentario in comments:
+            # Formatear el texto del comentario
+            texto_comentario = f"{comentario.fecha} - {comentario._id.split("-")[1]}: {comentario.texto}"
+
+            # Crear el item y añadirlo al QListWidget
+            item = QListWidgetItem(texto_comentario)
+            font = QFont()  # Crear un objeto de tipo QFont
+            font.setPointSize(12)  # Aumentar el tamaño de la fuente (ajusta el número según lo que necesites)
+            item.setFont(font)
+            item.setForeground(QBrush(QColor(0, 0, 0)))
+            self.comentariosList.addItem(item)
+
 
     def toAllAnimePage(self):
         allAnimePage = AllAnimeScreen(self.stacked_widget, self.currentUser)

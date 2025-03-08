@@ -9,11 +9,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 class ComentarioRepo():
 
     from Model.Comentario import Comentario
+    from Model.Usuario import Usuario
 
-    def getComentarios() -> list[Comentario]:
+    def getComentarios(self) -> list[Comentario]:
 
         from Model.Comentario import Comentario
-        
+
         db_path = os.path.abspath("default.db")  # Asegura que accedemos a la base de datos correcta
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
@@ -30,6 +31,29 @@ class ComentarioRepo():
 
         conn.close()
         return comentarios
+    
+
+    def getComentariosByUser(self, usuario: Usuario) -> list[Comentario]:
+
+        from Model.Comentario import Comentario
+
+        db_path = os.path.abspath("default.db")  # Asegura que accedemos a la base de datos correcta
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT * FROM COMENTARIO WHERE USUARIO = ?",(usuario.email,))
+        comentariosBD = cursor.fetchall()  # Recuperar todos los resultados
+
+        print("Datos obtenidos de COMENTARIO:", comentariosBD)  # <-- Verificación de datos
+
+        comentarios = []
+        for comentarioBD in comentariosBD:
+            comentario = Comentario(comentarioBD[0], comentarioBD[1], comentarioBD[2], comentarioBD[3])
+            comentarios.append(comentario)
+
+        conn.close()
+        return comentarios
+
 
     def addComentarioToAnime(self, comentario: Comentario):
         db_path = os.path.abspath("default.db")  # Asegura que usamos la base de datos correcta
@@ -38,7 +62,7 @@ class ComentarioRepo():
 
         # Insertar en la tabla COMENTARIO
         cursor.execute(
-            "INSERT INTO COMENTARIO VALUES (?, ?, ?, ?)", 
+            "INSERT OR REPLACE INTO COMENTARIO VALUES (?, ?, ?, ?)", 
             (comentario._id, comentario.usuario, comentario.texto, comentario.fecha)
         )
 

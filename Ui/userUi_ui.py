@@ -16,8 +16,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QFormLayout, QGridLayout, QLabel,
-    QListView, QMainWindow, QPushButton, QSizePolicy,
-    QSpacerItem, QWidget)
+    QListWidget, QListWidgetItem, QMainWindow, QPushButton,
+    QSizePolicy, QSpacerItem, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -93,14 +93,14 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.userImg.sizePolicy().hasHeightForWidth())
         self.userImg.setSizePolicy(sizePolicy)
-        self.comentariosList = QListView(self.widget)
-        self.comentariosList.setObjectName(u"comentariosList")
-        self.comentariosList.setGeometry(QRect(40, 540, 681, 192))
         self.label = QLabel(self.widget)
         self.label.setObjectName(u"label")
         self.label.setGeometry(QRect(40, 510, 131, 20))
         self.label.setStyleSheet(u"color: rgb(0, 0, 0);\n"
 "font: 16pt \"Segoe UI\";")
+        self.comentariosList = QListWidget(self.widget)
+        self.comentariosList.setObjectName(u"comentariosList")
+        self.comentariosList.setGeometry(QRect(30, 540, 701, 192))
 
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
 
