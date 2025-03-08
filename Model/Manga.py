@@ -15,6 +15,13 @@ from Model.Comentario import Comentario
 
 
 class Manga():
+
+    """
+    Clase que representa un manga con sus atributos y métodos asociados.
+    Un manga tiene un identificador único, nombre, sinopsis, género, autor, imagen, número de tomos,
+    número de capítulos y una lista de comentarios asociados.
+    """
+
     def __init__(self, _id, nombre, sinopsis, genero, autor, imagen, tomos, capitulos, comentarios):
         self._id = _id
         self.nombre = nombre

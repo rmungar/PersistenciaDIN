@@ -6,7 +6,17 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import Model.Manga
 
 class MangaRepo():
+    """
+    Clase que representa un repositorio para manejar operaciones relacionadas con mangas en la base de datos.
+    Proporciona métodos para obtener todos los mangas almacenados en la base de datos.
+    """
     def getMangas(self) -> list[Model.Manga.Manga]:
+        """
+        Obtiene todos los mangas almacenados en la base de datos.
+
+        Returns:
+            list[Model.Manga.Manga]: Una lista de objetos de tipo Manga.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 

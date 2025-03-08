@@ -7,11 +7,19 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Model.Usuario import Usuario 
 
 
-
-
 class UsuarioRepo():
+    """
+    Clase que representa un repositorio para manejar operaciones relacionadas con usuarios en la base de datos.
+    Proporciona métodos para obtener usuarios, agregar nuevos usuarios y buscar usuarios por correo electrónico.
+    """
 
     def getUsuarios() -> list[Usuario]:
+        """
+        Obtiene todos los usuarios almacenados en la base de datos.
+
+        Returns:
+            list[Usuario]: Una lista de objetos de tipo Usuario.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
@@ -26,6 +34,12 @@ class UsuarioRepo():
         return usuarios
     
     def addUsuario(usuario):
+        """
+        Agrega un nuevo usuario a la base de datos.
+
+        Args:
+            usuario (Usuario): Objeto de tipo Usuario que se desea agregar.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 
@@ -33,6 +47,15 @@ class UsuarioRepo():
         conn.commit()
 
     def getUsuario(email) -> Usuario:
+        """
+        Obtiene un usuario específico por su correo electrónico.
+
+        Args:
+            email (str): Correo electrónico del usuario que se desea buscar.
+
+        Returns:
+            Usuario: Objeto de tipo Usuario correspondiente al correo electrónico proporcionado.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 

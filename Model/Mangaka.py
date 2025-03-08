@@ -8,6 +8,12 @@
 ## )
 
 class Mangaka():
+    """
+    Clase que representa un mangaka (creador de manga) con sus atributos y métodos asociados.
+    Un mangaka tiene un identificador único, nombre, fecha de nacimiento, nacionalidad, imagen
+    representativa y una lista de obras creadas.
+    """
+    
     def __init__(self, _id, nombre, nacimiento, nacionalidad, imagen, obras):
         self._id = _id
         self.nombre = nombre

@@ -15,6 +15,10 @@ from Model.Comentario import Comentario
 
 
 class Anime():
+    """
+    Clase que representa un anime con sus atributos y métodos asociados.
+    """
+    
     def __init__(self, _id, nombre, sinopsis, genero, estudio, imagen, temporadas, capitulos, comentarios):
         self._id = _id
         self.nombre = nombre

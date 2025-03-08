@@ -8,8 +8,18 @@ import Model.Anime
 
 
 class AnimeRepo():
-    
+    """
+    Clase que representa un repositorio para manejar operaciones relacionadas con animes en la base de datos.
+    Proporciona métodos para obtener animes desde la base de datos.
+    """
+
     def getAnime(self) -> list[Model.Anime.Anime]:
+        """
+        Obtiene todos los animes almacenados en la base de datos.
+
+        Returns:
+            list[Model.Anime.Anime]: Una lista de objetos de tipo Anime.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
 

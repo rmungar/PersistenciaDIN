@@ -15,6 +15,11 @@ import sqlite3
 
 
 class Usuario():
+    """
+    Clase que representa un usuario con sus atributos y métodos asociados.
+    Un usuario tiene un nombre, contraseña, correo electrónico, lista de comentarios y lista de favoritos.
+    Además, interactúa con una base de datos SQLite para cargar y guardar sus favoritos.
+    """
     
     def __init__(self, nombre: str, passwd: str, email: str, comentarios: list, favoritos: list):
         self.nombre = email.split("@")[0]
@@ -25,6 +30,10 @@ class Usuario():
         self.load_favoritos()
 
     def load_favoritos(self):
+        """
+        Carga la lista de favoritos del usuario desde la base de datos SQLite.
+        Si no hay favoritos o hay un error en el formato JSON, se inicializa una lista vacía.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         query = "SELECT favoritos FROM USUARIO WHERE nombre = ?"
@@ -41,12 +50,28 @@ class Usuario():
 
 
     def updateComentarios(self, comentario):
+        """
+        Agrega un comentario a la lista de comentarios del usuario.
+
+        Args:
+            comentario (Comentario): Objeto de tipo Comentario que se desea agregar.
+
+        Nota:
+            Solo se agrega el comentario si es una instancia de la clase Comentario.
+        """
         from Model.Comentario import Comentario
         if comentario is Comentario:
             self.comentarios.append(comentario)
 
 
     def updateFavoritos(self, favorito):
+        """
+        Actualiza la lista de favoritos del usuario.
+        Si el favorito ya está en la lista, se elimina; de lo contrario, se agrega.
+
+        Args:
+            favorito (Manga o Anime): Objeto de tipo Manga o Anime que se desea agregar o eliminar.
+        """
         from Model.Manga import Manga
         from Model.Anime import Anime
         removed = False
@@ -60,6 +85,10 @@ class Usuario():
             self.save_favoritos()
 
     def save_favoritos(self):
+        """
+        Guarda la lista de favoritos del usuario en la base de datos SQLite.
+        Convierte la lista de favoritos a formato JSON antes de guardarla.
+        """
         conn = sqlite3.connect('default.db')
         cursor = conn.cursor()
         # Convertir la lista de favoritos a JSON

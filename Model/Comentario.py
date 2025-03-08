@@ -9,6 +9,10 @@
 from Model.Usuario import Usuario
 
 class Comentario():
+    """
+    Clase que representa un comentario con sus atributos y métodos asociados.
+    Un comentario está asociado a un usuario y contiene un texto y una fecha.
+    """
     def __init__(self, _id: str, usuario: Usuario, texto: str, fecha: str):
         self._id = _id
         self.usuario = usuario

@@ -7,11 +7,21 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 class ComentarioRepo():
+    """
+    Clase que representa un repositorio para manejar operaciones relacionadas con comentarios en la base de datos.
+    Proporciona métodos para obtener comentarios, filtrarlos por usuario y agregar comentarios a un anime.
+    """
 
     from Model.Comentario import Comentario
     from Model.Usuario import Usuario
 
     def getComentarios(self) -> list[Comentario]:
+        """
+        Obtiene todos los comentarios almacenados en la base de datos.
+
+        Returns:
+            list[Comentario]: Una lista de objetos de tipo Comentario.
+        """
 
         from Model.Comentario import Comentario
 
@@ -32,6 +42,15 @@ class ComentarioRepo():
     
 
     def getComentariosByUser(self, usuario: Usuario) -> list[Comentario]:
+        """
+        Obtiene todos los comentarios realizados por un usuario específico.
+
+        Args:
+            usuario (Usuario): Objeto de tipo Usuario que representa al autor de los comentarios.
+
+        Returns:
+            list[Comentario]: Una lista de objetos de tipo Comentario asociados al usuario.
+        """
 
         from Model.Comentario import Comentario
 
@@ -52,6 +71,13 @@ class ComentarioRepo():
 
 
     def addComentarioToAnime(self, comentario: Comentario):
+        """
+        Agrega un comentario a un anime en la base de datos.
+
+        Args:
+            comentario (Comentario): Objeto de tipo Comentario que se desea agregar.
+        """
+
         db_path = os.path.abspath("default.db")  # Asegura que usamos la base de datos correcta
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()

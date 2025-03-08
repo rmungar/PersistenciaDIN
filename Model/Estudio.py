@@ -6,6 +6,12 @@
 ## )
 
 class Estudio():
+
+    """
+    Clase que representa un estudio de animación con sus atributos y métodos asociados.
+    Un estudio tiene un nombre, un país de origen, una imagen representativa y una lista de animes producidos.
+    """
+
     def __init__(self, nombre, pais, imagen, animes):
         self.nombre = nombre
         self.pais = pais
