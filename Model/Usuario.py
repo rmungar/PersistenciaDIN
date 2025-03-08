@@ -52,7 +52,7 @@ class Usuario():
         removed = False
         if isinstance(favorito, Manga) or isinstance(favorito, Anime):
             for fav in self.favoritos:  
-                if favorito._id == fav["_id"]:
+                if favorito._id == fav["_id"] if isinstance(fav, dict) else fav._id:
                     self.favoritos.remove(fav)
                     removed = True
             if not removed:    
