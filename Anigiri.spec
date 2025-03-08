@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['codigo.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[('Resources/*', 'Resources'), ('Model/*', 'Model'), ('Repository/*', 'Repository'), ('Screens/*', 'Screens'), ('Ui/*', 'Ui'), ('Utils/*', 'Utils'), ('default.db', '.'), ('SQL/*', 'SQL'), ('Config/*', 'Config')],
