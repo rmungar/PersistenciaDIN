@@ -11,7 +11,7 @@
 ##     comentarios JSON)"""
 ## )
 
-## from Model.Comentario import Comentario
+from Model.Comentario import Comentario
 
 
 class Anime():

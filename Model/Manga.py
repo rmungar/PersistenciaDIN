@@ -11,7 +11,7 @@
 ##     comentarios TEXT)"""
 ## )
 
-from Model import Comentario
+from Model.Comentario import Comentario
 
 
 class Manga():

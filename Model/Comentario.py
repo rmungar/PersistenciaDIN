@@ -9,7 +9,7 @@
 from Model.Usuario import Usuario
 
 class Comentario():
-    def __init__(self, _id, usuario: Usuario, texto, fecha):
+    def __init__(self, _id: str, usuario: Usuario, texto: str, fecha: str):
         self._id = _id
         self.usuario = usuario
         self.texto = texto

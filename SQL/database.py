@@ -63,7 +63,7 @@ cursor.execute(
     _id VARCHAR(255) PRIMARY KEY, 
     usuario VARCHAR(255) NOT NULL,
     texto TEXT NOT NULL,
-    fecha DATE NOT NULL)"""
+    fecha VARCHAR(255) NOT NULL)"""
 )
 
 # Forma de insertar datos

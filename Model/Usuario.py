@@ -10,7 +10,7 @@
 ##     favoritos JSON)"""
 ## )
 
-from Model import Anime, Comentario, Manga
+
 
 
 class Usuario():
@@ -21,39 +21,17 @@ class Usuario():
         self.comentarios = comentarios
         self.favoritos = favoritos
 
-    def updateVistos(self, visto):
-        if visto is Manga.Manga():
-            self.vistos.append(visto)
-        elif visto is Anime.Anime():
-            self.vistos.append(visto)
-        else:
-            print("No se pudo agregar a vistos")
 
-
-    def updateEmpezados(self, empezado):
-        if empezado is Manga.Manga():
-            self.empezados.append(empezado)
-        elif empezado is Anime.Anime():
-            self.empezados.append(empezado)
-        else:
-            print("No se pudo agregar a empezados")
-
-
-    def updateGuardados(self, guardado):
-        if guardado is Manga.Manga():
-            self.guardados.append(guardado)
-        elif guardado is Anime.Anime():
-            self.guardados.append(guardado)
-        else:
-            print("No se pudo agregar a guardados")
-    
 
     def updateComentarios(self, comentario):
+        from Model.Comentario import Comentario
         if comentario is Comentario:
             self.comentarios.append(comentario)
 
 
     def updateFavoritos(self, favorito):
+        from Model.Manga import Manga
+        from Model.Anime import Anime
         if favorito is Manga.Manga():
             self.favoritos.append(favorito)
         elif favorito is Anime.Anime():

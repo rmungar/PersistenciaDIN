@@ -538,12 +538,12 @@ class AnimeScreen(QMainWindow):
             datos = dialogo.obtener_datos()
 
             comentarioRepo = ComentarioRepo()
-            comentarioRepo.addComentario(
+            comentarioRepo.addComentarioToAnime(
                 Comentario(
                     f"{anime.nombre}-{usuario.nombre}",
                     usuario.email,
                     datos["Comentario"],
-                    date.today()
+                    f"{date.today()}"
                 )   
             )
             print("Datos ingresados:", datos)
